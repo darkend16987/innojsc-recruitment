@@ -1,15 +1,18 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
 import { getJobById, getRelatedJobs } from '@/lib/firestore-helpers';
 import { Job } from '@/lib/firebase-config';
 import ApplyModal from '@/components/ApplyModal';
-import { ArrowLeft, MapPin, Briefcase, Clock, DollarSign, Building2 } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { ArrowLeft, MapPin, Briefcase, Clock, DollarSign, Building2, Share2 } from 'lucide-react';
 import Link from 'next/link';
+import { useToast } from '@/components/Toast';
+import Script from 'next/script';
 
 export default function JobDetailPage({ params }: { params: { id: string } }) {
-  const router = useRouter();
+  const toast = useToast();
   const [job, setJob] = useState<Job | null>(null);
   const [relatedJobs, setRelatedJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
@@ -45,6 +48,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
       setRelatedJobs(related);
     } catch (err) {
       setError('Có lỗi xảy ra khi tải thông tin công việc');
+      toast.error('Không thể tải thông tin công việc');
       console.error('Error fetching job detail:', err);
     } finally {
       setLoading(false);
@@ -59,15 +63,86 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
     setIsModalOpen(false);
   };
 
+  const handleShare = async () => {
+    if (!job) return;
+
+    const shareData = {
+      title: job.title,
+      text: `${job.title} - ${job.salary.display}`,
+      url: window.location.href,
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        toast.success('Đã chia sẻ!');
+      } catch (err) {
+        if ((err as Error).name !== 'AbortError') {
+          copyToClipboard();
+        }
+      }
+    } else {
+      copyToClipboard();
+    }
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href);
+    toast.success('Đã sao chép link!');
+  };
+
+  // Generate JobPosting structured data
+  const generateJobPostingSchema = (job: Job) => {
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careers.innojsc.com';
+
+    return {
+      '@context': 'https://schema.org',
+      '@type': 'JobPosting',
+      title: job.title,
+      description: job.description.replace(/<[^>]*>/g, ''),
+      datePosted: job.publishedAt,
+      employmentType: job.jobType === 'Full-time' ? 'FULL_TIME' : job.jobType === 'Part-time' ? 'PART_TIME' : job.jobType === 'Intern' ? 'INTERN' : 'CONTRACTOR',
+      hiringOrganization: {
+        '@type': 'Organization',
+        name: 'InnoJSC',
+        sameAs: 'https://innojsc.com',
+        logo: `${siteUrl}/images/logo.svg`,
+      },
+      jobLocation: {
+        '@type': 'Place',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: job.location === 'Hà Nội' ? 'Hanoi' : job.location === 'TP.HCM' ? 'Ho Chi Minh City' : 'Vietnam',
+          addressCountry: 'VN',
+        },
+      },
+      baseSalary: {
+        '@type': 'MonetaryAmount',
+        currency: job.salary.currency,
+        value: {
+          '@type': 'QuantitativeValue',
+          minValue: job.salary.min,
+          maxValue: job.salary.max,
+          unitText: 'MONTH',
+        },
+      },
+      skills: job.expertise,
+      experienceRequirements: {
+        '@type': 'OccupationalExperienceRequirements',
+        monthsOfExperience: job.experience * 12,
+      },
+    };
+  };
+
   // Loading state
   if (loading) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
-          <div className="flex justify-center items-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
-          </div>
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <Header />
+        <div className="flex-grow flex items-center justify-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -75,8 +150,9 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
   // Error state
   if (error || !job) {
     return (
-      <div className="min-h-screen bg-gray-50">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-20">
+      <div className="min-h-screen bg-gray-50 flex flex-col">
+        <Header />
+        <div className="flex-grow flex items-center justify-center px-4">
           <div className="text-center">
             <p className="text-red-600 text-lg mb-4">{error || 'Không tìm thấy công việc'}</p>
             <Link
@@ -88,39 +164,23 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
             </Link>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-40">
-        <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <Link href="/" className="flex items-center">
-              <span className="text-2xl font-bold text-blue-600">InnoJSC</span>
-              <span className="ml-2 text-2xl font-light text-gray-700">Careers</span>
-            </Link>
-            <div className="hidden md:flex md:space-x-8">
-              <Link href="/" className="text-gray-900 hover:text-blue-600 font-medium">
-                Việc làm
-              </Link>
-              <a
-                href="https://innojsc.com"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-gray-500 hover:text-blue-600"
-              >
-                Về chúng tôi
-              </a>
-              <a href="mailto:ahr@innojsc.com" className="text-gray-500 hover:text-blue-600">
-                Liên hệ
-              </a>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header />
+
+      {/* JobPosting Structured Data */}
+      <Script
+        id="job-posting-schema"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(generateJobPostingSchema(job)),
+        }}
+      />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-8">
@@ -195,13 +255,22 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                   </span>
                 </div>
 
-                {/* Apply Button */}
-                <button
-                  onClick={handleApplyClick}
-                  className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
-                >
-                  Ứng tuyển ngay
-                </button>
+                {/* Action Buttons */}
+                <div className="flex gap-3">
+                  <button
+                    onClick={handleApplyClick}
+                    className="flex-1 sm:flex-none px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                  >
+                    Ứng tuyển ngay
+                  </button>
+                  <button
+                    onClick={handleShare}
+                    className="px-4 py-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+                    title="Chia sẻ"
+                  >
+                    <Share2 className="w-5 h-5 text-gray-600" />
+                  </button>
+                </div>
               </div>
 
               <hr className="my-8" />
@@ -331,47 +400,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-gray-300 mt-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">InnoJSC Careers</h3>
-              <p className="text-sm">Tham gia cùng chúng tôi để kiến tạo tương lai.</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Liên kết</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <Link href="/" className="hover:text-white">
-                    Trang chủ
-                  </Link>
-                </li>
-                <li>
-                  <a
-                    href="https://innojsc.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white"
-                  >
-                    Website công ty
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Liên hệ</h3>
-              <ul className="space-y-2 text-sm">
-                <li>Email: ahr@innojsc.com</li>
-                <li>Hotline: +84 969 979 391</li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
-            &copy; {new Date().getFullYear()} InnoJSC. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Apply Modal */}
       {isModalOpen && job && (

@@ -5,13 +5,18 @@ import { getPublishedJobs } from '@/lib/firestore-helpers';
 import { Job } from '@/lib/firebase-config';
 import JobCard from '@/components/JobCard';
 import ApplyModal from '@/components/ApplyModal';
-import { List, LayoutGrid } from 'lucide-react';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { useToast } from '@/components/Toast';
+import { List, LayoutGrid, Search } from 'lucide-react';
 
 export default function HomePage() {
+  const toast = useToast();
   const [jobs, setJobs] = useState<Job[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+  const [searchTerm, setSearchTerm] = useState('');
 
   // Modal state
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -35,8 +40,12 @@ export default function HomePage() {
       setError(null);
       const jobsData = await getPublishedJobs();
       setJobs(jobsData);
+      if (jobsData.length > 0) {
+        toast.success(`Đã tải ${jobsData.length} việc làm`);
+      }
     } catch (err) {
       setError('Không thể tải danh sách việc làm. Vui lòng thử lại sau.');
+      toast.error('Không thể tải danh sách việc làm');
       console.error('Error fetching jobs:', err);
     } finally {
       setLoading(false);
@@ -55,38 +64,30 @@ export default function HomePage() {
     setSelectedJobTitle('');
   };
 
-  // Filter jobs based on selected filters
+  // Filter jobs based on selected filters and search term
   const filteredJobs = jobs.filter(job => {
+    // Text search
+    if (searchTerm) {
+      const search = searchTerm.toLowerCase();
+      const matchesSearch =
+        job.title.toLowerCase().includes(search) ||
+        job.department.toLowerCase().includes(search) ||
+        job.description.toLowerCase().includes(search) ||
+        job.expertise.toLowerCase().includes(search);
+      if (!matchesSearch) return false;
+    }
+
+    // Filters
     if (filters.location && job.location !== filters.location) return false;
     if (filters.jobType && job.jobType !== filters.jobType) return false;
     if (filters.expertise && job.expertise !== filters.expertise) return false;
+
     return true;
   });
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
-      <header className="bg-white shadow-sm sticky top-0 z-40">
-        <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center">
-              <span className="text-2xl font-bold text-blue-600">InnoJSC</span>
-              <span className="ml-2 text-2xl font-light text-gray-700">Careers</span>
-            </div>
-            <div className="hidden md:flex md:space-x-8">
-              <a href="/" className="text-gray-900 hover:text-blue-600 font-medium">
-                Việc làm
-              </a>
-              <a href="https://innojsc.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-blue-600">
-                Về chúng tôi
-              </a>
-              <a href="mailto:ahr@innojsc.com" className="text-gray-500 hover:text-blue-600">
-                Liên hệ
-              </a>
-            </div>
-          </div>
-        </nav>
-      </header>
+      <Header />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-8">
@@ -187,6 +188,20 @@ export default function HomePage() {
 
           {/* Job List */}
           <main className="w-full md:w-3/4">
+            {/* Search Bar */}
+            <div className="mb-6">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
+                <input
+                  type="text"
+                  placeholder="Tìm kiếm theo tên công việc, chuyên môn..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+            </div>
+
             {/* Header with View Mode Toggle */}
             <div className="flex justify-between items-center mb-4">
               <h2 className="text-xl font-semibold text-gray-800">
@@ -273,58 +288,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* Footer */}
-      <footer className="bg-gray-800 text-gray-300 mt-16">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-xl font-bold text-white mb-4">InnoJSC Careers</h3>
-              <p className="text-sm">Tham gia cùng chúng tôi để kiến tạo tương lai.</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Liên kết</h3>
-              <ul className="space-y-2 text-sm">
-                <li>
-                  <a href="/" className="hover:text-white">
-                    Trang chủ
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://innojsc.com"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-white"
-                  >
-                    Website công ty
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold text-white mb-4">Liên hệ</h3>
-              <ul className="space-y-2 text-sm">
-                <li>Email: ahr@innojsc.com</li>
-                <li>Hotline: +84 969 979 391</li>
-                <li className="mt-4">
-                  <strong>Hà Nội:</strong>
-                  <p>39 Thượng Thụy, Phú Thượng, Tây Hồ, Hà Nội</p>
-                </li>
-                <li className="mt-2">
-                  <strong>TP.HCM:</strong>
-                  <p>
-                    Căn hộ TMDV A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng,
-                    phường Thảo Điền, TP. Thủ Đức
-                  </p>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div className="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
-            &copy; {new Date().getFullYear()} InnoJSC. All rights reserved.
-          </div>
-        </div>
-      </footer>
+      <Footer />
 
       {/* Apply Modal */}
       {isModalOpen && (

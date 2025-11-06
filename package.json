@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "ts-node -O '{\"module\":\"commonjs\"}' scripts/seed-jobs.ts"
+    "seed": "ts-node -O '{\"module\":\"commonjs\"}' scripts/seed-jobs.ts",
+    "create-admin": "ts-node -O '{\"module\":\"commonjs\"}' scripts/create-admin.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
