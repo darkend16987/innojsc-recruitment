@@ -44,29 +44,59 @@ NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
 ```
 
-### 3. Firestore Security Rules
+### 3. Setup Admin Panel
 
-Go to Firestore Database > Rules and add:
+#### 3.1 Enable Firebase Authentication
+
+1. Go to Firebase Console > Authentication
+2. Click "Get Started"
+3. Enable "Email/Password" sign-in method
+
+#### 3.2 Create Admin User
+
+Run the create-admin script:
+
+```bash
+npm run create-admin
+```
+
+Follow the prompts to create your first admin user. Save the UID displayed - you'll need it for security rules.
+
+#### 3.3 Update Firestore Security Rules
+
+Go to Firestore Database > Rules and add (replace `YOUR_ADMIN_UID` with the UID from step 3.2):
 
 ```javascript
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Helper function to check if user is admin
+    function isAdmin() {
+      // Replace with your admin UID(s)
+      return request.auth != null && (
+        request.auth.uid == 'YOUR_ADMIN_UID'
+        // Add more admin UIDs separated by ||
+        // || request.auth.uid == 'ANOTHER_ADMIN_UID'
+      );
+    }
+
     // Jobs collection - Read: Public, Write: Admin only
     match /jobs/{jobId} {
       allow read: if true;
-      allow write: if false; // Only admin via Firebase Console or Functions
+      allow create, update, delete: if isAdmin();
     }
 
-    // Applications collection - Write: Public (for applying), Read: Admin only
+    // Applications collection - Write: Public (for applying), Read/Delete: Admin only
     match /applications/{applicationId} {
-      allow read: if false; // Only admin
+      allow read, delete: if isAdmin();
       allow create: if true; // Anyone can apply
-      allow update, delete: if false;
+      allow update: if false;
     }
   }
 }
 ```
+
+**Important:** Replace `YOUR_ADMIN_UID` with the actual UID from the create-admin script output!
 
 ### 4. Storage Security Rules
 
@@ -76,9 +106,9 @@ Go to Storage > Rules and add:
 rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
-    // CV uploads
+    // CV uploads - Read: Admin only, Write: Public (for applications)
     match /cvs/{fileName} {
-      allow read: if false; // Only admin via Firebase Console
+      allow read: if request.auth != null; // Authenticated users (admins) can read
       allow write: if request.resource.size < 5 * 1024 * 1024 // 5MB
                    && request.resource.contentType.matches('application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document');
     }
@@ -94,7 +124,24 @@ npm run seed
 
 This will add 5 sample job postings to your Firestore.
 
-### 6. Run Development Server
+### 6. Access Admin Panel
+
+After setup, access the admin panel at:
+
+```
+http://localhost:3000/admin/login
+```
+
+Use the email and password you created in step 3.2 to login.
+
+**Admin Features:**
+- 📊 Dashboard with statistics
+- ✍️ Create, edit, and delete job postings
+- 👥 View and manage applications
+- 📥 Download CVs
+- 🔄 Change job status (published/draft/closed)
+
+### 7. Run Development Server
 
 ```bash
 npm run dev
@@ -184,13 +231,30 @@ innojsc-recruitment/
 
 ## 🔑 Key Features
 
+**Public Website:**
 - ✅ Job listing with filters (location, type, expertise)
-- ✅ Job detail page with related jobs
+- ✅ Advanced search functionality
+- ✅ Job detail page with related jobs and sharing
 - ✅ Apply modal with CV upload
+- ✅ Contact page with company information
 - ✅ Email notifications to HR (via Firebase Functions)
 - ✅ Responsive design
 - ✅ Loading states and error handling
-- ✅ SEO optimized
+- ✅ SEO optimized with Open Graph tags
+- ✅ Social media sharing support
+- ✅ Toast notifications
+
+**Admin Panel:**
+- ✅ Secure authentication with Firebase Auth
+- ✅ Dashboard with real-time statistics
+- ✅ Create, edit, and delete job postings
+- ✅ Rich job form with requirements and benefits
+- ✅ Job status management (draft/published/closed)
+- ✅ View all applications with filtering
+- ✅ Download applicant CVs
+- ✅ Delete applications
+- ✅ Responsive admin interface
+- ✅ Protected routes
 
 ## 🐛 Troubleshooting
 
