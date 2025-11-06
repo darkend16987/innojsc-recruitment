@@ -32,38 +32,3 @@ const db = getFirestore(app);
 const storage = getStorage(app);
 
 export { app, db, storage };
-
-// TypeScript Types
-export interface Job {
-  id?: string;
-  title: string;
-  department: string;
-  position: 'Junior' | 'Middle' | 'Senior' | 'Manager' | 'Director';
-  expertise: string;
-  experience: number;
-  jobType: 'Full-time' | 'Part-time' | 'Intern' | 'Contract';
-  salary: {
-    min: number;
-    max: number;
-    currency: 'VND' | 'USD';
-    display: string;
-  };
-  tags: string[];
-  location: 'Hà Nội' | 'TP.HCM' | 'Remote';
-  description: string;
-  requirements: string;
-  benefits: string;
-  publishedAt: string;
-  status: 'published' | 'draft' | 'closed';
-}
-
-export interface Application {
-  id?: string;
-  jobId: string;
-  jobTitle: string;
-  applicantName: string;
-  applicantEmail: string;
-  applicantPhone: string;
-  cvUrl: string;
-  appliedAt: string;
-}

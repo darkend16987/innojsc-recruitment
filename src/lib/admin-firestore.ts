@@ -12,7 +12,8 @@ import {
   where,
   Timestamp,
 } from 'firebase/firestore';
-import { db, Job, Application } from './firebase-config';
+import { db } from './firebase-config';
+import { Job, Application } from '@/types/job';
 
 // ===== ADMIN JOB FUNCTIONS =====
 

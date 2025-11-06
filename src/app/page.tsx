@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getPublishedJobs } from '@/lib/firestore-helpers';
-import { Job } from '@/lib/firebase-config';
+import { Job } from '@/types/job';
 import JobCard from '@/components/JobCard';
 import ApplyModal from '@/components/ApplyModal';
 import Header from '@/components/Header';

@@ -4,8 +4,9 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { Job } from '@/types/job';
 import { createJob, updateJob } from '@/lib/admin-firestore';
+import { getSettings, SystemSettings } from '@/lib/settings';
 import { useToast } from '@/components/Toast';
-import { Save, X, AlertCircle } from 'lucide-react';
+import { Save, X, AlertCircle, Tag } from 'lucide-react';
 
 interface JobFormProps {
   job?: Job;
@@ -16,15 +17,21 @@ export default function JobForm({ job, mode }: JobFormProps) {
   const router = useRouter();
   const toast = useToast();
   const [loading, setLoading] = useState(false);
+  const [settingsLoading, setSettingsLoading] = useState(true);
+  const [settings, setSettings] = useState<SystemSettings | null>(null);
+
   const [formData, setFormData] = useState({
     title: job?.title || '',
     department: job?.department || '',
-    location: job?.location || 'Hà Nội',
-    jobType: job?.jobType || 'Full-time',
-    expertise: job?.expertise || 'Junior',
+    position: job?.position || '',
+    location: job?.location || '',
+    jobType: job?.jobType || '',
+    expertise: job?.expertise || '',
+    experience: job?.experience || 0,
     description: job?.description || '',
     requirements: job?.requirements || [],
     benefits: job?.benefits || [],
+    tags: job?.tags || [],
     salary: job?.salary || '',
     status: job?.status || 'draft',
   });
@@ -33,11 +40,50 @@ export default function JobForm({ job, mode }: JobFormProps) {
   const [requirementInput, setRequirementInput] = useState('');
   const [benefitInput, setBenefitInput] = useState('');
 
+  // Load settings
+  useEffect(() => {
+    loadSettings();
+  }, []);
+
+  const loadSettings = async () => {
+    try {
+      setSettingsLoading(true);
+      const data = await getSettings();
+      setSettings(data);
+
+      // Set default values if not editing
+      if (mode === 'create' && !job) {
+        setFormData(prev => ({
+          ...prev,
+          department: data.departments[0] || '',
+          position: data.positions[0] || '',
+          location: data.locations[0] || '',
+          jobType: data.jobTypes[0] || '',
+          expertise: data.expertiseLevels[0] || '',
+        }));
+      }
+    } catch (error) {
+      console.error('Error loading settings:', error);
+      toast.error('Không thể tải cấu hình. Vui lòng kiểm tra lại.');
+    } finally {
+      setSettingsLoading(false);
+    }
+  };
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const toggleTag = (tag: string) => {
+    setFormData((prev) => ({
+      ...prev,
+      tags: prev.tags.includes(tag)
+        ? prev.tags.filter((t) => t !== tag)
+        : [...prev.tags, tag],
+    }));
   };
 
   const addRequirement = () => {
@@ -84,7 +130,7 @@ export default function JobForm({ job, mode }: JobFormProps) {
     }
 
     if (!formData.department.trim()) {
-      toast.error('Vui lòng nhập phòng ban');
+      toast.error('Vui lòng chọn phòng ban');
       return;
     }
 
@@ -133,6 +179,27 @@ export default function JobForm({ job, mode }: JobFormProps) {
     }
   };
 
+  if (settingsLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
+          <p className="text-gray-600">Đang tải cấu hình...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (!settings) {
+    return (
+      <div className="bg-red-50 border border-red-200 rounded-lg p-4">
+        <p className="text-red-800">
+          Không thể tải cấu hình. Vui lòng vào trang Cấu hình để thiết lập.
+        </p>
+      </div>
+    );
+  }
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
       {/* Basic Information */}
@@ -163,15 +230,44 @@ export default function JobForm({ job, mode }: JobFormProps) {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Phòng ban <span className="text-red-500">*</span>
             </label>
-            <input
-              type="text"
+            <select
               name="department"
               value={formData.department}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="VD: Phát triển sản phẩm"
               required
-            />
+            >
+              <option value="">-- Chọn phòng ban --</option>
+              {settings.departments.map((dept) => (
+                <option key={dept} value={dept}>
+                  {dept}
+                </option>
+              ))}
+            </select>
+            <p className="mt-1 text-xs text-gray-500">
+              Không tìm thấy? Thêm ở trang <a href="/admin/settings" className="text-blue-600 hover:underline">Cấu hình</a>
+            </p>
+          </div>
+
+          {/* Position */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Chức vụ <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              required
+            >
+              <option value="">-- Chọn chức vụ --</option>
+              {settings.positions.map((pos) => (
+                <option key={pos} value={pos}>
+                  {pos}
+                </option>
+              ))}
+            </select>
           </div>
 
           {/* Location */}
@@ -186,10 +282,12 @@ export default function JobForm({ job, mode }: JobFormProps) {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
             >
-              <option value="Hà Nội">Hà Nội</option>
-              <option value="TP.HCM">TP.HCM</option>
-              <option value="Remote">Remote</option>
-              <option value="Hybrid">Hybrid</option>
+              <option value="">-- Chọn địa điểm --</option>
+              {settings.locations.map((loc) => (
+                <option key={loc} value={loc}>
+                  {loc}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -205,10 +303,12 @@ export default function JobForm({ job, mode }: JobFormProps) {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
             >
-              <option value="Full-time">Full-time</option>
-              <option value="Part-time">Part-time</option>
-              <option value="Contract">Contract</option>
-              <option value="Internship">Internship</option>
+              <option value="">-- Chọn loại hình --</option>
+              {settings.jobTypes.map((type) => (
+                <option key={type} value={type}>
+                  {type}
+                </option>
+              ))}
             </select>
           </div>
 
@@ -224,12 +324,34 @@ export default function JobForm({ job, mode }: JobFormProps) {
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
               required
             >
-              <option value="Intern">Intern</option>
-              <option value="Junior">Junior</option>
-              <option value="Mid-level">Mid-level</option>
-              <option value="Senior">Senior</option>
-              <option value="Lead">Lead</option>
+              <option value="">-- Chọn cấp bậc --</option>
+              {settings.expertiseLevels.map((level) => (
+                <option key={level} value={level}>
+                  {level}
+                </option>
+              ))}
             </select>
+          </div>
+
+          {/* Experience */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Số năm kinh nghiệm <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="number"
+              name="experience"
+              value={formData.experience}
+              onChange={handleChange}
+              min="0"
+              max="50"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="0"
+              required
+            />
+            <p className="mt-1 text-xs text-gray-500">
+              Nhập 0 nếu không yêu cầu kinh nghiệm
+            </p>
           </div>
 
           {/* Salary */}
@@ -265,6 +387,63 @@ export default function JobForm({ job, mode }: JobFormProps) {
             </select>
           </div>
         </div>
+      </div>
+
+      {/* Tags/Skills */}
+      <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-6">
+        <div className="flex items-center gap-2 mb-4">
+          <Tag className="w-5 h-5 text-gray-600" />
+          <h2 className="text-lg font-semibold text-gray-900">
+            Kỹ năng / Tags
+          </h2>
+        </div>
+        <p className="text-sm text-gray-600 mb-4">
+          Chọn các kỹ năng cần thiết cho vị trí này. Giúp ứng viên tìm kiếm chính xác hơn.
+        </p>
+
+        {settings.skills.length > 0 ? (
+          <div className="flex flex-wrap gap-2">
+            {settings.skills.map((skill) => (
+              <button
+                key={skill}
+                type="button"
+                onClick={() => toggleTag(skill)}
+                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${
+                  formData.tags.includes(skill)
+                    ? 'bg-blue-600 text-white'
+                    : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                }`}
+              >
+                {skill}
+              </button>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-gray-500">
+            Chưa có kỹ năng nào. Vui lòng thêm ở trang{' '}
+            <a href="/admin/settings" className="text-blue-600 hover:underline">
+              Cấu hình
+            </a>
+          </p>
+        )}
+
+        {formData.tags.length > 0 && (
+          <div className="mt-4 pt-4 border-t border-gray-200">
+            <p className="text-sm text-gray-600 mb-2">
+              Đã chọn ({formData.tags.length}):
+            </p>
+            <div className="flex flex-wrap gap-2">
+              {formData.tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="inline-flex items-center gap-1 px-2.5 py-1 bg-blue-100 text-blue-800 rounded-full text-xs font-medium"
+                >
+                  {tag}
+                </span>
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       {/* Description */}

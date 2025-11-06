@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getJobById, getRelatedJobs } from '@/lib/firestore-helpers';
-import { Job } from '@/lib/firebase-config';
+import { Job } from '@/types/job';
 import ApplyModal from '@/components/ApplyModal';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -68,7 +68,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
 
     const shareData = {
       title: job.title,
-      text: `${job.title} - ${job.salary.display}`,
+      text: `${job.title}${job.salary ? ` - ${job.salary}` : ''}`,
       url: window.location.href,
     };
 
@@ -95,7 +95,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
   const generateJobPostingSchema = (job: Job) => {
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careers.innojsc.com';
 
-    return {
+    const schema: any = {
       '@context': 'https://schema.org',
       '@type': 'JobPosting',
       title: job.title,
@@ -116,22 +116,22 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
           addressCountry: 'VN',
         },
       },
-      baseSalary: {
-        '@type': 'MonetaryAmount',
-        currency: job.salary.currency,
-        value: {
-          '@type': 'QuantitativeValue',
-          minValue: job.salary.min,
-          maxValue: job.salary.max,
-          unitText: 'MONTH',
-        },
-      },
-      skills: job.expertise,
-      experienceRequirements: {
+    };
+
+    // Add skills if available
+    if (job.tags && job.tags.length > 0) {
+      schema.skills = job.tags.join(', ');
+    }
+
+    // Add experience requirements
+    if (job.experience > 0) {
+      schema.experienceRequirements = {
         '@type': 'OccupationalExperienceRequirements',
         monthsOfExperience: job.experience * 12,
-      },
-    };
+      };
+    }
+
+    return schema;
   };
 
   // Loading state
@@ -237,12 +237,14 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                   </div>
                   <div className="flex items-center gap-2 text-sm text-gray-600">
                     <Clock size={18} className="text-gray-400" />
-                    <span>{job.experience > 0 ? `${job.experience}+ năm` : 'Không yêu cầu'}</span>
+                    <span>{job.experience > 0 ? `${job.experience}+ năm kinh nghiệm` : 'Không yêu cầu kinh nghiệm'}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm">
-                    <DollarSign size={18} className="text-blue-600" />
-                    <span className="font-medium text-blue-600">{job.salary.display}</span>
-                  </div>
+                  {job.salary && (
+                    <div className="flex items-center gap-2 text-sm">
+                      <DollarSign size={18} className="text-blue-600" />
+                      <span className="font-medium text-blue-600">{job.salary}</span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Department & Position */}
