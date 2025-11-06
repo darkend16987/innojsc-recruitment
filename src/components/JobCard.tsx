@@ -1,7 +1,7 @@
 // src/components/JobCard.tsx
 'use client';
 
-import { Job } from '@/lib/firebaseConfig';
+import { Job } from '@/lib/firebase-config';
 import { MapPin, Briefcase, Clock, DollarSign } from 'lucide-react';
 import Link from 'next/link';
 

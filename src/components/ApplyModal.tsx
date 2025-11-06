@@ -3,7 +3,7 @@
 
 import { useState } from 'react';
 import { X } from 'lucide-react';
-import { submitApplication } from '@/lib/firestore';
+import { submitApplication } from '@/lib/firestore-helpers';
 
 interface ApplyModalProps {
   isOpen: boolean;

@@ -1,65 +1,340 @@
-import Image from "next/image";
+'use client';
 
-export default function Home() {
+import { useState, useEffect } from 'react';
+import { getPublishedJobs } from '@/lib/firestore-helpers';
+import { Job } from '@/lib/firebase-config';
+import JobCard from '@/components/JobCard';
+import ApplyModal from '@/components/ApplyModal';
+import { List, LayoutGrid } from 'lucide-react';
+
+export default function HomePage() {
+  const [jobs, setJobs] = useState<Job[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
+
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedJobId, setSelectedJobId] = useState<string>('');
+  const [selectedJobTitle, setSelectedJobTitle] = useState<string>('');
+
+  // Filter states
+  const [filters, setFilters] = useState({
+    location: '',
+    jobType: '',
+    expertise: '',
+  });
+
+  useEffect(() => {
+    fetchJobs();
+  }, []);
+
+  const fetchJobs = async () => {
+    try {
+      setLoading(true);
+      setError(null);
+      const jobsData = await getPublishedJobs();
+      setJobs(jobsData);
+    } catch (err) {
+      setError('Không thể tải danh sách việc làm. Vui lòng thử lại sau.');
+      console.error('Error fetching jobs:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleApply = (jobId: string, jobTitle: string) => {
+    setSelectedJobId(jobId);
+    setSelectedJobTitle(jobTitle);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedJobId('');
+    setSelectedJobTitle('');
+  };
+
+  // Filter jobs based on selected filters
+  const filteredJobs = jobs.filter(job => {
+    if (filters.location && job.location !== filters.location) return false;
+    if (filters.jobType && job.jobType !== filters.jobType) return false;
+    if (filters.expertise && job.expertise !== filters.expertise) return false;
+    return true;
+  });
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <header className="bg-white shadow-sm sticky top-0 z-40">
+        <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex justify-between items-center h-16">
+            <div className="flex items-center">
+              <span className="text-2xl font-bold text-blue-600">InnoJSC</span>
+              <span className="ml-2 text-2xl font-light text-gray-700">Careers</span>
+            </div>
+            <div className="hidden md:flex md:space-x-8">
+              <a href="/" className="text-gray-900 hover:text-blue-600 font-medium">
+                Việc làm
+              </a>
+              <a href="https://innojsc.com" target="_blank" rel="noopener noreferrer" className="text-gray-500 hover:text-blue-600">
+                Về chúng tôi
+              </a>
+              <a href="mailto:ahr@innojsc.com" className="text-gray-500 hover:text-blue-600">
+                Liên hệ
+              </a>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      {/* Main Content */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 mt-8">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Sidebar Filters */}
+          <aside className="w-full md:w-1/4">
+            <div className="bg-white p-5 rounded-lg shadow-sm border border-gray-200 sticky top-24">
+              <h3 className="text-lg font-semibold mb-4">Bộ lọc</h3>
+              <div className="space-y-4">
+                {/* Location Filter */}
+                <div>
+                  <h4 className="font-medium text-gray-800 mb-2">Địa điểm</h4>
+                  <div className="space-y-2">
+                    {['Hà Nội', 'TP.HCM', 'Remote'].map(location => (
+                      <label key={location} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="location"
+                          value={location}
+                          checked={filters.location === location}
+                          onChange={(e) => setFilters({ ...filters, location: e.target.value })}
+                          className="rounded text-blue-600"
+                        />
+                        <span className="ml-2 text-sm text-gray-700">{location}</span>
+                      </label>
+                    ))}
+                    <button
+                      onClick={() => setFilters({ ...filters, location: '' })}
+                      className="text-sm text-blue-600 hover:underline"
+                    >
+                      Xóa bộ lọc
+                    </button>
+                  </div>
+                </div>
+
+                {/* Job Type Filter */}
+                <div>
+                  <h4 className="font-medium text-gray-800 mb-2">Loại công việc</h4>
+                  <div className="space-y-2">
+                    {['Full-time', 'Part-time', 'Intern', 'Contract'].map(type => (
+                      <label key={type} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="jobType"
+                          value={type}
+                          checked={filters.jobType === type}
+                          onChange={(e) => setFilters({ ...filters, jobType: e.target.value })}
+                          className="rounded text-blue-600"
+                        />
+                        <span className="ml-2 text-sm text-gray-700">{type}</span>
+                      </label>
+                    ))}
+                    <button
+                      onClick={() => setFilters({ ...filters, jobType: '' })}
+                      className="text-sm text-blue-600 hover:underline"
+                    >
+                      Xóa bộ lọc
+                    </button>
+                  </div>
+                </div>
+
+                {/* Expertise Filter */}
+                <div>
+                  <h4 className="font-medium text-gray-800 mb-2">Chuyên môn</h4>
+                  <div className="space-y-2">
+                    {['Frontend', 'Backend', 'BA', 'DevOps', 'Mobile'].map(expertise => (
+                      <label key={expertise} className="flex items-center">
+                        <input
+                          type="radio"
+                          name="expertise"
+                          value={expertise}
+                          checked={filters.expertise === expertise}
+                          onChange={(e) => setFilters({ ...filters, expertise: e.target.value })}
+                          className="rounded text-blue-600"
+                        />
+                        <span className="ml-2 text-sm text-gray-700">{expertise}</span>
+                      </label>
+                    ))}
+                    <button
+                      onClick={() => setFilters({ ...filters, expertise: '' })}
+                      className="text-sm text-blue-600 hover:underline"
+                    >
+                      Xóa bộ lọc
+                    </button>
+                  </div>
+                </div>
+
+                {/* Clear All Filters */}
+                <button
+                  onClick={() => setFilters({ location: '', jobType: '', expertise: '' })}
+                  className="w-full mt-4 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50"
+                >
+                  Xóa tất cả bộ lọc
+                </button>
+              </div>
+            </div>
+          </aside>
+
+          {/* Job List */}
+          <main className="w-full md:w-3/4">
+            {/* Header with View Mode Toggle */}
+            <div className="flex justify-between items-center mb-4">
+              <h2 className="text-xl font-semibold text-gray-800">
+                Tìm thấy <span className="text-blue-600">{filteredJobs.length}</span> việc làm
+              </h2>
+              <div className="flex items-center space-x-2">
+                <span className="text-sm font-medium">Xem:</span>
+                <button
+                  onClick={() => setViewMode('list')}
+                  className={`p-2 rounded-md ${
+                    viewMode === 'list'
+                      ? 'bg-blue-100 text-blue-600'
+                      : 'text-gray-500 hover:bg-gray-100'
+                  }`}
+                >
+                  <List className="w-5 h-5" />
+                </button>
+                <button
+                  onClick={() => setViewMode('grid')}
+                  className={`p-2 rounded-md ${
+                    viewMode === 'grid'
+                      ? 'bg-blue-100 text-blue-600'
+                      : 'text-gray-500 hover:bg-gray-100'
+                  }`}
+                >
+                  <LayoutGrid className="w-5 h-5" />
+                </button>
+              </div>
+            </div>
+
+            {/* Loading State */}
+            {loading && (
+              <div className="flex justify-center items-center py-20">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600"></div>
+              </div>
+            )}
+
+            {/* Error State */}
+            {error && (
+              <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
+                <p className="text-red-800">{error}</p>
+                <button
+                  onClick={fetchJobs}
+                  className="mt-2 text-sm text-red-600 hover:underline font-medium"
+                >
+                  Thử lại
+                </button>
+              </div>
+            )}
+
+            {/* Empty State */}
+            {!loading && !error && filteredJobs.length === 0 && (
+              <div className="text-center py-20">
+                <p className="text-gray-500 text-lg">Không tìm thấy việc làm phù hợp</p>
+                <button
+                  onClick={() => setFilters({ location: '', jobType: '', expertise: '' })}
+                  className="mt-4 text-blue-600 hover:underline"
+                >
+                  Xóa bộ lọc
+                </button>
+              </div>
+            )}
+
+            {/* Job Cards */}
+            {!loading && !error && filteredJobs.length > 0 && (
+              <div
+                className={
+                  viewMode === 'list'
+                    ? 'space-y-4'
+                    : 'grid grid-cols-1 lg:grid-cols-2 gap-4'
+                }
+              >
+                {filteredJobs.map((job) => (
+                  <JobCard
+                    key={job.id}
+                    job={job}
+                    onApply={handleApply}
+                    viewMode={viewMode}
+                  />
+                ))}
+              </div>
+            )}
+          </main>
+        </div>
+      </div>
+
+      {/* Footer */}
+      <footer className="bg-gray-800 text-gray-300 mt-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div>
+              <h3 className="text-xl font-bold text-white mb-4">InnoJSC Careers</h3>
+              <p className="text-sm">Tham gia cùng chúng tôi để kiến tạo tương lai.</p>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">Liên kết</h3>
+              <ul className="space-y-2 text-sm">
+                <li>
+                  <a href="/" className="hover:text-white">
+                    Trang chủ
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="https://innojsc.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-white"
+                  >
+                    Website công ty
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">Liên hệ</h3>
+              <ul className="space-y-2 text-sm">
+                <li>Email: ahr@innojsc.com</li>
+                <li>Hotline: +84 969 979 391</li>
+                <li className="mt-4">
+                  <strong>Hà Nội:</strong>
+                  <p>39 Thượng Thụy, Phú Thượng, Tây Hồ, Hà Nội</p>
+                </li>
+                <li className="mt-2">
+                  <strong>TP.HCM:</strong>
+                  <p>
+                    Căn hộ TMDV A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng,
+                    phường Thảo Điền, TP. Thủ Đức
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div className="mt-8 border-t border-gray-700 pt-8 text-sm text-center">
+            &copy; {new Date().getFullYear()} InnoJSC. All rights reserved.
+          </div>
+        </div>
+      </footer>
+
+      {/* Apply Modal */}
+      {isModalOpen && (
+        <ApplyModal
+          isOpen={isModalOpen}
+          onClose={handleCloseModal}
+          jobId={selectedJobId}
+          jobTitle={selectedJobTitle}
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+      )}
     </div>
   );
 }
