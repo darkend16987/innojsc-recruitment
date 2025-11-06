@@ -1,0 +1,16 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Jobs collection - read-only for public
+    match /jobs/{jobId} {
+      allow read: if resource.data.status == 'published';
+      allow write: if false; // Only via Firebase Console or Admin SDK
+    }
+    
+    // Applications collection - write-only for public
+    match /applications/{applicationId} {
+      allow create: if request.auth == null; // Allow anonymous submissions
+      allow read, update, delete: if false; // Only admin access
+    }
+  }
+}

@@ -1,0 +1,16 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    match /cvs/{fileName} {
+      // Allow upload
+      allow create: if request.resource.size < 5 * 1024 * 1024  // Max 5MB
+                   && request.resource.contentType.matches('application/pdf|application/msword|application/vnd.openxmlformats-officedocument.wordprocessingml.document');
+      
+      // Only allow read for authenticated users (admins)
+      allow read: if false;
+      
+      // No updates or deletes from client
+      allow update, delete: if false;
+    }
+  }
+}
