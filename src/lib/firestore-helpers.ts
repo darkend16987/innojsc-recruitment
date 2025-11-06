@@ -12,7 +12,8 @@ import {
   Timestamp,
 } from 'firebase/firestore';
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage';
-import { db, storage, Job, Application } from './firebase-config';
+import { db, storage } from './firebase-config';
+import { Job, Application } from '@/types/job';
 
 // ===== JOB FUNCTIONS =====
 

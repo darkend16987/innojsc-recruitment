@@ -1,8 +1,8 @@
 // src/components/JobCard.tsx
 'use client';
 
-import { Job } from '@/lib/firebase-config';
-import { MapPin, Briefcase, Clock, DollarSign } from 'lucide-react';
+import { Job } from '@/types/job';
+import { MapPin, Briefcase, Clock, DollarSign, Award } from 'lucide-react';
 import Link from 'next/link';
 
 interface JobCardProps {
@@ -93,24 +93,32 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
             {/* Experience */}
             <div className="flex items-center gap-2 text-sm text-gray-600">
               <Clock size={16} className="text-gray-400" />
-              <span>{job.experience > 0 ? `${job.experience}+ năm` : 'Không yêu cầu'}</span>
+              <span>{job.experience > 0 ? `${job.experience}+ năm KN` : 'Không yêu cầu KN'}</span>
             </div>
 
             {/* Salary */}
-            <div className="flex items-center gap-2 text-sm text-gray-600">
-              <DollarSign size={16} className="text-gray-400" />
-              <span className="font-medium text-blue-600">{job.salary.display}</span>
-            </div>
+            {job.salary && (
+              <div className="flex items-center gap-2 text-sm text-gray-600">
+                <DollarSign size={16} className="text-gray-400" />
+                <span className="font-medium text-blue-600">{job.salary}</span>
+              </div>
+            )}
           </div>
 
-          {/* Expertise */}
-          {job.expertise && (
-            <div className="mb-4">
+          {/* Position & Expertise */}
+          <div className="flex flex-wrap gap-2 mb-4">
+            {job.position && (
+              <span className="inline-flex items-center gap-1 px-3 py-1 bg-purple-50 text-purple-700 text-sm font-medium rounded-full">
+                <Award size={14} />
+                {job.position}
+              </span>
+            )}
+            {job.expertise && (
               <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-sm font-medium rounded-full">
                 {job.expertise}
               </span>
-            </div>
-          )}
+            )}
+          </div>
 
           {/* Description Preview - chỉ hiện ở list view */}
           {!isGridView && (

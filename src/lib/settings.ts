@@ -3,9 +3,10 @@ import { doc, getDoc, setDoc, updateDoc } from 'firebase/firestore';
 
 export interface SystemSettings {
   departments: string[];
+  positions: string[]; // Chức vụ: Nhân viên, Trưởng phòng, Phó phòng...
   locations: string[];
   jobTypes: string[];
-  expertiseLevels: string[];
+  expertiseLevels: string[]; // Cấp bậc: Junior, Senior, Lead...
   skills: string[];
 }
 
@@ -21,6 +22,14 @@ export const DEFAULT_SETTINGS: SystemSettings = {
     'Marketing',
     'Nhân sự',
     'Kế toán',
+  ],
+  positions: [
+    'Nhân viên',
+    'Chuyên viên',
+    'Trưởng nhóm',
+    'Phó phòng',
+    'Trưởng phòng',
+    'Giám đốc',
   ],
   locations: [
     'Hà Nội',

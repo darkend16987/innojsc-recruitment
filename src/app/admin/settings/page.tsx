@@ -91,6 +91,13 @@ function SettingsContent() {
       color: 'blue',
     },
     {
+      key: 'positions',
+      title: 'Chức vụ',
+      description: 'Các chức danh công việc (Nhân viên, Trưởng phòng...)',
+      icon: Award,
+      color: 'indigo',
+    },
+    {
       key: 'locations',
       title: 'Địa điểm',
       description: 'Các địa điểm làm việc',
@@ -196,6 +203,7 @@ function SettingCategory({
 
   const colorClasses = {
     blue: 'bg-blue-50 text-blue-600 border-blue-200',
+    indigo: 'bg-indigo-50 text-indigo-600 border-indigo-200',
     green: 'bg-green-50 text-green-600 border-green-200',
     purple: 'bg-purple-50 text-purple-600 border-purple-200',
     orange: 'bg-orange-50 text-orange-600 border-orange-200',

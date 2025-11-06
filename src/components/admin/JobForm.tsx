@@ -23,9 +23,11 @@ export default function JobForm({ job, mode }: JobFormProps) {
   const [formData, setFormData] = useState({
     title: job?.title || '',
     department: job?.department || '',
+    position: job?.position || '',
     location: job?.location || '',
     jobType: job?.jobType || '',
     expertise: job?.expertise || '',
+    experience: job?.experience || 0,
     description: job?.description || '',
     requirements: job?.requirements || [],
     benefits: job?.benefits || [],
@@ -54,6 +56,7 @@ export default function JobForm({ job, mode }: JobFormProps) {
         setFormData(prev => ({
           ...prev,
           department: data.departments[0] || '',
+          position: data.positions[0] || '',
           location: data.locations[0] || '',
           jobType: data.jobTypes[0] || '',
           expertise: data.expertiseLevels[0] || '',
@@ -246,6 +249,27 @@ export default function JobForm({ job, mode }: JobFormProps) {
             </p>
           </div>
 
+          {/* Position */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Chức vụ <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="position"
+              value={formData.position}
+              onChange={handleChange}
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              required
+            >
+              <option value="">-- Chọn chức vụ --</option>
+              {settings.positions.map((pos) => (
+                <option key={pos} value={pos}>
+                  {pos}
+                </option>
+              ))}
+            </select>
+          </div>
+
           {/* Location */}
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -307,6 +331,27 @@ export default function JobForm({ job, mode }: JobFormProps) {
                 </option>
               ))}
             </select>
+          </div>
+
+          {/* Experience */}
+          <div>
+            <label className="block text-sm font-medium text-gray-700 mb-2">
+              Số năm kinh nghiệm <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="number"
+              name="experience"
+              value={formData.experience}
+              onChange={handleChange}
+              min="0"
+              max="50"
+              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              placeholder="0"
+              required
+            />
+            <p className="mt-1 text-xs text-gray-500">
+              Nhập 0 nếu không yêu cầu kinh nghiệm
+            </p>
           </div>
 
           {/* Salary */}
