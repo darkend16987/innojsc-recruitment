@@ -12,6 +12,20 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+// Validate Firebase config in development
+if (process.env.NODE_ENV === 'development') {
+  const missingVars = Object.entries(firebaseConfig)
+    .filter(([_, value]) => !value)
+    .map(([key]) => `NEXT_PUBLIC_FIREBASE_${key.toUpperCase()}`);
+
+  if (missingVars.length > 0) {
+    console.error('❌ Missing Firebase environment variables:');
+    missingVars.forEach(varName => console.error(`  - ${varName}`));
+    console.error('\n💡 Create a .env.local file and add your Firebase config.');
+    console.error('   See .env.example for reference.\n');
+  }
+}
+
 // Initialize Firebase (singleton pattern)
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];
 const db = getFirestore(app);
