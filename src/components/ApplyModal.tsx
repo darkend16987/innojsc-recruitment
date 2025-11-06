@@ -4,6 +4,7 @@
 import { useState } from 'react';
 import { X } from 'lucide-react';
 import { submitApplication } from '@/lib/firestore-helpers';
+import { useToast } from './Toast';
 
 interface ApplyModalProps {
   isOpen: boolean;
@@ -18,6 +19,7 @@ export default function ApplyModal({
   jobId,
   jobTitle,
 }: ApplyModalProps) {
+  const toast = useToast();
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -86,13 +88,16 @@ export default function ApplyModal({
     try {
       await submitApplication(jobId, jobTitle, formData, cvFile!);
       setSuccess(true);
-      
+      toast.success('Ứng tuyển thành công! Chúng tôi sẽ liên hệ bạn sớm.');
+
       // Auto close after 2 seconds
       setTimeout(() => {
         handleClose();
       }, 2000);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Có lỗi xảy ra. Vui lòng thử lại.');
+      const errorMsg = err instanceof Error ? err.message : 'Có lỗi xảy ra. Vui lòng thử lại.';
+      setError(errorMsg);
+      toast.error(errorMsg);
     } finally {
       setIsSubmitting(false);
     }
