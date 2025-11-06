@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "seed": "ts-node -O '{\"module\":\"commonjs\"}' scripts/seed-jobs.ts",
+    "seed-settings": "ts-node -O '{\"module\":\"commonjs\"}' scripts/seed-settings.ts",
     "create-admin": "ts-node -O '{\"module\":\"commonjs\"}' scripts/create-admin.ts"
   },
   "dependencies": {

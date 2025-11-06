@@ -14,12 +14,14 @@ import {
   Menu,
   X,
   Home,
+  Settings,
 } from 'lucide-react';
 
 const navItems = [
   { href: '/admin/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { href: '/admin/jobs', label: 'Quản lý Jobs', icon: Briefcase },
   { href: '/admin/applications', label: 'Ứng tuyển', icon: FileText },
+  { href: '/admin/settings', label: 'Cấu hình', icon: Settings },
 ];
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {

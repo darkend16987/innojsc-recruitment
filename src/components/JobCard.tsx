@@ -42,25 +42,22 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
         <div className="flex-1">
           {/* Header with Tags */}
           <div className="mb-3">
-            {/* Tags */}
+            {/* Tags/Skills */}
             {job.tags && job.tags.length > 0 && (
-              <div className="flex flex-wrap gap-2 mb-2">
-                {job.tags.map((tag, index) => (
+              <div className="flex flex-wrap gap-1.5 mb-2">
+                {job.tags.slice(0, 5).map((tag, index) => (
                   <span
                     key={index}
-                    className={`px-2 py-1 text-xs font-semibold rounded ${
-                      tag === 'HOT'
-                        ? 'bg-red-100 text-red-700'
-                        : tag === 'TUYỂN DỤNG GẤP'
-                        ? 'bg-orange-100 text-orange-700'
-                        : tag === 'ƯU TIÊN NGOẠI NGỮ'
-                        ? 'bg-purple-100 text-purple-700'
-                        : 'bg-blue-100 text-blue-700'
-                    }`}
+                    className="px-2 py-0.5 text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200 rounded"
                   >
                     {tag}
                   </span>
                 ))}
+                {job.tags.length > 5 && (
+                  <span className="px-2 py-0.5 text-xs font-medium text-gray-500">
+                    +{job.tags.length - 5}
+                  </span>
+                )}
               </div>
             )}
 

@@ -92,6 +92,12 @@ service cloud.firestore {
       allow create: if true; // Anyone can apply
       allow update: if false;
     }
+
+    // Settings collection - Read: Public (for dropdowns), Write: Admin only
+    match /settings/{settingId} {
+      allow read: if true; // Public can read for job form dropdowns
+      allow write: if isAdmin();
+    }
   }
 }
 ```
@@ -116,7 +122,24 @@ service firebase.storage {
 }
 ```
 
-### 5. Seed Sample Data (Optional)
+### 5. Seed System Settings (Important)
+
+Initialize the system settings (departments, locations, job types, etc.):
+
+```bash
+npm run seed-settings
+```
+
+This will create default settings for:
+- **Phòng ban**: Phát triển sản phẩm, Công nghệ, Kinh doanh, Marketing, Nhân sự, Kế toán
+- **Địa điểm**: Hà Nội, TP.HCM, Đà Nẵng, Remote, Hybrid
+- **Loại công việc**: Full-time, Part-time, Contract, Internship
+- **Cấp bậc**: Intern, Fresher, Junior, Mid-level, Senior, Lead, Manager
+- **Kỹ năng**: React, Vue.js, Angular, Node.js, Python, Java, và nhiều hơn...
+
+**Note:** HR có thể quản lý các settings này ở `/admin/settings` mà không cần sửa code.
+
+### 6. Seed Sample Jobs (Optional)
 
 ```bash
 npm run seed
@@ -124,7 +147,7 @@ npm run seed
 
 This will add 5 sample job postings to your Firestore.
 
-### 6. Access Admin Panel
+### 7. Access Admin Panel
 
 After setup, access the admin panel at:
 
@@ -136,10 +159,11 @@ Use the email and password you created in step 3.2 to login.
 
 **Admin Features:**
 - 📊 Dashboard with statistics
-- ✍️ Create, edit, and delete job postings
+- ✍️ Create, edit, and delete job postings with tags/skills
 - 👥 View and manage applications
 - 📥 Download CVs
 - 🔄 Change job status (published/draft/closed)
+- ⚙️ Manage system settings (departments, locations, skills, etc.)
 
 ### 7. Run Development Server
 
@@ -249,10 +273,17 @@ innojsc-recruitment/
 - ✅ Dashboard with real-time statistics
 - ✅ Create, edit, and delete job postings
 - ✅ Rich job form with requirements and benefits
+- ✅ Tags/Skills multi-select for each job
 - ✅ Job status management (draft/published/closed)
 - ✅ View all applications with filtering
 - ✅ Download applicant CVs
 - ✅ Delete applications
+- ✅ **Settings Management** - HR can configure:
+  - Departments list
+  - Locations list
+  - Job types list
+  - Expertise levels list
+  - Skills/Tags list
 - ✅ Responsive admin interface
 - ✅ Protected routes
 
