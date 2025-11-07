@@ -389,9 +389,11 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                           <MapPin size={14} />
                           <span>{relatedJob.location}</span>
                         </div>
-                        <span className="text-sm font-medium text-blue-600">
-                          {relatedJob.salary.display}
-                        </span>
+                        {relatedJob.salary && (
+                          <span className="text-sm font-medium text-blue-600">
+                            {relatedJob.salary}
+                          </span>
+                        )}
                       </Link>
                     ))}
                   </div>
