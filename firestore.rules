@@ -1,16 +1,48 @@
 rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
-    // Jobs collection - read-only for public
-    match /jobs/{jobId} {
-      allow read: if resource.data.status == 'published';
-      allow write: if false; // Only via Firebase Console or Admin SDK
+
+    // Helper function to check if user is admin
+    function isAdmin() {
+      // TODO: Replace 'YOUR_ADMIN_UID_HERE' with actual UID from create-admin script
+      // Get UID by running: npm run create-admin
+      return request.auth != null && request.auth.uid == 'YOUR_ADMIN_UID_HERE';
     }
-    
-    // Applications collection - write-only for public
+
+    // Jobs collection
+    match /jobs/{jobId} {
+      // Public can read published jobs
+      allow read: if resource.data.status == 'published';
+      // Admin can read all jobs (including drafts)
+      allow read: if isAdmin();
+      // Only admin can create/update/delete jobs
+      allow write: if isAdmin();
+    }
+
+    // Applications collection
     match /applications/{applicationId} {
-      allow create: if request.auth == null; // Allow anonymous submissions
-      allow read, update, delete: if false; // Only admin access
+      // Anyone can submit application (create)
+      allow create: if true;
+      // Only admin can read/update/delete applications
+      allow read, update, delete: if isAdmin();
+    }
+
+    // Settings collection (departments, positions, skills, etc.)
+    match /settings/{settingId} {
+      // Anyone can read settings (needed for dropdown values in job form)
+      allow read: if true;
+      // Only admin can modify settings
+      allow write: if isAdmin();
+    }
+
+    // Test collection (for debugging - remove in production)
+    match /test_connection/{docId} {
+      allow read, write: if true;
+    }
+
+    // Deny all other collections by default
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }
