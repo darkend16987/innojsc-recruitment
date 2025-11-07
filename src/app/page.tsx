@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import { getPublishedJobs } from '@/lib/firestore-helpers';
+import { getSettings, SystemSettings } from '@/lib/settings';
 import { Job } from '@/types/job';
 import JobCard from '@/components/JobCard';
 import ApplyModal from '@/components/ApplyModal';
@@ -13,6 +14,7 @@ import { List, LayoutGrid, Search } from 'lucide-react';
 export default function HomePage() {
   const toast = useToast();
   const [jobs, setJobs] = useState<Job[]>([]);
+  const [settings, setSettings] = useState<SystemSettings | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
   const [viewMode, setViewMode] = useState<'list' | 'grid'>('list');
@@ -27,19 +29,23 @@ export default function HomePage() {
   const [filters, setFilters] = useState({
     location: '',
     jobType: '',
-    expertise: '',
+    department: '',
   });
 
   useEffect(() => {
-    fetchJobs();
+    fetchJobsAndSettings();
   }, []);
 
-  const fetchJobs = async () => {
+  const fetchJobsAndSettings = async () => {
     try {
       setLoading(true);
       setError(null);
-      const jobsData = await getPublishedJobs();
+      const [jobsData, settingsData] = await Promise.all([
+        getPublishedJobs(),
+        getSettings(),
+      ]);
       setJobs(jobsData);
+      setSettings(settingsData);
       if (jobsData.length > 0) {
         toast.success(`Đã tải ${jobsData.length} việc làm`);
       }
@@ -80,7 +86,7 @@ export default function HomePage() {
     // Filters
     if (filters.location && job.location !== filters.location) return false;
     if (filters.jobType && job.jobType !== filters.jobType) return false;
-    if (filters.expertise && job.expertise !== filters.expertise) return false;
+    if (filters.department && job.department !== filters.department) return false;
 
     return true;
   });
@@ -98,86 +104,92 @@ export default function HomePage() {
               <h3 className="text-lg font-semibold mb-4">Bộ lọc</h3>
               <div className="space-y-4">
                 {/* Location Filter */}
-                <div>
-                  <h4 className="font-medium text-gray-800 mb-2">Địa điểm</h4>
-                  <div className="space-y-2">
-                    {['Hà Nội', 'TP.HCM', 'Remote'].map(location => (
-                      <label key={location} className="flex items-center">
-                        <input
-                          type="radio"
-                          name="location"
-                          value={location}
-                          checked={filters.location === location}
-                          onChange={(e) => setFilters({ ...filters, location: e.target.value })}
-                          className="rounded text-blue-600"
-                        />
-                        <span className="ml-2 text-sm text-gray-700">{location}</span>
-                      </label>
-                    ))}
-                    <button
-                      onClick={() => setFilters({ ...filters, location: '' })}
-                      className="text-sm text-blue-600 hover:underline"
-                    >
-                      Xóa bộ lọc
-                    </button>
+                {settings && settings.locations.length > 0 && (
+                  <div>
+                    <h4 className="font-medium text-gray-800 mb-2">Địa điểm</h4>
+                    <div className="space-y-2">
+                      {settings.locations.map(location => (
+                        <label key={location} className="flex items-center">
+                          <input
+                            type="radio"
+                            name="location"
+                            value={location}
+                            checked={filters.location === location}
+                            onChange={(e) => setFilters({ ...filters, location: e.target.value })}
+                            className="rounded text-blue-600"
+                          />
+                          <span className="ml-2 text-sm text-gray-700">{location}</span>
+                        </label>
+                      ))}
+                      <button
+                        onClick={() => setFilters({ ...filters, location: '' })}
+                        className="text-sm text-blue-600 hover:underline"
+                      >
+                        Xóa bộ lọc
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Job Type Filter */}
-                <div>
-                  <h4 className="font-medium text-gray-800 mb-2">Loại công việc</h4>
-                  <div className="space-y-2">
-                    {['Full-time', 'Part-time', 'Intern', 'Contract'].map(type => (
-                      <label key={type} className="flex items-center">
-                        <input
-                          type="radio"
-                          name="jobType"
-                          value={type}
-                          checked={filters.jobType === type}
-                          onChange={(e) => setFilters({ ...filters, jobType: e.target.value })}
-                          className="rounded text-blue-600"
-                        />
-                        <span className="ml-2 text-sm text-gray-700">{type}</span>
-                      </label>
-                    ))}
-                    <button
-                      onClick={() => setFilters({ ...filters, jobType: '' })}
-                      className="text-sm text-blue-600 hover:underline"
-                    >
-                      Xóa bộ lọc
-                    </button>
+                {settings && settings.jobTypes.length > 0 && (
+                  <div>
+                    <h4 className="font-medium text-gray-800 mb-2">Loại công việc</h4>
+                    <div className="space-y-2">
+                      {settings.jobTypes.map(type => (
+                        <label key={type} className="flex items-center">
+                          <input
+                            type="radio"
+                            name="jobType"
+                            value={type}
+                            checked={filters.jobType === type}
+                            onChange={(e) => setFilters({ ...filters, jobType: e.target.value })}
+                            className="rounded text-blue-600"
+                          />
+                          <span className="ml-2 text-sm text-gray-700">{type}</span>
+                        </label>
+                      ))}
+                      <button
+                        onClick={() => setFilters({ ...filters, jobType: '' })}
+                        className="text-sm text-blue-600 hover:underline"
+                      >
+                        Xóa bộ lọc
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
 
-                {/* Expertise Filter */}
-                <div>
-                  <h4 className="font-medium text-gray-800 mb-2">Chuyên môn</h4>
-                  <div className="space-y-2">
-                    {['Frontend', 'Backend', 'BA', 'DevOps', 'Mobile'].map(expertise => (
-                      <label key={expertise} className="flex items-center">
-                        <input
-                          type="radio"
-                          name="expertise"
-                          value={expertise}
-                          checked={filters.expertise === expertise}
-                          onChange={(e) => setFilters({ ...filters, expertise: e.target.value })}
-                          className="rounded text-blue-600"
-                        />
-                        <span className="ml-2 text-sm text-gray-700">{expertise}</span>
-                      </label>
-                    ))}
-                    <button
-                      onClick={() => setFilters({ ...filters, expertise: '' })}
-                      className="text-sm text-blue-600 hover:underline"
-                    >
-                      Xóa bộ lọc
-                    </button>
+                {/* Department Filter */}
+                {settings && settings.departments.length > 0 && (
+                  <div>
+                    <h4 className="font-medium text-gray-800 mb-2">Phòng ban</h4>
+                    <div className="space-y-2 max-h-60 overflow-y-auto">
+                      {settings.departments.map(dept => (
+                        <label key={dept} className="flex items-center">
+                          <input
+                            type="radio"
+                            name="department"
+                            value={dept}
+                            checked={filters.department === dept}
+                            onChange={(e) => setFilters({ ...filters, department: e.target.value })}
+                            className="rounded text-blue-600"
+                          />
+                          <span className="ml-2 text-sm text-gray-700">{dept}</span>
+                        </label>
+                      ))}
+                      <button
+                        onClick={() => setFilters({ ...filters, department: '' })}
+                        className="text-sm text-blue-600 hover:underline"
+                      >
+                        Xóa bộ lọc
+                      </button>
+                    </div>
                   </div>
-                </div>
+                )}
 
                 {/* Clear All Filters */}
                 <button
-                  onClick={() => setFilters({ location: '', jobType: '', expertise: '' })}
+                  onClick={() => setFilters({ location: '', jobType: '', department: '' })}
                   className="w-full mt-4 px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50"
                 >
                   Xóa tất cả bộ lọc
