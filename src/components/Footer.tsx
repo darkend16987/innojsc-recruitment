@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import Logo from './Logo';
 
 const CONTACT_INFO = {
   email: 'ahr@innojsc.com',
@@ -22,12 +23,14 @@ export default function Footer() {
     <footer className="bg-gray-800 text-gray-300 mt-16">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Column 1: About */}
+          {/* Column 1: Logo & About */}
           <div>
-            <h3 className="text-xl font-bold text-white mb-4">InnoJSC Careers</h3>
+            <div className="mb-4">
+              <Logo variant="dark" />
+            </div>
             <p className="text-sm mb-4">
               Tham gia cùng chúng tôi để kiến tạo tương lai. Khám phá các cơ hội nghề nghiệp
-              hấp dẫn trong lĩnh vực công nghệ thông tin.
+              hấp dẫn trong lĩnh vực kiến trúc và xây dựng.
             </p>
             <a
               href={CONTACT_INFO.website}
@@ -103,11 +106,8 @@ export default function Footer() {
 
         {/* Bottom Bar */}
         <div className="mt-8 pt-8 border-t border-gray-700">
-          <div className="flex flex-col md:flex-row justify-between items-center text-sm">
+          <div className="flex flex-col md:flex-row justify-center items-center text-sm">
             <p>&copy; {new Date().getFullYear()} InnoJSC. All rights reserved.</p>
-            <p className="mt-2 md:mt-0">
-              Made with ❤️ in Vietnam
-            </p>
           </div>
         </div>
       </div>

@@ -8,20 +8,19 @@ interface LogoProps {
 }
 
 export default function Logo({ className = '', variant = 'default', showText = true }: LogoProps) {
-  // Kiểm tra nếu có logo image trong public/images
-  // Nếu không có, sẽ render text-based logo
-  const hasLogoImage = false; // Set to true khi đã có logo.svg/png
+  // Check if logo image exists in public/images
+  const hasLogoImage = true; // Logo now available in public/images/logo.svg
 
   if (hasLogoImage) {
     return (
       <Link href="/" className={`flex items-center ${className}`}>
         <Image
-          src={variant === 'dark' ? '/images/logo-dark.svg' : '/images/logo.svg'}
+          src="/images/logo.svg"
           alt="InnoJSC Logo"
-          width={120}
-          height={40}
+          width={150}
+          height={50}
           priority
-          className="h-8 w-auto"
+          className={`h-10 w-auto ${variant === 'dark' ? 'brightness-0 invert' : ''}`}
         />
       </Link>
     );
