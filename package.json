@@ -9,6 +9,7 @@
     "lint": "eslint",
     "seed": "ts-node --project tsconfig.scripts.json scripts/seed-jobs.ts",
     "seed-settings": "ts-node --project tsconfig.scripts.json scripts/seed-settings.ts",
+    "seed-simple": "ts-node --project tsconfig.scripts.json scripts/seed-settings-simple.ts",
     "create-admin": "ts-node --project tsconfig.scripts.json scripts/create-admin.ts"
   },
   "dependencies": {
