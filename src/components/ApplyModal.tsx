@@ -1,9 +1,10 @@
 // src/components/ApplyModal.tsx
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { X } from 'lucide-react';
 import { submitApplication } from '@/lib/firestore-helpers';
+import { getSettings, SystemSettings } from '@/lib/settings';
 import { useToast } from './Toast';
 
 interface ApplyModalProps {
@@ -20,17 +21,37 @@ export default function ApplyModal({
   jobTitle,
 }: ApplyModalProps) {
   const toast = useToast();
+  const [settings, setSettings] = useState<SystemSettings | null>(null);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
     phone: '',
+    position: '',
+    expertise: '',
+    yearsOfExperience: '',
   });
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState(false);
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  // Load settings for dropdowns
+  useEffect(() => {
+    if (isOpen) {
+      loadSettings();
+    }
+  }, [isOpen]);
+
+  const loadSettings = async () => {
+    try {
+      const data = await getSettings();
+      setSettings(data);
+    } catch (error) {
+      console.error('Error loading settings:', error);
+    }
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -104,7 +125,14 @@ export default function ApplyModal({
   };
 
   const handleClose = () => {
-    setFormData({ name: '', email: '', phone: '' });
+    setFormData({
+      name: '',
+      email: '',
+      phone: '',
+      position: '',
+      expertise: '',
+      yearsOfExperience: ''
+    });
     setCvFile(null);
     setError('');
     setSuccess(false);
@@ -202,6 +230,72 @@ export default function ApplyModal({
                 placeholder="0987654321"
                 disabled={isSubmitting}
               />
+            </div>
+
+            {/* Position (Optional) */}
+            <div>
+              <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">
+                Vị trí <span className="text-gray-400 text-xs">(Không bắt buộc)</span>
+              </label>
+              <select
+                id="position"
+                name="position"
+                value={formData.position}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={isSubmitting || !settings}
+              >
+                <option value="">-- Chọn vị trí --</option>
+                {settings?.positions.map((pos) => (
+                  <option key={pos} value={pos}>
+                    {pos}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Expertise (Optional) */}
+            <div>
+              <label htmlFor="expertise" className="block text-sm font-medium text-gray-700 mb-1">
+                Chuyên môn <span className="text-gray-400 text-xs">(Không bắt buộc)</span>
+              </label>
+              <select
+                id="expertise"
+                name="expertise"
+                value={formData.expertise}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={isSubmitting || !settings}
+              >
+                <option value="">-- Chọn chuyên môn --</option>
+                {settings?.expertiseLevels.map((exp) => (
+                  <option key={exp} value={exp}>
+                    {exp}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Years of Experience (Optional) */}
+            <div>
+              <label htmlFor="yearsOfExperience" className="block text-sm font-medium text-gray-700 mb-1">
+                Số năm kinh nghiệm <span className="text-gray-400 text-xs">(Không bắt buộc)</span>
+              </label>
+              <select
+                id="yearsOfExperience"
+                name="yearsOfExperience"
+                value={formData.yearsOfExperience}
+                onChange={handleInputChange}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                disabled={isSubmitting}
+              >
+                <option value="">-- Chọn số năm --</option>
+                <option value="Dưới 1 năm">Dưới 1 năm</option>
+                <option value="1-2 năm">1-2 năm</option>
+                <option value="3-5 năm">3-5 năm</option>
+                <option value="5-10 năm">5-10 năm</option>
+                <option value="Trên 10 năm">Trên 10 năm</option>
+              </select>
             </div>
 
             {/* CV Upload */}

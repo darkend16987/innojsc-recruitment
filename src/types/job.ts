@@ -23,6 +23,9 @@ export interface Application {
   fullName: string;
   email: string;
   phone: string;
+  position?: string; // Vị trí mong muốn (optional)
+  expertise?: string; // Chuyên môn/Cấp bậc (optional)
+  yearsOfExperience?: string; // Số năm kinh nghiệm (optional) - text range like "1-2 năm"
   coverLetter?: string; // Optional: thư xin việc/giới thiệu bản thân
   cvUrl: string;
   appliedAt: string;

@@ -88,29 +88,50 @@ export const onApplicationCreated = functions
             
             <div class="info-row">
               <span class="label">👤 Họ tên:</span>
-              <span class="value">${application.applicantName}</span>
+              <span class="value">${application.fullName}</span>
             </div>
-            
+
             <div class="info-row">
               <span class="label">📧 Email:</span>
-              <span class="value">${application.applicantEmail}</span>
+              <span class="value">${application.email}</span>
             </div>
-            
+
             <div class="info-row">
               <span class="label">📱 Điện thoại:</span>
-              <span class="value">${application.applicantPhone}</span>
+              <span class="value">${application.phone}</span>
             </div>
-            
+
+            ${application.position ? `
+            <div class="info-row">
+              <span class="label">💼 Vị trí mong muốn:</span>
+              <span class="value">${application.position}</span>
+            </div>
+            ` : ''}
+
+            ${application.expertise ? `
+            <div class="info-row">
+              <span class="label">🎓 Chuyên môn:</span>
+              <span class="value">${application.expertise}</span>
+            </div>
+            ` : ''}
+
+            ${application.yearsOfExperience ? `
+            <div class="info-row">
+              <span class="label">⏱️ Kinh nghiệm:</span>
+              <span class="value">${application.yearsOfExperience}</span>
+            </div>
+            ` : ''}
+
             <div class="info-row">
               <span class="label">🏢 Phòng ban:</span>
               <span class="value">${jobData.department}</span>
             </div>
-            
+
             <div class="info-row">
               <span class="label">📍 Địa điểm:</span>
               <span class="value">${jobData.location}</span>
             </div>
-            
+
             <div class="info-row">
               <span class="label">📅 Ngày ứng tuyển:</span>
               <span class="value">${new Date(application.appliedAt).toLocaleString('vi-VN')}</span>
@@ -130,11 +151,22 @@ export const onApplicationCreated = functions
       </html>
     `;
 
+    // Build email subject with format: [Ứng tuyển] - name - job - location - chuyên ngành - số năm kinh nghiệm
+    const subjectParts = [
+      '[Ứng tuyển]',
+      application.fullName,
+      jobData.title,
+      jobData.location,
+      application.expertise || 'N/A',
+      application.yearsOfExperience || 'N/A'
+    ];
+    const emailSubject = subjectParts.join(' - ');
+
     // Email options
     const mailOptions = {
       from: `"InnoJSC Recruitment" <${functions.config().email.user}>`,
       to: 'ahr@innojsc.com',
-      subject: `🔔 Ứng tuyển mới: ${application.applicantName} - ${jobData.title}`,
+      subject: emailSubject,
       html: emailContent,
       // Add CC if needed
       // cc: 'hr2@innojsc.com',
