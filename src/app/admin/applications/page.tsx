@@ -5,6 +5,7 @@ import AdminLayout from '@/components/admin/AdminLayout';
 import ProtectedRoute from '@/components/admin/ProtectedRoute';
 import { getAllApplications, deleteApplication } from '@/lib/admin-firestore';
 import { getJobById } from '@/lib/firestore-helpers';
+import { Application } from '@/types/job';
 import { useToast } from '@/components/Toast';
 import {
   Mail,
@@ -18,21 +19,8 @@ import {
   Filter,
 } from 'lucide-react';
 
-interface Application {
-  id: string;
-  jobId: string;
-  fullName: string;
-  email: string;
-  phone: string;
-  coverLetter: string;
-  cvUrl: string;
-  appliedAt: string;
-  status: 'pending' | 'reviewed' | 'rejected';
-}
-
-interface ApplicationWithJob extends Application {
-  jobTitle?: string;
-}
+// Application already has jobTitle from the interface, no need to extend
+type ApplicationWithJob = Application;
 
 export default function AdminApplicationsPage() {
   return (
