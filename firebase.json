@@ -18,7 +18,7 @@
       "source": "functions",
       "codebase": "default",
       // Runtime Node.js, dựa trên file functions-package.json
-      "runtime": "nodejs18",
+      "runtime": "nodejs20",
       // Các file bỏ qua khi deploy
       "ignore": [
         "node_modules",
