@@ -1,8 +1,12 @@
+import 'dotenv/config';
 import { initializeApp } from 'firebase/app';
 import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
 import * as readline from 'readline';
 
-// Load environment variables
+// Load environment variables from .env.local
+require('dotenv').config({ path: '.env.local' });
+
+// Validate Firebase config
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -11,6 +15,19 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+
+// Check if all required config values are present
+const missingVars = Object.entries(firebaseConfig)
+  .filter(([_, value]) => !value)
+  .map(([key]) => key);
+
+if (missingVars.length > 0) {
+  console.error('❌ Error: Missing Firebase environment variables:');
+  missingVars.forEach(varName => console.error(`  - ${varName}`));
+  console.error('\n💡 Please create a .env.local file with your Firebase config.');
+  console.error('   See .env.example or DEPLOYMENT.md for instructions.\n');
+  process.exit(1);
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);

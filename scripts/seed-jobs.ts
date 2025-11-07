@@ -5,15 +5,19 @@
  *
  * Usage:
  * 1. Make sure you have .env.local with Firebase config
- * 2. Run: npx ts-node scripts/seed-jobs.ts
+ * 2. Run: npm run seed
  *
  * Note: This uses client-side Firebase SDK
  */
 
+import 'dotenv/config';
 import { initializeApp, getApps } from 'firebase/app';
 import { getFirestore, collection, addDoc } from 'firebase/firestore';
 
-// Firebase config from environment variables
+// Load environment variables from .env.local
+require('dotenv').config({ path: '.env.local' });
+
+// Validate Firebase config
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -22,6 +26,19 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+
+// Check if all required config values are present
+const missingVars = Object.entries(firebaseConfig)
+  .filter(([_, value]) => !value)
+  .map(([key]) => key);
+
+if (missingVars.length > 0) {
+  console.error('❌ Error: Missing Firebase environment variables:');
+  missingVars.forEach(varName => console.error(`  - ${varName}`));
+  console.error('\n💡 Please create a .env.local file with your Firebase config.');
+  console.error('   See .env.example or DEPLOYMENT.md for instructions.\n');
+  process.exit(1);
+}
 
 // Initialize Firebase
 const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0];

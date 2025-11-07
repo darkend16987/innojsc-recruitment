@@ -1,8 +1,12 @@
+import 'dotenv/config';
 import { initializeApp } from 'firebase/app';
 import { getFirestore } from 'firebase/firestore';
 import { initializeSettings } from '../src/lib/settings';
 
-// Load environment variables
+// Load environment variables from .env.local
+require('dotenv').config({ path: '.env.local' });
+
+// Validate Firebase config
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
   authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
@@ -11,6 +15,19 @@ const firebaseConfig = {
   messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
+
+// Check if all required config values are present
+const missingVars = Object.entries(firebaseConfig)
+  .filter(([_, value]) => !value)
+  .map(([key]) => key);
+
+if (missingVars.length > 0) {
+  console.error('❌ Error: Missing Firebase environment variables:');
+  missingVars.forEach(varName => console.error(`  - ${varName}`));
+  console.error('\n💡 Please create a .env.local file with your Firebase config.');
+  console.error('   See .env.example or DEPLOYMENT.md for instructions.\n');
+  process.exit(1);
+}
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
@@ -24,11 +41,12 @@ async function seedSettings() {
 
     console.log('\n✅ Settings seeded successfully!');
     console.log('\nDefault settings have been created:');
-    console.log('  • Departments: Phát triển sản phẩm, Công nghệ, Kinh doanh, Marketing, Nhân sự, Kế toán');
-    console.log('  • Locations: Hà Nội, TP.HCM, Đà Nẵng, Remote, Hybrid');
-    console.log('  • Job Types: Full-time, Part-time, Contract, Internship');
-    console.log('  • Expertise Levels: Intern, Fresher, Junior, Mid-level, Senior, Lead, Manager');
-    console.log('  • Skills: React, Vue.js, Angular, Node.js, Python, Java, and more...');
+    console.log('  • 20 Departments (Ban giám đốc, Kiến trúc, BIM, MEP...)');
+    console.log('  • 13 Positions (Giám đốc, Kiến trúc sư, Kỹ sư, Nhân viên...)');
+    console.log('  • 2 Locations (Hà Nội, TP.HCM)');
+    console.log('  • 6 Job Types (Toàn thời gian, Part-time, Thực tập...)');
+    console.log('  • 6 Expertise Levels (Thực tập → Junior → Mid-Level → Senior → Expert)');
+    console.log('  • 60+ Skills (AutoCAD, Revit, Etabs, BIM, MS Project, Photoshop...)');
     console.log('\n💡 You can manage these settings in the Admin Panel at /admin/settings\n');
 
     process.exit(0);
