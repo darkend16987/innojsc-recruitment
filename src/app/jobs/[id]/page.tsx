@@ -390,7 +390,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                           <span>{relatedJob.location}</span>
                         </div>
                         <span className="text-sm font-medium text-blue-600">
-                          {relatedJob.salary.display}
+                          {relatedJob.salary}
                         </span>
                       </Link>
                     ))}
