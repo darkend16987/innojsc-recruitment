@@ -29,7 +29,6 @@
       ],
       // Các lệnh chạy trước khi deploy (build code TypeScript)
       "predeploy": [
-        "npm --prefix \"$RESOURCE_DIR\" run lint",
         "npm --prefix \"$RESOURCE_DIR\" run build"
       ]
     }
