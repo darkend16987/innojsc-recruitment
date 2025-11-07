@@ -1,6 +1,4 @@
 import 'dotenv/config';
-import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
 import { initializeSettings } from '../src/lib/settings';
 
 // Load environment variables from .env.local
@@ -29,9 +27,8 @@ if (missingVars.length > 0) {
   process.exit(1);
 }
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getFirestore(app);
+// Note: Firebase is automatically initialized when settings.ts imports firebase-config.ts
+// No need to initialize it here
 
 async function seedSettings() {
   console.log('🌱 Seeding system settings...\n');
