@@ -155,11 +155,12 @@ export async function submitApplication(
     const application: Omit<Application, 'id'> = {
       jobId,
       jobTitle,
-      applicantName: applicantData.name,
-      applicantEmail: applicantData.email,
-      applicantPhone: applicantData.phone,
+      fullName: applicantData.name,
+      email: applicantData.email,
+      phone: applicantData.phone,
       cvUrl,
       appliedAt: new Date().toISOString(),
+      status: 'pending',
     };
 
     const docRef = await addDoc(collection(db, 'applications'), application);

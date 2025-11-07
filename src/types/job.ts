@@ -19,10 +19,11 @@ export interface Job {
 export interface Application {
   id: string;
   jobId: string;
+  jobTitle: string; // Tên job để hiển thị (denormalized for convenience)
   fullName: string;
   email: string;
   phone: string;
-  coverLetter: string;
+  coverLetter?: string; // Optional: thư xin việc/giới thiệu bản thân
   cvUrl: string;
   appliedAt: string;
   status: 'pending' | 'reviewed' | 'rejected';
