@@ -162,6 +162,9 @@ export async function getDashboardStats(): Promise<{
   draftJobs: number;
   closedJobs: number;
   totalApplications: number;
+  pendingApplications: number;
+  reviewedApplications: number;
+  rejectedApplications: number;
   recentApplications: Application[];
 }> {
   try {
@@ -176,6 +179,9 @@ export async function getDashboardStats(): Promise<{
       draftJobs: jobs.filter(j => j.status === 'draft').length,
       closedJobs: jobs.filter(j => j.status === 'closed').length,
       totalApplications: applications.length,
+      pendingApplications: applications.filter(a => a.status === 'pending').length,
+      reviewedApplications: applications.filter(a => a.status === 'reviewed').length,
+      rejectedApplications: applications.filter(a => a.status === 'rejected').length,
       recentApplications: applications.slice(0, 10),
     };
   } catch (error) {
