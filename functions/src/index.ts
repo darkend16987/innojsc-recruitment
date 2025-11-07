@@ -5,31 +5,17 @@ import * as nodemailer from 'nodemailer';
 
 admin.initializeApp();
 
-// Configure email transport
-
-// Bỏ qua Option 1 (Gmail)
-/*
+// Configure email transport using environment variables
+// Set these in .env file for local development
+// For production: firebase functions:secrets:set SMTP_HOST SMTP_PORT EMAIL_USER EMAIL_PASSWORD
 const transporter = nodemailer.createTransport({
-  service: 'gmail',
+  host: process.env.SMTP_HOST,
+  port: parseInt(process.env.SMTP_PORT || '465'),
+  secure: process.env.SMTP_PORT === '465',
   auth: {
-    user: functions.config().email.user,
-    pass: functions.config().email.password,
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
   },
-});
-*/
-
-// Option 2: Sử dụng SMTP của nhà cung cấp dịch vụ email bất kỳ (InnoJSC)
-// Bạn phải cấu hình các biến này qua Firebase CLI (xem Bước 2)
-const transporter = nodemailer.createTransport({
-  host: functions.config().smtp.host,     // 'mail90162.maychuemail.com'
-  port: functions.config().smtp.port,     // '465'
-  // Dòng này sẽ tự động là TRUE nếu port là 465 (đúng như cấu hình của bạn)
-  secure: functions.config().smtp.port == 465, 
-  auth: {
-    user: functions.config().email.user,
-    pass: functions.config().email.password,
-  },
-  // Thêm tùy chọn TLS nếu cần thiết
   tls: {
     rejectUnauthorized: false
   }
@@ -164,7 +150,7 @@ export const onApplicationCreated = functions
 
     // Email options
     const mailOptions = {
-      from: `"InnoJSC Recruitment" <${functions.config().email.user}>`,
+      from: `"InnoJSC Recruitment" <${process.env.EMAIL_USER}>`,
       to: 'ahr@innojsc.com',
       subject: emailSubject,
       html: emailContent,

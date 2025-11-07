@@ -1,0 +1,15 @@
+# ESLint ignore file for Firebase Functions
+
+# Built files
+lib/
+generated/
+
+# Config files
+.eslintrc.js
+*.config.js
+
+# Dependencies
+node_modules/
+
+# Logs
+*.log
