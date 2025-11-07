@@ -7,9 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "seed": "ts-node -O '{\"module\":\"commonjs\"}' scripts/seed-jobs.ts",
-    "seed-settings": "ts-node -O '{\"module\":\"commonjs\"}' scripts/seed-settings.ts",
-    "create-admin": "ts-node -O '{\"module\":\"commonjs\"}' scripts/create-admin.ts"
+    "seed": "ts-node --project tsconfig.scripts.json scripts/seed-jobs.ts",
+    "seed-settings": "ts-node --project tsconfig.scripts.json scripts/seed-settings.ts",
+    "create-admin": "ts-node --project tsconfig.scripts.json scripts/create-admin.ts"
   },
   "dependencies": {
     "@radix-ui/react-dialog": "^1.1.15",
