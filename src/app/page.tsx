@@ -256,7 +256,7 @@ export default function HomePage() {
               <div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-4">
                 <p className="text-red-800">{error}</p>
                 <button
-                  onClick={fetchJobs}
+                  onClick={fetchJobsAndSettings}
                   className="mt-2 text-sm text-red-600 hover:underline font-medium"
                 >
                   Thử lại
@@ -269,7 +269,7 @@ export default function HomePage() {
               <div className="text-center py-20">
                 <p className="text-gray-500 text-lg">Không tìm thấy việc làm phù hợp</p>
                 <button
-                  onClick={() => setFilters({ location: '', jobType: '', expertise: '' })}
+                  onClick={() => setFilters({ location: '', jobType: '', department: '' })}
                   className="mt-4 text-blue-600 hover:underline"
                 >
                   Xóa bộ lọc
