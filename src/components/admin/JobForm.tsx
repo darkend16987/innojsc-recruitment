@@ -359,14 +359,34 @@ export default function JobForm({ job, mode }: JobFormProps) {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Mức lương
             </label>
+            {/* Quick Salary Presets */}
+            <div className="flex flex-wrap gap-2 mb-3">
+              {['Thỏa thuận', '10-15 triệu', '15-20 triệu', '20-30 triệu', '30-50 triệu', 'Trên 50 triệu'].map((preset) => (
+                <button
+                  key={preset}
+                  type="button"
+                  onClick={() => setFormData((prev) => ({ ...prev, salary: preset }))}
+                  className={`px-3 py-1.5 text-sm rounded-md border transition-colors ${
+                    formData.salary === preset
+                      ? 'bg-blue-600 text-white border-blue-600'
+                      : 'bg-white text-gray-700 border-gray-300 hover:border-blue-400 hover:bg-blue-50'
+                  }`}
+                >
+                  {preset}
+                </button>
+              ))}
+            </div>
             <input
               type="text"
               name="salary"
               value={formData.salary}
               onChange={handleChange}
               className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="VD: 20-30 triệu VND hoặc Thỏa thuận"
+              placeholder="Hoặc nhập tự do: VD: 15-25 triệu VND"
             />
+            <p className="mt-1 text-xs text-gray-500">
+              💡 Chọn nhanh từ các mức phổ biến hoặc nhập tự do vào ô bên dưới
+            </p>
           </div>
 
           {/* Status */}
