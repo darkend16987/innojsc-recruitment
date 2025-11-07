@@ -26,7 +26,10 @@ const transporter = nodemailer.createTransport({
  * Sends notification email to HR
  */
 export const onApplicationCreated = functions
-  .region('asia-southeast1') // Change to your preferred region
+  .region('asia-southeast1')
+  .runWith({
+    secrets: ['SMTP_HOST', 'SMTP_PORT', 'EMAIL_USER', 'EMAIL_PASSWORD']
+  })
   .firestore.document('applications/{applicationId}')
   .onCreate(async (snapshot, context) => {
     const application = snapshot.data();
