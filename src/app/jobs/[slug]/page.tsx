@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { getJobById, getRelatedJobs } from '@/lib/firestore-helpers';
+import { getJobById, getJobBySlug, getRelatedJobs } from '@/lib/firestore-helpers';
 import { Job } from '@/types/job';
 import ApplyModal from '@/components/ApplyModal';
 import Header from '@/components/Header';
@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { useToast } from '@/components/Toast';
 import Script from 'next/script';
 
-export default function JobDetailPage({ params }: { params: { id: string } }) {
+export default function JobDetailPage({ params }: { params: { slug: string } }) {
   const toast = useToast();
   const [job, setJob] = useState<Job | null>(null);
   const [relatedJobs, setRelatedJobs] = useState<Job[]>([]);
@@ -23,13 +23,20 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
 
   useEffect(() => {
     fetchJobDetail();
-  }, [params.id]);
+  }, [params.slug]);
 
   const fetchJobDetail = async () => {
     try {
       setLoading(true);
       setError(null);
-      const jobData = await getJobById(params.id);
+
+      // Try slug first (new URLs), fallback to ID (old URLs for backward compatibility)
+      let jobData = await getJobBySlug(params.slug);
+
+      // If not found by slug, try as ID (backward compatibility)
+      if (!jobData) {
+        jobData = await getJobById(params.slug);
+      }
 
       if (!jobData) {
         setError('Không tìm thấy công việc này');
@@ -381,7 +388,7 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                     {relatedJobs.map((relatedJob) => (
                       <Link
                         key={relatedJob.id}
-                        href={`/jobs/${relatedJob.id}`}
+                        href={`/jobs/${relatedJob.slug}`}
                         className="block p-4 rounded-md border border-gray-200 hover:bg-gray-50 hover:border-blue-300 transition-colors"
                       >
                         <h4 className="font-medium text-gray-800 hover:text-blue-600 mb-1">

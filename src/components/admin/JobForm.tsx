@@ -7,6 +7,7 @@ import { createJob, updateJob } from '@/lib/admin-firestore';
 import { getSettings, SystemSettings } from '@/lib/settings';
 import { useToast } from '@/components/Toast';
 import { Save, X, AlertCircle, Tag } from 'lucide-react';
+import { generateUniqueSlug } from '@/lib/slug';
 
 interface JobFormProps {
   job?: Job;
@@ -22,6 +23,7 @@ export default function JobForm({ job, mode }: JobFormProps) {
 
   const [formData, setFormData] = useState({
     title: job?.title || '',
+    slug: job?.slug || '',
     department: job?.department || '',
     position: job?.position || '',
     location: job?.location || '',
@@ -74,7 +76,14 @@ export default function JobForm({ job, mode }: JobFormProps) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+
+    // Auto-generate slug when title changes (only for new jobs)
+    if (name === 'title' && mode === 'create') {
+      const newSlug = generateUniqueSlug(value);
+      setFormData((prev) => ({ ...prev, title: value, slug: newSlug }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const toggleTag = (tag: string) => {
