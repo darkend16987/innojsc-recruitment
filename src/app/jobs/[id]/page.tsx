@@ -291,19 +291,21 @@ export default function JobDetailPage({ params }: { params: { id: string } }) {
                 {/* Requirements */}
                 <div className="mb-8">
                   <h2 className="text-xl font-bold text-gray-900 mb-3">Yêu cầu ứng viên</h2>
-                  <div
-                    className="text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: job.requirements }}
-                  />
+                  <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+                    {job.requirements.map((req, index) => (
+                      <li key={index}>{req}</li>
+                    ))}
+                  </ul>
                 </div>
 
                 {/* Benefits */}
                 <div className="mb-8">
                   <h2 className="text-xl font-bold text-gray-900 mb-3">Quyền lợi</h2>
-                  <div
-                    className="text-gray-700 leading-relaxed"
-                    dangerouslySetInnerHTML={{ __html: job.benefits }}
-                  />
+                  <ul className="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">
+                    {job.benefits.map((benefit, index) => (
+                      <li key={index}>{benefit}</li>
+                    ))}
+                  </ul>
                 </div>
               </div>
 
