@@ -20,8 +20,11 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
 
   const isGridView = viewMode === 'grid';
 
+  // Fallback to ID if slug not available (for jobs created before slug feature)
+  const jobUrl = job.slug || job.id;
+
   return (
-    <Link href={`/jobs/${job.slug}`}>
+    <Link href={`/jobs/${jobUrl}`}>
       <div
         className={`bg-white rounded-lg border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200 cursor-pointer ${
           isGridView ? 'p-6' : 'p-6 flex gap-6'
