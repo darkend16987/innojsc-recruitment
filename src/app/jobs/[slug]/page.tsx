@@ -385,26 +385,29 @@ export default function JobDetailPage({ params }: { params: { slug: string } }) 
                     Các việc làm khác
                   </h3>
                   <div className="space-y-4">
-                    {relatedJobs.map((relatedJob) => (
-                      <Link
-                        key={relatedJob.id}
-                        href={`/jobs/${relatedJob.slug}`}
-                        className="block p-4 rounded-md border border-gray-200 hover:bg-gray-50 hover:border-blue-300 transition-colors"
-                      >
-                        <h4 className="font-medium text-gray-800 hover:text-blue-600 mb-1">
-                          {relatedJob.title}
-                        </h4>
-                        <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
-                          <MapPin size={14} />
-                          <span>{relatedJob.location}</span>
-                        </div>
-                        {relatedJob.salary && (
-                          <span className="text-sm font-medium text-blue-600">
-                            {relatedJob.salary}
-                          </span>
-                        )}
-                      </Link>
-                    ))}
+                    {relatedJobs.map((relatedJob) => {
+                      const relatedJobUrl = relatedJob.slug || relatedJob.id;
+                      return (
+                        <Link
+                          key={relatedJob.id}
+                          href={`/jobs/${relatedJobUrl}`}
+                          className="block p-4 rounded-md border border-gray-200 hover:bg-gray-50 hover:border-blue-300 transition-colors"
+                        >
+                          <h4 className="font-medium text-gray-800 hover:text-blue-600 mb-1">
+                            {relatedJob.title}
+                          </h4>
+                          <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
+                            <MapPin size={14} />
+                            <span>{relatedJob.location}</span>
+                          </div>
+                          {relatedJob.salary && (
+                            <span className="text-sm font-medium text-blue-600">
+                              {relatedJob.salary}
+                            </span>
+                          )}
+                        </Link>
+                      );
+                    })}
                   </div>
                 </div>
               )}
