@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, use } from 'react';
 import { getJobById, getJobBySlug, getRelatedJobs } from '@/lib/firestore-helpers';
 import { Job } from '@/types/job';
 import ApplyModal from '@/components/ApplyModal';
@@ -11,7 +11,10 @@ import Link from 'next/link';
 import { useToast } from '@/components/Toast';
 import Script from 'next/script';
 
-export default function JobDetailPage({ params }: { params: { slug: string } }) {
+export default function JobDetailPage({ params }: { params: Promise<{ slug: string }> }) {
+  // Unwrap params Promise for Next.js 15+
+  const { slug } = use(params);
+
   const toast = useToast();
   const [job, setJob] = useState<Job | null>(null);
   const [relatedJobs, setRelatedJobs] = useState<Job[]>([]);
@@ -23,7 +26,7 @@ export default function JobDetailPage({ params }: { params: { slug: string } }) 
 
   useEffect(() => {
     fetchJobDetail();
-  }, [params.slug]);
+  }, [slug]);
 
   const fetchJobDetail = async () => {
     try {
@@ -31,11 +34,11 @@ export default function JobDetailPage({ params }: { params: { slug: string } }) 
       setError(null);
 
       // Try slug first (new URLs), fallback to ID (old URLs for backward compatibility)
-      let jobData = await getJobBySlug(params.slug);
+      let jobData = await getJobBySlug(slug);
 
       // If not found by slug, try as ID (backward compatibility)
       if (!jobData) {
-        jobData = await getJobById(params.slug);
+        jobData = await getJobById(slug);
       }
 
       if (!jobData) {
