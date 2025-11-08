@@ -47,7 +47,7 @@ export default function JobDetailPage({ params }: { params: { slug: string } }) 
 
       // Fetch related jobs
       const related = await getRelatedJobs(
-        params.id,
+        jobData.id,
         jobData.expertise,
         jobData.location,
         3
