@@ -21,7 +21,7 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
   const isGridView = viewMode === 'grid';
 
   return (
-    <Link href={`/jobs/${job.id}`}>
+    <Link href={`/jobs/${job.slug}`}>
       <div
         className={`bg-white rounded-lg border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200 cursor-pointer ${
           isGridView ? 'p-6' : 'p-6 flex gap-6'

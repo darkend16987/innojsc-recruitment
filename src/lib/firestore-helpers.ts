@@ -78,6 +78,29 @@ export async function getJobById(jobId: string): Promise<Job | null> {
 }
 
 /**
+ * Get a single job by slug (for pretty URLs)
+ */
+export async function getJobBySlug(slug: string): Promise<Job | null> {
+  try {
+    const jobsRef = collection(db, 'jobs');
+    const q = query(jobsRef, where('slug', '==', slug), limit(1));
+    const snapshot = await getDocs(q);
+
+    if (!snapshot.empty) {
+      const docSnap = snapshot.docs[0];
+      return {
+        id: docSnap.id,
+        ...docSnap.data(),
+      } as Job;
+    }
+    return null;
+  } catch (error) {
+    console.error('Error fetching job by slug:', error);
+    return null;
+  }
+}
+
+/**
  * Get related jobs (same expertise or location)
  */
 export async function getRelatedJobs(

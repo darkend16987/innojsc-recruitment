@@ -1,5 +1,6 @@
 export interface Job {
   id: string;
+  slug: string; // URL-friendly slug: "kien-truc-su-ha-noi-abc123"
   title: string;
   department: string;
   position: string; // Chức vụ: Nhân viên, Trưởng phòng, Phó phòng...
