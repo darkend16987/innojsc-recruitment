@@ -9,9 +9,12 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navLinks = [
-    { href: '/', label: 'Việc làm' },
-    { href: 'https://innojsc.com', label: 'Về chúng tôi', external: true },
-    { href: '/contact', label: 'Liên hệ' },
+    { href: '/about', label: 'Về INNO' },
+    { href: '/why-inno', label: 'Vì sao chọn INNO' },
+    { href: '/', label: 'Cơ hội nghề nghiệp' },
+    { href: '/career-path', label: 'Lộ trình phát triển' },
+    { href: '/recruitment-process', label: 'Quy trình tuyển dụng' },
+    { href: '/faqs', label: 'FAQs' },
   ];
 
   return (
@@ -71,7 +74,7 @@ export default function Header() {
                     href={link.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-gray-700 hover:text-blue-600 font-medium transition-colors px-4 py-2"
+                    className="text-gray-700 hover:text-primary font-medium transition-colors px-4 py-2"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.label}
@@ -80,7 +83,7 @@ export default function Header() {
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-gray-700 hover:text-blue-600 font-medium transition-colors px-4 py-2"
+                    className="text-gray-700 hover:text-primary font-medium transition-colors px-4 py-2"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     {link.label}
