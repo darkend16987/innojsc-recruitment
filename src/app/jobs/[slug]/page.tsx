@@ -167,7 +167,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
             <p className="text-red-600 text-lg mb-4">{error || 'Không tìm thấy công việc'}</p>
             <Link
               href="/"
-              className="inline-flex items-center text-blue-600 hover:underline"
+              className="inline-flex items-center text-primary hover:underline"
             >
               <ArrowLeft className="w-4 h-4 mr-2" />
               Quay lại trang chủ
@@ -197,7 +197,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
         {/* Back Button */}
         <Link
           href="/"
-          className="mb-4 inline-flex items-center text-gray-600 hover:text-blue-600 group"
+          className="mb-4 inline-flex items-center text-gray-600 hover:text-primary group"
         >
           <ArrowLeft className="w-5 h-5 mr-2 transition-transform group-hover:-translate-x-1" />
           <span className="font-medium">Quay lại danh sách</span>
@@ -226,7 +226,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                             ? 'bg-orange-100 text-orange-700'
                             : tag === 'ƯU TIÊN NGOẠI NGỮ'
                             ? 'bg-purple-100 text-purple-700'
-                            : 'bg-blue-100 text-blue-700'
+                            : 'bg-red-100 text-primary'
                         }`}
                       >
                         {tag}
@@ -251,8 +251,8 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                   </div>
                   {job.salary && (
                     <div className="flex items-center gap-2 text-sm">
-                      <DollarSign size={18} className="text-blue-600" />
-                      <span className="font-medium text-blue-600">{job.salary}</span>
+                      <DollarSign size={18} className="text-primary" />
+                      <span className="font-medium text-primary">{job.salary}</span>
                     </div>
                   )}
                 </div>
@@ -271,7 +271,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                 <div className="flex gap-3">
                   <button
                     onClick={handleApplyClick}
-                    className="flex-1 sm:flex-none px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                    className="flex-1 sm:flex-none px-8 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
                   >
                     Ứng tuyển ngay
                   </button>
@@ -323,7 +323,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
               <div className="mt-8 pt-8 border-t border-gray-200">
                 <button
                   onClick={handleApplyClick}
-                  className="w-full sm:w-auto px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition-colors shadow-sm"
+                  className="w-full sm:w-auto px-8 py-3 bg-primary text-white font-semibold rounded-lg hover:bg-primary/90 transition-colors shadow-sm"
                 >
                   Ứng tuyển ngay
                 </button>
@@ -344,14 +344,14 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                     <strong className="text-gray-700">Email:</strong>
                     <a
                       href="mailto:ahr@innojsc.com"
-                      className="ml-2 text-blue-600 hover:underline"
+                      className="ml-2 text-primary hover:underline"
                     >
                       ahr@innojsc.com
                     </a>
                   </div>
                   <div>
                     <strong className="text-gray-700">Hotline:</strong>
-                    <span className="ml-2 text-gray-800">+84 969 979 391</span>
+                    <span className="ml-2 text-gray-800">0243 2121 776</span>
                   </div>
                   <div>
                     <strong className="text-gray-700">Website:</strong>
@@ -359,7 +359,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                       href="https://innojsc.com"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="ml-2 text-blue-600 hover:underline"
+                      className="ml-2 text-primary hover:underline"
                     >
                       innojsc.com
                     </a>
@@ -374,9 +374,34 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                   <div>
                     <strong className="text-gray-700">TP.HCM:</strong>
                     <p className="text-gray-600 mt-1">
-                      Căn hộ TMDV A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng,
-                      phường Thảo Điền, TP. Thủ Đức
+                      A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng,
+                      phường Thảo Điền
                     </p>
+                  </div>
+                  <hr className="my-3" />
+                  {/* QR Code Section */}
+                  <div className="text-center">
+                    <strong className="text-gray-700 block mb-3">Liên hệ qua Zalo</strong>
+                    <div className="flex justify-center">
+                      <div className="relative w-40 h-40 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
+                        {/* Placeholder - user will replace with actual QR code */}
+                        <div className="text-center p-4">
+                          <svg className="w-16 h-16 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
+                          </svg>
+                          <p className="text-xs text-gray-500">Quét QR để chat</p>
+                        </div>
+                        {/* Uncomment and update path when QR code image is ready */}
+                        {/* <Image
+                          src="/images/recruitment/qr-code/zalo-hr-qr.png"
+                          alt="Zalo HR QR Code"
+                          width={160}
+                          height={160}
+                          className="rounded-lg"
+                        /> */}
+                      </div>
+                    </div>
+                    <p className="text-xs text-gray-500 mt-2">Quét mã QR để liên hệ trực tiếp với HR</p>
                   </div>
                 </div>
               </div>
@@ -396,7 +421,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                           href={`/jobs/${relatedJobUrl}`}
                           className="block p-4 rounded-md border border-gray-200 hover:bg-gray-50 hover:border-blue-300 transition-colors"
                         >
-                          <h4 className="font-medium text-gray-800 hover:text-blue-600 mb-1">
+                          <h4 className="font-medium text-gray-800 hover:text-primary mb-1">
                             {relatedJob.title}
                           </h4>
                           <div className="flex items-center gap-2 text-sm text-gray-600 mb-1">
@@ -404,7 +429,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                             <span>{relatedJob.location}</span>
                           </div>
                           {relatedJob.salary && (
-                            <span className="text-sm font-medium text-blue-600">
+                            <span className="text-sm font-medium text-primary">
                               {relatedJob.salary}
                             </span>
                           )}

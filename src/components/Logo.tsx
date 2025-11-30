@@ -31,13 +31,13 @@ export default function Logo({ className = '', variant = 'default', showText = t
     <Link href="/" className={`flex items-center ${className}`}>
       <div className="flex items-center">
         {/* Icon/Monogram */}
-        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-blue-600 to-blue-700 text-white font-bold text-xl shadow-md">
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-primary to-red-700 text-white font-bold text-xl shadow-md">
           I
         </div>
         {/* Text */}
         {showText && (
           <div className="ml-3 flex items-baseline">
-            <span className="text-2xl font-bold text-blue-600">InnoJSC</span>
+            <span className="text-2xl font-bold text-primary">InnoJSC</span>
             <span className="ml-2 text-lg font-light text-gray-700">Careers</span>
           </div>
         )}

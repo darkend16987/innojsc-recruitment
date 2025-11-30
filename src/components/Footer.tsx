@@ -4,16 +4,16 @@ import Logo from './Logo';
 
 const CONTACT_INFO = {
   email: 'ahr@innojsc.com',
-  hotline: '+84 969 979 391',
+  hotline: '0243 2121 776',
   website: 'https://innojsc.com',
   addresses: [
     {
       name: 'Hà Nội',
-      detail: '39 Thượng Thụy, Phú Thượng, Tây Hồ, Hà Nội',
+      detail: '39 Thượng Thụy, Phú Thượng',
     },
     {
       name: 'TP.HCM',
-      detail: 'Căn hộ TMDV A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền, TP. Thủ Đức',
+      detail: 'A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền',
     },
   ],
 };

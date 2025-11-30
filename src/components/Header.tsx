@@ -30,7 +30,7 @@ export default function Header() {
                   href={link.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                  className="text-gray-700 hover:text-primary font-medium transition-colors"
                 >
                   {link.label}
                 </a>
@@ -38,7 +38,7 @@ export default function Header() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-gray-700 hover:text-blue-600 font-medium transition-colors"
+                  className="text-gray-700 hover:text-primary font-medium transition-colors"
                 >
                   {link.label}
                 </Link>

@@ -130,7 +130,7 @@ export default function RootLayout({
               ],
               contactPoint: {
                 "@type": "ContactPoint",
-                telephone: "+84-969-979-391",
+                telephone: "0243-2121-776",
                 contactType: "Customer Service",
                 areaServed: "VN",
                 availableLanguage: ["Vietnamese", "English"],

@@ -26,14 +26,14 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
   return (
     <Link href={`/jobs/${jobUrl}`}>
       <div
-        className={`bg-white rounded-lg border border-gray-200 hover:border-blue-400 hover:shadow-lg transition-all duration-200 cursor-pointer ${
+        className={`bg-white rounded-lg border border-gray-200 hover:border-primary/40 hover:shadow-lg transition-all duration-200 cursor-pointer ${
           isGridView ? 'p-6' : 'p-6 flex gap-6'
         }`}
       >
         {/* Company Logo Placeholder - chỉ hiện ở list view */}
         {!isGridView && (
           <div className="flex-shrink-0">
-            <div className="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-16 h-16 bg-gradient-to-br from-primary to-red-700 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-xl">
                 {job.title.charAt(0)}
               </span>
@@ -51,7 +51,7 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
                 {job.tags.slice(0, 5).map((tag, index) => (
                   <span
                     key={index}
-                    className="px-2 py-0.5 text-xs font-medium bg-blue-50 text-blue-700 border border-blue-200 rounded"
+                    className="px-2 py-0.5 text-xs font-medium bg-red-50 text-primary border border-red-200 rounded"
                   >
                     {tag}
                   </span>
@@ -65,7 +65,7 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
             )}
 
             {/* Job Title */}
-            <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-blue-600 transition-colors">
+            <h3 className="text-xl font-bold text-gray-900 mb-2 hover:text-primary transition-colors">
               {job.title}
             </h3>
 
@@ -103,7 +103,7 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
             {job.salary && (
               <div className="flex items-center gap-2 text-sm text-gray-600">
                 <DollarSign size={16} className="text-gray-400" />
-                <span className="font-medium text-blue-600">{job.salary}</span>
+                <span className="font-medium text-primary">{job.salary}</span>
               </div>
             )}
           </div>
@@ -117,7 +117,7 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
               </span>
             )}
             {job.expertise && (
-              <span className="inline-block px-3 py-1 bg-blue-50 text-blue-700 text-sm font-medium rounded-full">
+              <span className="inline-block px-3 py-1 bg-red-50 text-primary text-sm font-medium rounded-full">
                 {job.expertise}
               </span>
             )}
@@ -137,7 +137,7 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
             </span>
             <button
               onClick={handleApplyClick}
-              className="px-6 py-2 bg-blue-600 text-white text-sm font-medium rounded-lg hover:bg-blue-700 transition-colors"
+              className="px-6 py-2 bg-primary text-white text-sm font-medium rounded-lg hover:bg-primary/90 transition-colors"
             >
               Ứng tuyển
             </button>
