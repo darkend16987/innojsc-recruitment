@@ -20,7 +20,7 @@ const robotoMono = Roboto_Mono({
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careers.innojsc.com';
 const siteName = 'Inno JSC Careers';
-const siteDescription = 'Hãy tham gia cùng chúng tôi - INNO JSC.';
+const siteDescription = 'Hãy tham gia cùng chúng tôi - INNO JSC. Công ty tư vấn xây dựng hàng đầu Việt Nam';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
