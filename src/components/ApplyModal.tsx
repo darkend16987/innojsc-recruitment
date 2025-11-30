@@ -333,7 +333,7 @@ export default function ApplyModal({
               </button>
               <button
                 type="submit"
-                className="flex-1 px-4 py-2 bg-blue-600 text-white rounded-lg font-medium hover:bg-blue-700 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
+                className="flex-1 px-4 py-2 bg-primary text-white rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:bg-gray-400 disabled:cursor-not-allowed"
                 disabled={isSubmitting}
               >
                 {isSubmitting ? 'Đang gửi...' : 'Gửi ứng tuyển'}
