@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image'; // Thêm dòng này để dùng Image
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { BookOpen, Users, Trophy } from 'lucide-react';
@@ -10,8 +11,22 @@ export default function WhyInnoPage() {
       <Header />
 
       {/* Hero Section */}
-      <div className="bg-gradient-to-r from-primary to-red-700 text-white py-20">
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative py-24 sm:py-32 flex items-center justify-center min-h-[400px]">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/recruitment/hero/why-inno-hero.webp"
+            alt="Vì sao chọn INNO"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Overlay màu đen mờ giúp text trắng dễ đọc hơn */}
+          <div className="absolute inset-0 bg-black/60"></div>
+        </div>
+
+        {/* Nội dung text đặt lên trên (z-10) */}
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Vì sao nên chọn INNO?
           </h1>
