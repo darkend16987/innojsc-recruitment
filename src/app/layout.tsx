@@ -19,29 +19,29 @@ const robotoMono = Roboto_Mono({
 });
 
 const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://careers.innojsc.com';
-const siteName = 'InnoJSC Careers';
-const siteDescription = 'Tham gia đội ngũ InnoJSC - Nơi tài năng được phát triển và khẳng định. Khám phá các cơ hội nghề nghiệp hấp dẫn trong lĩnh vực công nghệ thông tin.';
+const siteName = 'Inno JSC Careers';
+const siteDescription = 'Hãy tham gia cùng chúng tôi - INNO JSC.';
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: {
-    default: "InnoJSC Careers - Tuyển dụng nhân tài công nghệ",
+    default: "Inno JSC Careers - Join us and build your dream",
     template: "%s | InnoJSC Careers",
   },
   description: siteDescription,
   keywords: [
     "InnoJSC",
     "tuyển dụng",
-    "việc làm IT",
+    "việc làm xây dựng",
     "công nghệ",
-    "developer",
-    "frontend",
-    "backend",
-    "react",
-    "nodejs",
+    "Việc làm kiến trúc",
+    "Kiến trúc sư",
+    "Kỹ sư xây dựng",
+    "Xây dựng",
+    "Tư vấn xây dựng",
     "việc làm Hà Nội",
     "việc làm TP.HCM",
-    "lập trình viên",
+    "BIM",
   ],
   authors: [{ name: "InnoJSC", url: "https://innojsc.com" }],
   creator: "InnoJSC",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     locale: "vi_VN",
     url: siteUrl,
     siteName: siteName,
-    title: "InnoJSC Careers - Tuyển dụng nhân tài công nghệ",
+    title: "Inno JSC Careers - Join us and build your dream",
     description: siteDescription,
     images: [
       {
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@innojsc", // Update với Twitter handle thực tế
     creator: "@innojsc",
-    title: "InnoJSC Careers - Tuyển dụng nhân tài công nghệ",
+    title: "Inno JSC Careers - Join us and build your dream",
     description: siteDescription,
     images: ["/images/og-image.jpg"],
   },
