@@ -57,19 +57,17 @@ export default function RecruitmentProcessPage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-        {/* Timeline Image */}
         <section className="mb-20">
-          <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <svg className="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                <p className="text-gray-400 text-lg">Ảnh timeline quy trình tuyển dụng (placeholder)</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Upload ảnh vào: /public/images/recruitment/timeline/
-                </p>
-              </div>
+          {/* Giảm p-8 xuống p-4 trên mobile */}
+          <div className="bg-white rounded-lg shadow-md p-4 md:p-8 border border-gray-200">
+            <div className="relative aspect-video">
+                <Image
+                  src="/images/recruitment/timeline/quytrinh.webp"
+                  alt="Quy trình tuyển dụng INNO"
+                  fill
+                  className="object-contain rounded-lg"
+                  sizes="(max-width: 768px) 100vw, 1200px"
+                />
             </div>
           </div>
         </section>
