@@ -1,8 +1,7 @@
 'use client';
 
 import { useState, useEffect, use } from 'react';
-// Thêm dòng này vào 👇
-import Image from 'next/image'; 
+import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
 import { ArrowLeft, MapPin, Briefcase, Clock, DollarSign, Building2, Share2 } from 'lucide-react';
@@ -398,6 +397,8 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                     </div>
                     <p className="text-xs text-gray-500 mt-2">Quét mã QR để liên hệ trực tiếp với HR</p>
                   </div>
+                </div>
+              </div>
 
               {/* Related Jobs */}
               {relatedJobs.length > 0 && (
