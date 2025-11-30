@@ -1,17 +1,11 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image'; // Đã thêm import Image
+import Image from 'next/image';
 import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { MapPin, Award, ChevronUp, ChevronDown } from 'lucide-react';
-
-// This would normally be in metadata, but since we use useState, we make it a client component
-// export const metadata: Metadata = {
-//   title: 'Về INNO - InnoJSC Careers',
-//   description: 'Khám phá INNO - Công ty tư vấn thiết kế uy tín nhất Việt Nam',
-// };
 
 const AWARDS_DATA = {
   2016: [
@@ -84,7 +78,7 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <div className="relative h-[400px] flex items-center justify-center">
+      <div className="relative py-24 sm:py-32 flex items-center justify-center min-h-[400px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
@@ -94,8 +88,8 @@ export default function AboutPage() {
             className="object-cover"
             priority
           />
-          {/* Overlay */}
-          <div className="absolute inset-0 bg-black/50"></div>
+          {/* Overlay màu đen mờ giúp text trắng dễ đọc hơn */}
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
 
         {/* Hero Content */}
@@ -146,10 +140,15 @@ export default function AboutPage() {
         {/* Impressive Numbers */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Các con số ấn tượng</h2>
-          <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <p className="text-gray-400 text-lg">Ảnh các con số ấn tượng (placeholder)</p>
-            </div>
+          {/* Ảnh hiển thị full, bo góc, có bóng, bỏ khung trắng */}
+          <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
+            <Image
+              src="/images/recruitment/awards/number.webp"
+              alt="Các con số ấn tượng về INNO"
+              width={1920}
+              height={1080}
+              className="w-full h-auto object-cover"
+            />
           </div>
         </section>
 
