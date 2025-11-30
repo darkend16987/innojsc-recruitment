@@ -131,7 +131,7 @@ export default function AboutPage() {
         </div>
       </div>
 
-      {/* Main Content */}
+      {/* Intro Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Company Introduction */}
         <section className="max-w-4xl mx-auto mb-20">
@@ -156,41 +156,45 @@ export default function AboutPage() {
             </p>
           </div>
         </section>
+      </div>
 
-        {/* Journey Timeline */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Hành trình của INNO</h2>
-          
-          {/* Draggable Scroll Container */}
-          <div className="relative group rounded-xl overflow-hidden shadow-xl bg-white">
-            {/* Visual Hint */}
-            <div className={`absolute top-4 left-1/2 transform -translate-x-1/2 bg-black/60 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-medium z-20 pointer-events-none transition-opacity duration-300 flex items-center gap-2 ${isDown ? 'opacity-0' : 'opacity-100'}`}>
-              <span className="animate-pulse">↔</span> Giữ và kéo sang ngang để xem lịch sử
-            </div>
+      {/* Journey Timeline - Full Width */}
+      <section className="mb-20">
+        <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Hành trình của INNO</h2>
+        
+        {/* Draggable Scroll Container - Full Width */}
+        <div className="relative group w-full bg-white border-y border-gray-100">
+          {/* Visual Hint */}
+          <div className={`absolute top-4 left-1/2 transform -translate-x-1/2 bg-black/60 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-medium z-20 pointer-events-none transition-opacity duration-300 flex items-center gap-2 ${isDown ? 'opacity-0' : 'opacity-100'}`}>
+            <span className="animate-pulse">↔</span> Giữ và kéo sang ngang để xem lịch sử
+          </div>
 
-            <div 
-              ref={timelineRef}
-              className={`overflow-x-auto scrollbar-hide select-none ${isDown ? 'cursor-grabbing' : 'cursor-grab'}`}
-              onMouseDown={handleMouseDown}
-              onMouseLeave={handleMouseLeave}
-              onMouseUp={handleMouseUp}
-              onMouseMove={handleMouseMove}
-              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Hide scrollbar for Firefox/IE
-            >
-              {/* Image Container - Width set to contain the long image */}
-              <div className="min-w-[1500px] md:min-w-[2000px] lg:min-w-[2500px]">
-                <Image
-                  src="/images/recruitment/timeline/timeline.webp"
-                  alt="Lịch sử hình thành và phát triển INNO"
-                  width={6296}
-                  height={1974}
-                  className="w-full h-auto object-contain pointer-events-none" // pointer-events-none prevents default image drag behavior
-                  priority
-                />
-              </div>
+          <div 
+            ref={timelineRef}
+            className={`overflow-x-auto scrollbar-hide select-none w-full ${isDown ? 'cursor-grabbing' : 'cursor-grab'}`}
+            onMouseDown={handleMouseDown}
+            onMouseLeave={handleMouseLeave}
+            onMouseUp={handleMouseUp}
+            onMouseMove={handleMouseMove}
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Hide scrollbar for Firefox/IE
+          >
+            {/* Image Container - Width set to contain the long image */}
+            <div className="min-w-[1500px] md:min-w-[2000px] lg:min-w-[2500px]">
+              <Image
+                src="/images/recruitment/timeline/timeline.webp"
+                alt="Lịch sử hình thành và phát triển INNO"
+                width={6296}
+                height={1974}
+                className="w-full h-auto object-contain pointer-events-none" // pointer-events-none prevents default image drag behavior
+                priority
+              />
             </div>
           </div>
-        </section>
+        </div>
+      </section>
+
+      {/* Main Content Continued */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Impressive Numbers */}
         <section className="mb-20">
