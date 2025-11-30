@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import Image from 'next/image';
 import { Metadata } from 'next';
 import Header from '@/components/Header';
@@ -64,6 +64,12 @@ export default function AboutPage() {
   const [selectedOffice, setSelectedOffice] = useState<'hanoi' | 'hcm'>('hanoi');
   const [selectedYear, setSelectedYear] = useState(2024);
 
+  // Timeline drag state
+  const timelineRef = useRef<HTMLDivElement>(null);
+  const [isDown, setIsDown] = useState(false);
+  const [startX, setStartX] = useState(0);
+  const [scrollLeft, setScrollLeft] = useState(0);
+
   const handleYearChange = (direction: 'up' | 'down') => {
     const currentIndex = YEARS.indexOf(selectedYear);
     if (direction === 'up' && currentIndex < YEARS.length - 1) {
@@ -71,6 +77,30 @@ export default function AboutPage() {
     } else if (direction === 'down' && currentIndex > 0) {
       setSelectedYear(YEARS[currentIndex - 1]);
     }
+  };
+
+  // Drag to scroll handlers
+  const handleMouseDown = (e: React.MouseEvent) => {
+    if (!timelineRef.current) return;
+    setIsDown(true);
+    setStartX(e.pageX - timelineRef.current.offsetLeft);
+    setScrollLeft(timelineRef.current.scrollLeft);
+  };
+
+  const handleMouseLeave = () => {
+    setIsDown(false);
+  };
+
+  const handleMouseUp = () => {
+    setIsDown(false);
+  };
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!isDown || !timelineRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - timelineRef.current.offsetLeft;
+    const walk = (x - startX) * 2; // Scroll speed (increase for faster scrolling)
+    timelineRef.current.scrollLeft = scrollLeft - walk;
   };
 
   return (
@@ -130,9 +160,34 @@ export default function AboutPage() {
         {/* Journey Timeline */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Hành trình của INNO</h2>
-          <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <p className="text-gray-400 text-lg">Ảnh timeline hành trình INNO (placeholder)</p>
+          
+          {/* Draggable Scroll Container */}
+          <div className="relative group rounded-xl overflow-hidden shadow-xl bg-white">
+            {/* Visual Hint */}
+            <div className={`absolute top-4 left-1/2 transform -translate-x-1/2 bg-black/60 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-medium z-20 pointer-events-none transition-opacity duration-300 flex items-center gap-2 ${isDown ? 'opacity-0' : 'opacity-100'}`}>
+              <span className="animate-pulse">↔</span> Giữ và kéo sang ngang để xem lịch sử
+            </div>
+
+            <div 
+              ref={timelineRef}
+              className={`overflow-x-auto scrollbar-hide select-none ${isDown ? 'cursor-grabbing' : 'cursor-grab'}`}
+              onMouseDown={handleMouseDown}
+              onMouseLeave={handleMouseLeave}
+              onMouseUp={handleMouseUp}
+              onMouseMove={handleMouseMove}
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Hide scrollbar for Firefox/IE
+            >
+              {/* Image Container - Width set to contain the long image */}
+              <div className="min-w-[1500px] md:min-w-[2000px] lg:min-w-[2500px]">
+                <Image
+                  src="/images/recruitment/timeline/timeline.webp"
+                  alt="Lịch sử hình thành và phát triển INNO"
+                  width={6296}
+                  height={1974}
+                  className="w-full h-auto object-contain pointer-events-none" // pointer-events-none prevents default image drag behavior
+                  priority
+                />
+              </div>
             </div>
           </div>
         </section>
