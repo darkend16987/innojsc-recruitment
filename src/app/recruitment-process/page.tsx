@@ -63,7 +63,7 @@ export default function RecruitmentProcessPage() {
           <div className="bg-white rounded-lg shadow-md p-4 md:p-8 border border-gray-200">
             <div className="relative aspect-video">
                 <Image
-                  src="/images/recruitment/timeline/quytrinh.webp"
+                  src="/images/recruitment/timeline/Quytrinh.webp"
                   alt="Quy trình tuyển dụng INNO"
                   fill
                   className="object-contain rounded-lg"
