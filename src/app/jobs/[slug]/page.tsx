@@ -1,15 +1,18 @@
 'use client';
 
 import { useState, useEffect, use } from 'react';
+// Thêm dòng này vào 👇
+import Image from 'next/image'; 
+import Link from 'next/link';
+import Script from 'next/script';
+import { ArrowLeft, MapPin, Briefcase, Clock, DollarSign, Building2, Share2 } from 'lucide-react';
+
 import { getJobById, getJobBySlug, getRelatedJobs } from '@/lib/firestore-helpers';
 import { Job } from '@/types/job';
 import ApplyModal from '@/components/ApplyModal';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { ArrowLeft, MapPin, Briefcase, Clock, DollarSign, Building2, Share2 } from 'lucide-react';
-import Link from 'next/link';
 import { useToast } from '@/components/Toast';
-import Script from 'next/script';
 
 export default function JobDetailPage({ params }: { params: Promise<{ slug: string }> }) {
   // Unwrap params Promise for Next.js 15+
@@ -383,28 +386,18 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                   <div className="text-center">
                     <strong className="text-gray-700 block mb-3">Liên hệ qua Zalo</strong>
                     <div className="flex justify-center">
-                      <div className="relative w-40 h-40 bg-gray-100 rounded-lg flex items-center justify-center border-2 border-dashed border-gray-300">
-                        {/* Placeholder - user will replace with actual QR code */}
-                        <div className="text-center p-4">
-                          <svg className="w-16 h-16 mx-auto text-gray-400 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v1m6 11h2m-6 0h-2v4m0-11v3m0 0h.01M12 12h4.01M16 20h4M4 12h4m12 0h.01M5 8h2a1 1 0 001-1V5a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1zm12 0h2a1 1 0 001-1V5a1 1 0 00-1-1h-2a1 1 0 00-1 1v2a1 1 0 001 1zM5 20h2a1 1 0 001-1v-2a1 1 0 00-1-1H5a1 1 0 00-1 1v2a1 1 0 001 1z" />
-                          </svg>
-                          <p className="text-xs text-gray-500">Quét QR để chat</p>
-                        </div>
-                        {/* Uncomment and update path when QR code image is ready */}
-                        {/* <Image
+                      <div className="relative w-40 h-40 bg-white rounded-lg flex items-center justify-center border border-gray-200 shadow-sm overflow-hidden">
+                        <Image
                           src="/images/recruitment/qr-code/zalo-hr-qr.png"
                           alt="Zalo HR QR Code"
                           width={160}
                           height={160}
-                          className="rounded-lg"
-                        /> */}
+                          className="rounded-lg object-cover"
+                        />
                       </div>
                     </div>
                     <p className="text-xs text-gray-500 mt-2">Quét mã QR để liên hệ trực tiếp với HR</p>
                   </div>
-                </div>
-              </div>
 
               {/* Related Jobs */}
               {relatedJobs.length > 0 && (
