@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image'; // Đã thêm import Image
 import { Metadata } from 'next';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -83,9 +84,21 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <div className="relative h-[400px] bg-gradient-to-r from-gray-900 to-gray-700 flex items-center justify-center">
-        {/* Placeholder for hero image - replace with actual image */}
-        <div className="absolute inset-0 bg-black/30"></div>
+      <div className="relative h-[400px] flex items-center justify-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/images/recruitment/hero/about-hero.webp"
+            alt="Về INNO"
+            fill
+            className="object-cover"
+            priority
+          />
+          {/* Overlay */}
+          <div className="absolute inset-0 bg-black/50"></div>
+        </div>
+
+        {/* Hero Content */}
         <div className="relative z-10 text-center text-white px-4">
           <h1 className="text-5xl md:text-6xl font-bold mb-4">WELCOME TO INNO</h1>
           <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed">
