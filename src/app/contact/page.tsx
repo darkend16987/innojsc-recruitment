@@ -10,17 +10,17 @@ export const metadata: Metadata = {
 
 const CONTACT_INFO = {
   email: 'ahr@innojsc.com',
-  hotline: '+84 969 979 391',
+  hotline: '0243 2121 776',
   website: 'https://innojsc.com',
   addresses: [
     {
       name: 'Văn phòng Hà Nội',
-      detail: '39 Thượng Thụy, Phú Thượng, Tây Hồ, Hà Nội',
-      mapUrl: 'https://maps.google.com/?q=39+Thượng+Thụy,+Phú+Thượng,+Tây+Hồ,+Hà+Nội',
+      detail: '39 Thượng Thụy, Phú Thượng',
+      mapUrl: 'https://maps.google.com/?q=39+Thượng+Thụy,+Phú+Thượng,+Hà+Nội',
     },
     {
       name: 'Văn phòng TP.HCM',
-      detail: 'Căn hộ TMDV A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền, TP. Thủ Đức',
+      detail: 'A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền',
       mapUrl: 'https://maps.google.com/?q=37+Nguyễn+Văn+Hưởng,+Thảo+Điền,+Thủ+Đức',
     },
   ],
