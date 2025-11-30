@@ -142,34 +142,44 @@ export default function AboutPage() {
 
         {/* Vision, Mission, Core Values */}
         <section className="mb-20">
-          <div className="grid md:grid-cols-3 gap-8">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Tầm nhìn - Sứ mệnh - Giá trị cốt lõi</h2>
+
+          <div className="max-w-4xl mx-auto space-y-8">
             {/* Vision */}
             <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-              <h3 className="text-2xl font-bold text-primary mb-4">Tầm nhìn</h3>
-              <p className="text-gray-700 leading-relaxed">
-                Trở thành công ty tư vấn thiết kế dẫn đầu về chất lượng và dịch vụ tại Việt Nam
-              </p>
-              <div className="mt-6 aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                <p className="text-gray-400 text-sm">Ảnh Vision</p>
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-primary mb-4">Tầm nhìn</h3>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    Trở thành công ty tư vấn thiết kế dẫn đầu về chất lượng và dịch vụ tại Việt Nam
+                  </p>
+                </div>
+                <div className="w-full md:w-64 aspect-square bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <p className="text-gray-400 text-sm">Ảnh Vision</p>
+                </div>
               </div>
             </div>
 
             {/* Mission */}
             <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-              <h3 className="text-2xl font-bold text-primary mb-4">Sứ mệnh</h3>
-              <p className="text-gray-700 leading-relaxed">
-                Đưa năng lực tư vấn thiết kế của công ty ngang tầm khu vực và tiệm cận các nước tiên tiến trên thế giới
-              </p>
-              <div className="mt-6 aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                <p className="text-gray-400 text-sm">Ảnh Mission</p>
+              <div className="flex flex-col md:flex-row gap-8 items-center">
+                <div className="flex-1">
+                  <h3 className="text-2xl font-bold text-primary mb-4">Sứ mệnh</h3>
+                  <p className="text-gray-700 leading-relaxed text-lg">
+                    Đưa năng lực tư vấn thiết kế của công ty ngang tầm khu vực và tiệm cận các nước tiên tiến trên thế giới
+                  </p>
+                </div>
+                <div className="w-full md:w-64 aspect-square bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <p className="text-gray-400 text-sm">Ảnh Mission</p>
+                </div>
               </div>
             </div>
 
             {/* Core Values */}
             <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-              <h3 className="text-2xl font-bold text-primary mb-4">Giá trị cốt lõi</h3>
-              <div className="mt-6 aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                <p className="text-gray-400 text-sm">Ảnh Core Values</p>
+              <h3 className="text-2xl font-bold text-primary mb-6 text-center">Giá trị cốt lõi</h3>
+              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
+                <p className="text-gray-400 text-sm">Ảnh Core Values (ảnh ngang toàn bộ)</p>
               </div>
             </div>
           </div>
