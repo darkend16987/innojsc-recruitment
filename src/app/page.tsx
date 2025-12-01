@@ -218,7 +218,7 @@ export default function HomePage() {
           <div
             className={
               viewMode === 'list'
-                ? 'flex flex-col gap-6' // Tăng khoảng cách lên gap-8 (32px)
+                ? 'space-y-8'
                 : 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'
             }
           >
