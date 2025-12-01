@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Mail, Phone, MapPin } from 'lucide-react';
+import { Mail, Phone, MapPin, Facebook, Linkedin } from 'lucide-react';
 import Logo from './Logo';
 
 const CONTACT_INFO = {
@@ -9,106 +9,136 @@ const CONTACT_INFO = {
   addresses: [
     {
       name: 'Hà Nội',
-      detail: '39 Thượng Thụy, Phú Thượng',
+      detail: '39 Thượng Thụy, Phú Thượng, Tây Hồ',
     },
     {
       name: 'TP.HCM',
-      detail: 'A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền',
+      detail: 'A01.03, Hoàng Anh River View, 37 Nguyễn Văn Hưởng, Thảo Điền',
     },
   ],
 };
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-800 text-gray-300 mt-16">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {/* Column 1: Logo & About */}
-          <div>
-            <div className="mb-4">
+    // Sử dụng style={{ border: 'none' }} để chắc chắn không có viền thừa từ global css
+    // Dùng w-full để đảm bảo full màn hình
+    <footer 
+      className="w-full bg-[#111827] text-gray-300 mt-20 border-t border-gray-800"
+      style={{ borderTopWidth: '1px', borderLeft: 'none', borderRight: 'none', borderBottom: 'none' }}
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
+          {/* Column 1: Brand Info */}
+          <div className="space-y-6">
+            <div className="transform origin-left scale-90 sm:scale-100">
               <Logo variant="dark" />
             </div>
-            <p className="text-sm mb-4">
-              Tham gia cùng chúng tôi để kiến tạo tương lai. Khám phá các cơ hội nghề nghiệp
-              hấp dẫn trong lĩnh vực kiến trúc và xây dựng.
+            <p className="text-sm leading-relaxed text-gray-400">
+              Tiên phong kiến tạo những công trình biểu tượng. Chúng tôi xây dựng môi trường làm việc chuyên nghiệp, nơi tài năng tỏa sáng.
             </p>
-            <a
-              href={CONTACT_INFO.website}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 hover:text-blue-300 text-sm font-medium"
-            >
-              Về InnoJSC →
-            </a>
+            <div className="flex gap-4">
+              <a 
+                href="https://www.facebook.com/innojsc" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
+                aria-label="Facebook"
+              >
+                <Facebook size={18} />
+              </a>
+              <a 
+                href="https://www.linkedin.com/company/innojsc" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-300"
+                aria-label="LinkedIn"
+              >
+                <Linkedin size={18} />
+              </a>
+            </div>
           </div>
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Liên kết nhanh</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-white font-bold text-lg mb-6 tracking-wide">Khám phá</h3>
+            <ul className="space-y-4">
               <li>
-                <Link href="/" className="hover:text-white transition-colors">
-                  Tìm việc làm
+                <Link href="/" className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                  Cơ hội việc làm
                 </Link>
               </li>
               <li>
-                <a
+                <Link href="/jobs/about" className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                  Về chúng tôi
+                </Link>
+              </li>
+              <li>
+                <Link href="/jobs/career-path" className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block">
+                  Lộ trình phát triển
+                </Link>
+              </li>
+              <li>
+                <a 
                   href={CONTACT_INFO.website}
-                  target="_blank"
+                  target="_blank" 
                   rel="noopener noreferrer"
-                  className="hover:text-white transition-colors"
+                  className="text-gray-400 hover:text-white hover:translate-x-1 transition-all duration-300 inline-block"
                 >
-                  Website công ty
+                  Website chính thức
                 </a>
-              </li>
-              <li>
-                <Link href="/contact" className="hover:text-white transition-colors">
-                  Liên hệ với chúng tôi
-                </Link>
               </li>
             </ul>
           </div>
 
-          {/* Column 3: Contact */}
+          {/* Column 3: Contact HN */}
           <div>
-            <h3 className="text-lg font-semibold text-white mb-4">Liên hệ</h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start">
-                <Mail className="w-5 h-5 mr-2 flex-shrink-0 text-blue-400" />
-                <a
-                  href={`mailto:${CONTACT_INFO.email}`}
-                  className="hover:text-white transition-colors"
-                >
-                  {CONTACT_INFO.email}
-                </a>
+            <h3 className="text-white font-bold text-lg mb-6 tracking-wide">Văn phòng Hà Nội</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                <span className="text-gray-400 text-sm">{CONTACT_INFO.addresses[0].detail}</span>
               </li>
-              <li className="flex items-start">
-                <Phone className="w-5 h-5 mr-2 flex-shrink-0 text-blue-400" />
-                <a
-                  href={`tel:${CONTACT_INFO.hotline}`}
-                  className="hover:text-white transition-colors"
-                >
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-primary flex-shrink-0" />
+                <a href={`tel:${CONTACT_INFO.hotline}`} className="text-gray-400 hover:text-white transition-colors">
                   {CONTACT_INFO.hotline}
                 </a>
               </li>
-              {CONTACT_INFO.addresses.map((addr) => (
-                <li key={addr.name} className="flex items-start">
-                  <MapPin className="w-5 h-5 mr-2 flex-shrink-0 text-blue-400" />
-                  <div>
-                    <strong className="text-white">{addr.name}:</strong>
-                    <p className="text-gray-400">{addr.detail}</p>
-                  </div>
-                </li>
-              ))}
+              <li className="flex items-center gap-3">
+                <Mail className="w-5 h-5 text-primary flex-shrink-0" />
+                <a href={`mailto:${CONTACT_INFO.email}`} className="text-gray-400 hover:text-white transition-colors">
+                  {CONTACT_INFO.email}
+                </a>
+              </li>
+            </ul>
+          </div>
+
+           {/* Column 4: Contact HCM */}
+           <div>
+            <h3 className="text-white font-bold text-lg mb-6 tracking-wide">Văn phòng TP.HCM</h3>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-3">
+                <MapPin className="w-5 h-5 text-primary flex-shrink-0 mt-1" />
+                <span className="text-gray-400 text-sm">{CONTACT_INFO.addresses[1].detail}</span>
+              </li>
+              <li className="flex items-center gap-3">
+                <Phone className="w-5 h-5 text-primary flex-shrink-0" />
+                <a href={`tel:${CONTACT_INFO.hotline}`} className="text-gray-400 hover:text-white transition-colors">
+                  {CONTACT_INFO.hotline}
+                </a>
+              </li>
             </ul>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="mt-8 pt-8 border-t border-gray-800">
-          <div className="flex flex-col md:flex-row justify-center items-center text-sm">
-            <p>&copy; {new Date().getFullYear()} InnoJSC. All rights reserved.</p>
-          </div>
+        {/* Copyright */}
+        <div className="border-t border-gray-800 pt-8 mt-8 text-center sm:flex sm:justify-between sm:items-center">
+          <p className="text-gray-500 text-sm">
+            &copy; {new Date().getFullYear()} InnoJSC. Bản quyền thuộc về Công ty CP INNO.
+          </p>
+          <p className="text-gray-600 text-sm mt-2 sm:mt-0">
+            Designed for INNO Careers
+          </p>
         </div>
       </div>
     </footer>
