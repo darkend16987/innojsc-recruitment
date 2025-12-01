@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image'; // Đã thêm import Image
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { TrendingUp, Users, BookOpen, Award } from 'lucide-react';
@@ -210,12 +211,12 @@ export default function CareerPathPage() {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Tham gia INNO và xây dựng sự nghiệp vững chắc trong lĩnh vực tư vấn thiết kế
           </p>
-          <a
+          <Link
             href="/"
             className="inline-block px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
           >
             Khám phá cơ hội nghề nghiệp
-          </a>
+          </Link>
         </section>
       </div>
 

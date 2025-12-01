@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Roboto, Roboto_Mono } from "next/font/google";
+import { Roboto, Roboto_Mono, Montserrat } from "next/font/google";
 import "./globals.css";
 import { ToastProvider } from "@/components/Toast";
 import { AuthProvider } from "@/contexts/AuthContext";
@@ -15,6 +15,13 @@ const robotoMono = Roboto_Mono({
   weight: ['400', '500'],
   variable: "--font-roboto-mono",
   subsets: ["latin"],
+  display: 'swap',
+});
+
+const montserrat = Montserrat({
+  weight: ['600', '700', '800'],  // Semi-Bold, Bold, Extra-Bold
+  variable: "--font-montserrat",
+  subsets: ["latin", "vietnamese"],
   display: 'swap',
 });
 
@@ -141,7 +148,7 @@ export default function RootLayout({
         {/* Structured Data - JobPosting will be added per job page */}
       </head>
       <body
-        className={`${roboto.variable} ${robotoMono.variable} antialiased`}
+        className={`${roboto.variable} ${robotoMono.variable} ${montserrat.variable} antialiased`}
       >
         <AuthProvider>
           <ToastProvider>

@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image'; // Thêm dòng này để dùng Image
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { BookOpen, Users, Trophy } from 'lucide-react';
@@ -185,12 +186,12 @@ export default function WhyInnoPage() {
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Khám phá các vị trí tuyển dụng đang mở và bắt đầu hành trình phát triển sự nghiệp cùng chúng tôi
           </p>
-          <a
+          <Link
             href="/"
             className="inline-block px-8 py-4 bg-white text-primary font-semibold rounded-lg hover:bg-gray-100 transition-colors shadow-lg"
           >
             Xem vị trí tuyển dụng
-          </a>
+          </Link>
         </section>
       </div>
 
