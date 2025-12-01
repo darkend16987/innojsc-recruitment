@@ -4,7 +4,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ImageSlider from '@/components/ImageSlider'; // Import ImageSlider
 import { TrendingUp, Users, BookOpen, Award } from 'lucide-react';
+
+// Danh sách ảnh đào tạo
+const TRAINING_IMAGES = Array.from({ length: 8 }, (_, i) => `/images/recruitment/training/${i + 1}.webp`);
 
 export default function CareerPathPage() {
   return (
@@ -40,12 +44,12 @@ export default function CareerPathPage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-        {/* Career Path Diagram - UPDATED */}
+        {/* Career Path Diagram */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Lộ trình nghề nghiệp
           </h2>
-          {/* Ảnh hiển thị full, bo góc, có bóng, bỏ khung trắng - Style giống trang About */}
+          {/* Style hiện đại: Full width, bo góc, đổ bóng, không viền */}
           <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white">
             <Image
               src="/images/recruitment/career-path/career.webp"
@@ -140,20 +144,20 @@ export default function CareerPathPage() {
             </div>
           </div>
 
-          {/* Training Images */}
-          <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-            <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">
-              Các buổi đào tạo nội bộ, lớp học Tiếng Anh...
+          {/* Training Images Slider */}
+          <div className="text-center mb-8">
+            <h3 className="text-xl font-semibold text-gray-900 mb-6">
+              Hoạt động đào tạo và văn hóa học tập
             </h3>
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-400 text-lg">Image slider - Training sessions</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Upload ảnh vào: /public/images/recruitment/training/
-                </p>
-              </div>
-            </div>
+          </div>
+          
+          {/* Container cho Slider - Style hiện đại giống phần Lộ trình */}
+          <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white">
+            <ImageSlider
+              images={TRAINING_IMAGES}
+              alt="Hoạt động đào tạo tại INNO"
+              height={600} // Tăng chiều cao để hiển thị ảnh rõ nét hơn
+            />
           </div>
         </section>
 
