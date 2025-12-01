@@ -12,15 +12,20 @@ export default function Logo({ className = '', variant = 'default', showText = t
   const hasLogoImage = true; // Logo now available in public/images/logo.svg
 
   if (hasLogoImage) {
+    // Use separate logo for dark mode to avoid CSS filter issues
+    const logoSrc = variant === 'dark'
+      ? '/images/logo-white.svg'  // White logo for dark background (footer)
+      : '/images/logo.svg';        // Color logo for light background (header)
+
     return (
       <Link href="/" className={`flex items-center ${className}`}>
         <Image
-          src="/images/logo.svg"
+          src={logoSrc}
           alt="InnoJSC Logo"
           width={150}
           height={50}
           priority
-          className={`h-10 w-auto ${variant === 'dark' ? 'grayscale brightness-[3]' : ''}`}
+          className="h-10 w-auto"
         />
       </Link>
     );
