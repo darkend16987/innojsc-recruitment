@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image'; // Đã thêm import Image
+import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -40,21 +40,20 @@ export default function CareerPathPage() {
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
-        {/* Career Path Diagram */}
+        {/* Career Path Diagram - UPDATED */}
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Lộ trình nghề nghiệp
           </h2>
-          <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <TrendingUp className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-400 text-lg">Ảnh mô tả lộ trình phát triển (placeholder)</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Upload ảnh vào: /public/images/recruitment/career-path/
-                </p>
-              </div>
-            </div>
+          {/* Ảnh hiển thị full, bo góc, có bóng, bỏ khung trắng - Style giống trang About */}
+          <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white">
+            <Image
+              src="/images/recruitment/career-path/career.webp"
+              alt="Sơ đồ lộ trình phát triển nghề nghiệp tại INNO"
+              width={1920}
+              height={1080}
+              className="w-full h-auto object-contain"
+            />
           </div>
         </section>
 
