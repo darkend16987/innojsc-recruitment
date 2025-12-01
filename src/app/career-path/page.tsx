@@ -20,7 +20,7 @@ export default function CareerPathPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/recruitment/hero/career-path-hero.webp"
+            src="/images/recruitment/hero/career-path-hero1.webp"
             alt="Lộ trình phát triển tại INNO"
             fill
             className="object-cover"
