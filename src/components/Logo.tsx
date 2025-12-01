@@ -20,7 +20,7 @@ export default function Logo({ className = '', variant = 'default', showText = t
           width={150}
           height={50}
           priority
-          className={`h-10 w-auto ${variant === 'dark' ? 'brightness-0 invert' : ''}`}
+          className={`h-10 w-auto ${variant === 'dark' ? 'grayscale brightness-[3]' : ''}`}
         />
       </Link>
     );
