@@ -1,7 +1,6 @@
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
-// Sửa lỗi import module: Dùng import trực tiếp từ swiper/modules
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 
@@ -70,18 +69,18 @@ export default function ImageSlider({ images, alt, height = 400 }: ImageSliderPr
       </Swiper>
 
       <style jsx global>{`
-        /* Button Styles */
+        /* Button Styles - Chỉ hiện mũi tên, bỏ background */
         .image-slider-container .swiper-button-next,
         .image-slider-container .swiper-button-prev {
-          color: #c9202c;
-          background: rgba(255, 255, 255, 0.9);
-          width: 44px; /* Tăng nhẹ size để dễ bấm */
-          height: 44px;
-          border-radius: 50%;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          color: #c9202c; /* Màu đỏ thương hiệu */
+          background: transparent; /* Nền trong suốt */
+          width: 50px; 
+          height: 50px;
+          border-radius: 0;
+          box-shadow: none; /* Bỏ đổ bóng */
           transition: all 0.3s ease;
           opacity: 0; /* Ẩn mặc định */
-          display: flex; /* Dùng flex để căn giữa mũi tên */
+          display: flex; 
           align-items: center;
           justify-content: center;
         }
@@ -92,19 +91,18 @@ export default function ImageSlider({ images, alt, height = 400 }: ImageSliderPr
           opacity: 1;
         }
 
-        /* Hover vào chính nút đó */
+        /* Hover vào chính nút đó -> Tăng nhẹ size + shadow text để nổi hơn */
         .image-slider-container .swiper-button-next:hover,
         .image-slider-container .swiper-button-prev:hover {
-          background: #fff;
-          transform: scale(1.1); /* Phóng to nhẹ khi hover */
+          transform: scale(1.2); 
+          filter: drop-shadow(0 2px 4px rgba(0,0,0,0.3));
         }
 
-        /* Chỉnh lại icon mũi tên */
+        /* Chỉnh lại icon mũi tên to hơn một chút */
         .image-slider-container .swiper-button-next:after,
         .image-slider-container .swiper-button-prev:after {
-          font-size: 18px; /* Giảm size icon cho tinh tế */
+          font-size: 32px; /* Tăng size icon */
           font-weight: bold;
-          line-height: 1; /* Reset line-height để căn giữa chuẩn */
         }
 
         /* Pagination Dots */
