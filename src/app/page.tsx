@@ -218,7 +218,7 @@ export default function HomePage() {
           <div
             className={
               viewMode === 'list'
-                ? 'space-y-6'
+                ? 'space-y-8'
                 : 'grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-6'
             }
           >

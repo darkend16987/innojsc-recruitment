@@ -105,7 +105,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Bar */}
-        <div className="mt-8 pt-8 border-t border-gray-700">
+        <div className="mt-8 pt-8 border-t border-gray-800">
           <div className="flex flex-col md:flex-row justify-center items-center text-sm">
             <p>&copy; {new Date().getFullYear()} InnoJSC. All rights reserved.</p>
           </div>
