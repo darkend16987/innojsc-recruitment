@@ -1,4 +1,5 @@
 import { Metadata } from 'next';
+import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
 import { Mail, Phone, MapPin, Send } from 'lucide-react';
@@ -33,10 +34,10 @@ export default function ContactPage() {
 
       <main className="flex-grow">
         {/* Hero Section */}
-        <section className="bg-gradient-to-br from-blue-600 to-blue-700 text-white py-16">
+        <section className="bg-gradient-to-br from-primary to-red-700 text-white py-16">
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-5xl font-bold mb-4">Liên hệ với chúng tôi</h1>
-            <p className="text-xl text-blue-100 max-w-2xl mx-auto">
+            <p className="text-xl text-red-100 max-w-2xl mx-auto">
               Chúng tôi luôn sẵn sàng lắng nghe và hỗ trợ bạn
             </p>
           </div>
@@ -55,8 +56,8 @@ export default function ContactPage() {
               <div className="bg-white p-6 rounded-lg shadow-sm border border-gray-200 hover:shadow-md transition-shadow">
                 <div className="flex items-start">
                   <div className="flex-shrink-0">
-                    <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
-                      <Mail className="w-6 h-6 text-blue-600" />
+                    <div className="w-12 h-12 bg-red-50 rounded-lg flex items-center justify-center">
+                      <Mail className="w-6 h-6 text-primary" />
                     </div>
                   </div>
                   <div className="ml-4 flex-grow">
@@ -66,7 +67,7 @@ export default function ContactPage() {
                     </p>
                     <a
                       href={`mailto:${CONTACT_INFO.email}`}
-                      className="text-blue-600 hover:text-blue-700 font-medium"
+                      className="text-primary hover:text-primary/80 font-medium"
                     >
                       {CONTACT_INFO.email}
                     </a>
@@ -148,7 +149,7 @@ export default function ContactPage() {
                       id="name"
                       name="name"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       placeholder="Nguyễn Văn A"
                     />
                   </div>
@@ -166,7 +167,7 @@ export default function ContactPage() {
                       id="email"
                       name="from"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       placeholder="email@example.com"
                     />
                   </div>
@@ -184,7 +185,7 @@ export default function ContactPage() {
                       id="subject"
                       name="subject"
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
                       placeholder="Câu hỏi về tuyển dụng"
                     />
                   </div>
@@ -202,7 +203,7 @@ export default function ContactPage() {
                       name="body"
                       rows={6}
                       required
-                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                      className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent resize-none"
                       placeholder="Nhập nội dung tin nhắn của bạn..."
                     />
                   </div>
@@ -210,7 +211,7 @@ export default function ContactPage() {
                   {/* Submit Button */}
                   <button
                     type="submit"
-                    className="w-full bg-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition-colors flex items-center justify-center shadow-sm"
+                    className="w-full bg-primary text-white py-3 px-6 rounded-lg font-semibold hover:bg-primary/90 transition-colors flex items-center justify-center shadow-sm"
                   >
                     <Send className="w-5 h-5 mr-2" />
                     Gửi tin nhắn
@@ -238,10 +239,10 @@ export default function ContactPage() {
                 </h3>
                 <p className="text-gray-600">
                   Bạn có thể xem danh sách các vị trí tuyển dụng tại{' '}
-                  <a href="/" className="text-blue-600 hover:underline">
+                  <Link href="/" className="text-primary hover:underline">
                     trang chủ
-                  </a>{' '}
-                  và click "Ứng tuyển" trên vị trí bạn quan tâm.
+                  </Link>{' '}
+                  và click &quot;Ứng tuyển&quot; trên vị trí bạn quan tâm.
                 </p>
               </div>
               <div className="border-b border-gray-200 pb-6">
