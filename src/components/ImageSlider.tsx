@@ -1,6 +1,7 @@
 'use client';
 
 import { Swiper, SwiperSlide } from 'swiper/react';
+// Sửa lỗi import module: Dùng import trực tiếp từ swiper/modules
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
 
@@ -34,19 +35,22 @@ export default function ImageSlider({ images, alt, height = 400 }: ImageSliderPr
   }
 
   return (
-    <div className="image-slider-container">
+    <div className="image-slider-container relative group">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
-        spaceBetween={20}
+        spaceBetween={0} // No gap between slides for cleaner look
         slidesPerView={1}
         navigation
-        pagination={{ clickable: true }}
+        pagination={{ 
+          clickable: true,
+          dynamicBullets: true // Dots nhỏ gọn hơn
+        }}
         autoplay={{
           delay: 5000,
           disableOnInteraction: false,
         }}
         loop={images.length > 1}
-        className="rounded-lg"
+        className="h-full w-full"
         style={{ height: `${height}px` }}
       >
         {images.map((image, index) => (
@@ -56,8 +60,9 @@ export default function ImageSlider({ images, alt, height = 400 }: ImageSliderPr
                 src={image}
                 alt={`${alt} ${index + 1}`}
                 fill
-                className="object-cover rounded-lg"
-                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 1200px"
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
+                priority={index === 0}
               />
             </div>
           </SwiperSlide>
@@ -65,29 +70,57 @@ export default function ImageSlider({ images, alt, height = 400 }: ImageSliderPr
       </Swiper>
 
       <style jsx global>{`
+        /* Button Styles */
         .image-slider-container .swiper-button-next,
         .image-slider-container .swiper-button-prev {
           color: #c9202c;
-          background: white;
-          width: 40px;
-          height: 40px;
+          background: rgba(255, 255, 255, 0.9);
+          width: 44px; /* Tăng nhẹ size để dễ bấm */
+          height: 44px;
           border-radius: 50%;
-          box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+          transition: all 0.3s ease;
+          opacity: 0; /* Ẩn mặc định */
+          display: flex; /* Dùng flex để căn giữa mũi tên */
+          align-items: center;
+          justify-content: center;
         }
 
+        /* Hiện nút khi hover vào container */
+        .image-slider-container:hover .swiper-button-next,
+        .image-slider-container:hover .swiper-button-prev {
+          opacity: 1;
+        }
+
+        /* Hover vào chính nút đó */
+        .image-slider-container .swiper-button-next:hover,
+        .image-slider-container .swiper-button-prev:hover {
+          background: #fff;
+          transform: scale(1.1); /* Phóng to nhẹ khi hover */
+        }
+
+        /* Chỉnh lại icon mũi tên */
         .image-slider-container .swiper-button-next:after,
         .image-slider-container .swiper-button-prev:after {
-          font-size: 20px;
+          font-size: 18px; /* Giảm size icon cho tinh tế */
           font-weight: bold;
+          line-height: 1; /* Reset line-height để căn giữa chuẩn */
         }
 
+        /* Pagination Dots */
         .image-slider-container .swiper-pagination-bullet {
-          background: #c9202c;
-          opacity: 0.5;
+          background: #fff;
+          opacity: 0.6;
+          width: 10px;
+          height: 10px;
+          box-shadow: 0 2px 4px rgba(0,0,0,0.2);
         }
 
         .image-slider-container .swiper-pagination-bullet-active {
+          background: #c9202c;
           opacity: 1;
+          width: 12px;
+          height: 12px;
         }
       `}</style>
     </div>
