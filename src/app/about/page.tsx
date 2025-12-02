@@ -142,7 +142,7 @@ export default function AboutPage() {
               Từ năm 2008, INNO đã phát triển thành một trong những công ty tư vấn thiết kế uy tín nhất Việt Nam, quy tụ mạng lưới chuyên gia hàng đầu trong các lĩnh vực: <strong className="text-primary">Kiến trúc, Quy hoạch, Kết cấu, MEP, PCCC, Nội thất, Cảnh quan, Hạ tầng và Kinh tế xây dựng</strong>.
             </p>
             <p>
-              Hơn 15 năm qua, INNO tự hào đồng hành trong những dự án mang tính biểu tượng quốc gia như <strong>Bitexco Financial Tower, Landmark 81, JW Marriott Hà Nội, Landmark 55</strong>, và nhiều dự án quy mô lớn của Vingroup, Sungroup, MIK, T&T, BRG, Novaland…
+              Hơn 17 năm qua, con người INNO tự hào đã và đang tham gia thiết kế những dự án mang tính biểu tượng quốc gia như <strong>Bitexco Financial Tower, Landmark 81, JW Marriott Hà Nội, Landmark 55</strong>, và nhiều dự án quy mô lớn của Vingroup, Sungroup, MIK, T&T, BRG, Novaland…
             </p>
             <p>
               Chúng tôi không chỉ cung cấp dịch vụ thiết kế – chúng tôi kiến tạo giá trị bền vững, đổi mới tư duy và dẫn đầu trong ứng dụng BIM. Tại INNO, mỗi thành viên là một mảnh ghép quan trọng, góp phần xây dựng nên những công trình làm thay đổi diện mạo đô thị Việt Nam.
