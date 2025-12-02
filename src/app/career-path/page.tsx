@@ -52,7 +52,7 @@ export default function CareerPathPage() {
           {/* Style hiện đại: Full width, bo góc, đổ bóng, không viền */}
           <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300 bg-white">
             <Image
-              src="/images/recruitment/career-path/career.webp"
+              src="/images/recruitment/career-path/career1.webp"
               alt="Sơ đồ lộ trình phát triển nghề nghiệp tại INNO"
               width={1920}
               height={1080}
