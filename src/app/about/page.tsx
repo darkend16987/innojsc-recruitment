@@ -1,10 +1,10 @@
 'use client';
 
-import { useState, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { MapPin, Award, ChevronUp, ChevronDown } from 'lucide-react';
+import { MapPin, Award, ChevronUp, ChevronDown, Building2, Users, Trophy, Briefcase, Calendar } from 'lucide-react';
 
 const AWARDS_DATA = {
   2016: [
@@ -61,6 +61,69 @@ const AWARDS_DATA = {
 
 const YEARS = [2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024];
 
+// --- COMPONENTS ---
+
+// Component số nhảy (Animation)
+const CountUpNumber = ({ end, suffix = '', duration = 2000, className = '' }: { end: number, suffix?: string, duration?: number, className?: string }) => {
+  const [count, setCount] = useState(0);
+  const countRef = useRef<HTMLSpanElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (countRef.current) {
+      observer.observe(countRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    let startTime: number;
+    let animationFrame: number;
+
+    const animate = (timestamp: number) => {
+      if (!startTime) startTime = timestamp;
+      const progress = timestamp - startTime;
+      const percentage = Math.min(progress / duration, 1);
+      
+      // Easing function: easeOutExpo
+      const easeOut = (x: number): number => {
+        return x === 1 ? 1 : 1 - Math.pow(2, -10 * x);
+      };
+
+      setCount(Math.floor(easeOut(percentage) * end));
+
+      if (progress < duration) {
+        animationFrame = requestAnimationFrame(animate);
+      } else {
+        setCount(end);
+      }
+    };
+
+    animationFrame = requestAnimationFrame(animate);
+
+    return () => cancelAnimationFrame(animationFrame);
+  }, [isVisible, end, duration]);
+
+  return (
+    <span ref={countRef} className={`tabular-nums ${className}`}>
+      {count}{suffix}
+    </span>
+  );
+};
+
 export default function AboutPage() {
   const [selectedOffice, setSelectedOffice] = useState<'hanoi' | 'hcm'>('hanoi');
   const [selectedYear, setSelectedYear] = useState(2024);
@@ -100,7 +163,7 @@ export default function AboutPage() {
     if (!isDown || !timelineRef.current) return;
     e.preventDefault();
     const x = e.pageX - timelineRef.current.offsetLeft;
-    const walk = (x - startX) * 2; // Scroll speed (increase for faster scrolling)
+    const walk = (x - startX) * 2; 
     timelineRef.current.scrollLeft = scrollLeft - walk;
   };
 
@@ -119,7 +182,7 @@ export default function AboutPage() {
             className="object-cover"
             priority
           />
-          {/* Overlay màu đen mờ giúp text trắng dễ đọc hơn */}
+          {/* Overlay */}
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
 
@@ -141,10 +204,10 @@ export default function AboutPage() {
               Tại INNO, chúng tôi tin rằng mỗi công trình không chỉ là bản vẽ – đó là dấu ấn của trí tuệ, sự sáng tạo và tinh thần kiến tạo tương lai.
             </p>
             <p>
-              Từ năm 2008, INNO đã phát triển thành một trong những công ty tư vấn thiết kế uy tín nhất Việt Nam, quy tụ mạng lưới chuyên gia hàng đầu trong các lĩnh vực: <strong className="text-primary">Kiến trúc, Quy hoạch, Kết cấu, MEP, PCCC, Nội thất, Cảnh quan, Hạ tầng và Kinh tế xây dựng</strong>.
+              Từ năm 2008, INNO đã phát triển thành một trong những công ty tư vấn thiết kế uy tín nhất Việt Nam, quy tụ mạng lưới chuyên gia hàng đầu trong các lĩnh vực: <strong className="text-primary">Kiến trúc, Quy hoạch, Kết cấu, MEP, PCCC, Nội thất, Cảnh quan và Kinh tế xây dựng</strong>.
             </p>
             <p>
-              Hơn 17 năm qua, con người INNO tự hào đã và đang tham gia thiết kế những dự án mang tính biểu tượng quốc gia như <strong>Bitexco Financial Tower, Landmark 81, JW Marriott Hà Nội, Landmark 55</strong>, và nhiều dự án quy mô lớn của Vingroup, Sungroup, MIK, T&T, BRG, Novaland…
+              Hơn 15 năm qua, INNO tự hào đồng hành trong những dự án mang tính biểu tượng quốc gia như <strong>Bitexco Financial Tower, Landmark 81, JW Marriott Hà Nội, Landmark 55</strong>, và nhiều dự án quy mô lớn của Vingroup, Sungroup, MIK, T&T, BRG, Novaland…
             </p>
             <p>
               Chúng tôi không chỉ cung cấp dịch vụ thiết kế – chúng tôi kiến tạo giá trị bền vững, đổi mới tư duy và dẫn đầu trong ứng dụng BIM. Tại INNO, mỗi thành viên là một mảnh ghép quan trọng, góp phần xây dựng nên những công trình làm thay đổi diện mạo đô thị Việt Nam.
@@ -163,9 +226,8 @@ export default function AboutPage() {
       <section className="mb-20">
         <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Hành trình của INNO</h2>
         
-        {/* Draggable Scroll Container - Full Width */}
+        {/* Draggable Scroll Container */}
         <div className="relative group w-full bg-white border-y border-gray-100">
-          {/* Visual Hint */}
           <div className={`absolute top-4 left-1/2 transform -translate-x-1/2 bg-black/60 backdrop-blur-sm text-white px-6 py-2 rounded-full text-sm font-medium z-20 pointer-events-none transition-opacity duration-300 flex items-center gap-2 ${isDown ? 'opacity-0' : 'opacity-100'}`}>
             <span className="animate-pulse">↔</span> Giữ và kéo sang ngang để xem lịch sử
           </div>
@@ -177,16 +239,15 @@ export default function AboutPage() {
             onMouseLeave={handleMouseLeave}
             onMouseUp={handleMouseUp}
             onMouseMove={handleMouseMove}
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }} // Hide scrollbar for Firefox/IE
+            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            {/* Image Container - Width set to contain the long image */}
             <div className="min-w-[1500px] md:min-w-[2000px] lg:min-w-[2500px]">
               <Image
                 src="/images/recruitment/timeline/timeline.webp"
                 alt="Lịch sử hình thành và phát triển INNO"
                 width={6296}
                 height={1974}
-                className="w-full h-auto object-contain pointer-events-none" // pointer-events-none prevents default image drag behavior
+                className="w-full h-auto object-contain pointer-events-none"
                 priority
               />
             </div>
@@ -197,18 +258,104 @@ export default function AboutPage() {
       {/* Main Content Continued */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Impressive Numbers */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Các con số ấn tượng</h2>
-          {/* Ảnh hiển thị full, bo góc, có bóng, bỏ khung trắng */}
-          <div className="rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-shadow duration-300">
-            <Image
-              src="/images/recruitment/awards/number.webp"
-              alt="Các con số ấn tượng về INNO"
-              width={1920}
-              height={1080}
-              className="w-full h-auto object-cover"
-            />
+        {/* Impressive Numbers Section (UPDATED) */}
+        <section className="mb-24">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Dấu ấn INNO</h2>
+            <div className="w-20 h-1 bg-primary mx-auto rounded-full"></div>
+            <p className="text-gray-600 mt-4 text-lg">Những con số biết nói khẳng định vị thế và uy tín</p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+            {/* Main Stat - 500+ Projects */}
+            <div className="lg:col-span-12 xl:col-span-4 relative group overflow-hidden bg-gradient-to-br from-primary to-red-800 rounded-3xl p-10 text-white shadow-xl flex flex-col justify-center items-center text-center">
+               {/* Decorative Circles */}
+              <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/20 transition-all duration-500"></div>
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
+              
+              <div className="relative z-10">
+                <div className="mb-4 inline-flex p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
+                  <Briefcase size={32} className="text-white" />
+                </div>
+                {/* Font Heading (Montserrat) for big number */}
+                <div className="text-7xl lg:text-8xl font-black mb-4 tracking-tighter" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <CountUpNumber end={500} suffix="+" />
+                </div>
+                <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wider mb-2">Dự án</h3>
+                <p className="text-white/80 font-medium">Đã tham gia thực hiện</p>
+              </div>
+            </div>
+
+            {/* Sub Stats Grid */}
+            <div className="lg:col-span-12 xl:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              
+              {/* Stat 1 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
+                <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Trophy size={24} />
+                </div>
+                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <CountUpNumber end={50} suffix="+" />
+                </div>
+                <p className="text-gray-600 font-medium">Dự án cấp đặc biệt & Cấp 1</p>
+              </div>
+
+              {/* Stat 2 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
+                <div className="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Award size={24} />
+                </div>
+                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <CountUpNumber end={30} suffix="+" />
+                </div>
+                <p className="text-gray-600 font-medium">Giải thưởng trong & ngoài nước</p>
+              </div>
+
+              {/* Stat 3 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
+                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Calendar size={24} />
+                </div>
+                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <CountUpNumber end={17} suffix="+" />
+                </div>
+                <p className="text-gray-600 font-medium">Năm xây dựng & phát triển</p>
+              </div>
+
+              {/* Stat 4 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
+                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Users size={24} />
+                </div>
+                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <CountUpNumber end={100} suffix="+" />
+                </div>
+                <p className="text-gray-600 font-medium">Khách hàng & Đối tác</p>
+              </div>
+
+              {/* Stat 5 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
+                <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Briefcase size={24} />
+                </div>
+                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <CountUpNumber end={300} suffix="+" />
+                </div>
+                <p className="text-gray-600 font-medium">Nhân sự đang làm việc</p>
+              </div>
+
+              {/* Stat 6 */}
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
+                <div className="w-12 h-12 bg-red-100 text-primary rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                  <Building2 size={24} />
+                </div>
+                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <CountUpNumber end={10} suffix="+" />
+                </div>
+                <p className="text-gray-600 font-medium">Công ty thành viên & liên kết</p>
+              </div>
+
+            </div>
           </div>
         </section>
 
