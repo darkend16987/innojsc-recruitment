@@ -30,12 +30,12 @@ const AWARDS_DATA = {
     { project: 'TECHNO PARK TOWER', award: 'Giải Quốc tế IBcon Digie Awards 2021: Đạt giải "Trung tâm công nghệ thông minh nhất"' },
     { project: 'TECHNO PARK TOWER', award: 'Đạt chứng chỉ "Công trình xanh LEED Platinum"' },
     { project: 'HAPPY CENTRAL ONE', award: 'Giải thưởng PropertyGuru Việt Nam 2021: Đạt giải "Dự án căn hộ tốt nhất Bình Dương"' },
-    { project: 'QHCT 1:500 03 KHU CAPITAL LAND - BẮC GIANG', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Bạc' },
-    { project: 'QHCT 1:500 KHU LNG CÀ NÁ', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Bạc' },
   ],
   2022: [
     { project: 'VINHOMES OCEAN PARK', award: 'Giải thưởng Kiến Trúc Quốc Gia 2022 - 2023: hạng Bạc Hạng mục "KIẾN TRÚC CẢNH QUAN - THIẾT KẾ ĐÔ THỊ"' },
     { project: 'QHPK 1:2000 BẾN ĐÌNH - VŨNG TÀU', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Vàng' },
+    { project: 'QHCT 1:500 03 KHU CAPITAL LAND - BẮC GIANG', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Bạc' },
+    { project: 'QHCT 1:500 KHU LNG CÀ NÁ', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Bạc' },
   ],
   2023: [
     { project: 'PARKCITY HANOI', award: 'Giải nhất toàn quốc, giải vàng Châu Á Cuộc thi thiết kế hệ thống điều hòa không khí "HVAC DESIGN AWARD ASIA"' },
@@ -44,9 +44,11 @@ const AWARDS_DATA = {
     { project: 'SUN WORLD BA DEN MOUNTAIN', award: 'Giải thưởng Dot Property Awards 2023: Đạt giải "Khu du lịch có thiết kế cảnh quan đẹp nhất Việt Nam 2023"' },
   ],
   2024: [
-    { project: 'ORIENTAL SQUARE BY OSI', award: 'Giải thưởng PropertyGuru Việt Nam 2024: Dự án văn phòng xuất sắc nhất; Best Commercial Green Development' },
+    { project: 'ORIENTAL SQUARE BY OSI', award: 'Giải thưởng PropertyGuru Việt Nam 2024: Dự án văn phòng xuất sắc nhất' },
+    { project: 'ORIENTAL SQUARE BY OSI', award: 'Giải thưởng PropertyGuru Việt Nam 2024: Best Office Development' },
     { project: 'THE SENIQUE HANOI', award: 'Giải thưởng PropertyGuru Việt Nam 2024: Dự án căn hộ cao cấp xuất sắc (Hà Nội)' },
-    { project: 'THE SYCAMORE BINH DUONG', award: 'Giải thưởng PropertyGuru Việt Nam 2024: Dự án căn hộ xuất sắc (Bình Dương); Dự án nhà ở xuất sắc (Bình Dương)' },
+    { project: 'THE SYCAMORE BINH DUONG', award: 'Giải thưởng PropertyGuru Việt Nam 2024: Dự án căn hộ xuất sắc (Bình Dương)' },
+    { project: 'THE SYCAMORE BINH DUONG', award: 'Giải thưởng PropertyGuru Việt Nam 2024: Dự án nhà ở xuất sắc (Bình Dương)' },
     { project: 'SUN WORLD BA DEN MOUNTAIN', award: 'Giải Bạc Châu Á Cuộc thi "Media International HVAC Contest Design Awards List"' },
     { project: 'VAN HO INTER-AGENCY', award: 'Giải thưởng Kiến Trúc Quốc Gia 2024 - 2025: hạng Đồng Hạng mục "KIẾN TRÚC CÔNG CỘNG"' },
     { project: 'TRỤC THÙY VÂN, TP VŨNG TÀU', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Vàng' },
