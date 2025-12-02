@@ -204,10 +204,10 @@ export default function AboutPage() {
               Tại INNO, chúng tôi tin rằng mỗi công trình không chỉ là bản vẽ – đó là dấu ấn của trí tuệ, sự sáng tạo và tinh thần kiến tạo tương lai.
             </p>
             <p>
-              Từ năm 2008, INNO đã phát triển thành một trong những công ty tư vấn thiết kế uy tín nhất Việt Nam, quy tụ mạng lưới chuyên gia hàng đầu trong các lĩnh vực: <strong className="text-primary">Kiến trúc, Quy hoạch, Kết cấu, MEP, PCCC, Nội thất, Cảnh quan và Kinh tế xây dựng</strong>.
+              Từ năm 2008, INNO đã phát triển thành một trong những công ty tư vấn thiết kế uy tín nhất Việt Nam, quy tụ mạng lưới chuyên gia hàng đầu trong các lĩnh vực: <strong className="text-primary">Kiến trúc, Quy hoạch, Kết cấu, MEP, PCCC, Nội thất, Cảnh quan, Hạ tầng và Kinh tế xây dựng</strong>.
             </p>
             <p>
-              Hơn 15 năm qua, INNO tự hào đồng hành trong những dự án mang tính biểu tượng quốc gia như <strong>Bitexco Financial Tower, Landmark 81, JW Marriott Hà Nội, Landmark 55</strong>, và nhiều dự án quy mô lớn của Vingroup, Sungroup, MIK, T&T, BRG, Novaland…
+              Hơn 17 năm qua, con người INNO tự hào luôn đồng hành, tham gia vào những dự án mang tính biểu tượng quốc gia như <strong>Bitexco Financial Tower, Landmark 81, JW Marriott Hà Nội, Landmark 55</strong>, và nhiều dự án quy mô lớn của Vingroup, Sungroup, MIK, T&T, BRG, Novaland…
             </p>
             <p>
               Chúng tôi không chỉ cung cấp dịch vụ thiết kế – chúng tôi kiến tạo giá trị bền vững, đổi mới tư duy và dẫn đầu trong ứng dụng BIM. Tại INNO, mỗi thành viên là một mảnh ghép quan trọng, góp phần xây dựng nên những công trình làm thay đổi diện mạo đô thị Việt Nam.
@@ -258,7 +258,7 @@ export default function AboutPage() {
       {/* Main Content Continued */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
-        {/* Impressive Numbers Section (UPDATED) */}
+        {/* Impressive Numbers Section (UPDATED - CLEAN & MINIMAL) */}
         <section className="mb-24">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-gray-900 mb-4">Dấu ấn INNO</h2>
@@ -273,86 +273,65 @@ export default function AboutPage() {
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/20 transition-all duration-500"></div>
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-black/10 rounded-full blur-2xl translate-y-1/2 -translate-x-1/2"></div>
               
-              <div className="relative z-10">
-                <div className="mb-4 inline-flex p-3 bg-white/20 rounded-2xl backdrop-blur-sm">
-                  <Briefcase size={32} className="text-white" />
-                </div>
+              <div className="relative z-10 flex flex-col justify-center h-full">
                 {/* Font Heading (Montserrat) for big number */}
-                <div className="text-7xl lg:text-8xl font-black mb-4 tracking-tighter" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                <div className="text-8xl lg:text-9xl font-black mb-2 tracking-tighter" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   <CountUpNumber end={500} suffix="+" />
                 </div>
-                <h3 className="text-xl md:text-2xl font-bold uppercase tracking-wider mb-2">Dự án</h3>
-                <p className="text-white/80 font-medium">Đã tham gia thực hiện</p>
+                <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-wider mb-2">Dự án</h3>
+                <p className="text-white/80 font-medium text-lg">Đã tham gia thực hiện</p>
               </div>
             </div>
 
-            {/* Sub Stats Grid */}
+            {/* Sub Stats Grid - No Icons, Clean Typography */}
             <div className="lg:col-span-12 xl:col-span-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               
               {/* Stat 1 */}
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
-                <div className="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Trophy size={24} />
-                </div>
-                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group justify-center min-h-[200px]">
+                <div className="text-5xl font-bold text-primary mb-3" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   <CountUpNumber end={50} suffix="+" />
                 </div>
-                <p className="text-gray-600 font-medium">Dự án cấp đặc biệt & Cấp 1</p>
+                <p className="text-gray-600 font-medium text-lg leading-tight">Dự án cấp đặc biệt<br/>& Cấp 1</p>
               </div>
 
               {/* Stat 2 */}
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
-                <div className="w-12 h-12 bg-yellow-100 text-yellow-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Award size={24} />
-                </div>
-                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group justify-center min-h-[200px]">
+                <div className="text-5xl font-bold text-primary mb-3" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   <CountUpNumber end={30} suffix="+" />
                 </div>
-                <p className="text-gray-600 font-medium">Giải thưởng trong & ngoài nước</p>
+                <p className="text-gray-600 font-medium text-lg leading-tight">Giải thưởng<br/>trong & ngoài nước</p>
               </div>
 
               {/* Stat 3 */}
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
-                <div className="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Calendar size={24} />
-                </div>
-                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group justify-center min-h-[200px]">
+                <div className="text-5xl font-bold text-primary mb-3" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   <CountUpNumber end={17} suffix="+" />
                 </div>
-                <p className="text-gray-600 font-medium">Năm xây dựng & phát triển</p>
+                <p className="text-gray-600 font-medium text-lg leading-tight">Năm xây dựng<br/>& phát triển</p>
               </div>
 
               {/* Stat 4 */}
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
-                <div className="w-12 h-12 bg-green-100 text-green-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Users size={24} />
-                </div>
-                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group justify-center min-h-[200px]">
+                <div className="text-5xl font-bold text-primary mb-3" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   <CountUpNumber end={100} suffix="+" />
                 </div>
-                <p className="text-gray-600 font-medium">Khách hàng & Đối tác</p>
+                <p className="text-gray-600 font-medium text-lg leading-tight">Khách hàng<br/>& Đối tác</p>
               </div>
 
               {/* Stat 5 */}
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
-                <div className="w-12 h-12 bg-purple-100 text-purple-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Briefcase size={24} />
-                </div>
-                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group justify-center min-h-[200px]">
+                <div className="text-5xl font-bold text-primary mb-3" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   <CountUpNumber end={300} suffix="+" />
                 </div>
-                <p className="text-gray-600 font-medium">Nhân sự đang làm việc</p>
+                <p className="text-gray-600 font-medium text-lg leading-tight">Nhân sự<br/>đang làm việc</p>
               </div>
 
               {/* Stat 6 */}
-              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group">
-                <div className="w-12 h-12 bg-red-100 text-primary rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                  <Building2 size={24} />
-                </div>
-                <div className="text-4xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <div className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group justify-center min-h-[200px]">
+                <div className="text-5xl font-bold text-primary mb-3" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   <CountUpNumber end={10} suffix="+" />
                 </div>
-                <p className="text-gray-600 font-medium">Công ty thành viên & liên kết</p>
+                <p className="text-gray-600 font-medium text-lg leading-tight">Công ty<br/>thành viên & liên kết</p>
               </div>
 
             </div>
