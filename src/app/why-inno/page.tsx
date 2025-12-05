@@ -55,11 +55,9 @@ export default function WhyInnoPage() {
           </div>
 
           <div className="max-w-4xl mx-auto mb-12">
-            <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-              <p className="text-gray-700 leading-relaxed text-lg">
-                INNO Academy phối hợp chặt chẽ với Ban lãnh đạo, các phòng ban và đội ngũ nhân sự để thiết kế những chương trình đào tạo hiệu quả. Chúng tôi mong muốn xây dựng một văn hóa học tập, nơi mọi thành viên đều có cơ hội phát triển. Vì vậy, INNO triển khai và duy trì các khóa đào tạo về <strong className="text-primary">kỹ năng chuyên môn, quản lý dự án, BIM và lãnh đạo</strong>, được thiết kế phù hợp với từng nhóm nhân viên, nhằm nâng cao năng lực và đồng hành cùng sự nghiệp của mỗi cá nhân.
-              </p>
-            </div>
+            <p className="text-gray-700 leading-relaxed text-lg text-center">
+              INNO Academy phối hợp chặt chẽ với Ban lãnh đạo, các phòng ban và đội ngũ nhân sự để thiết kế những chương trình đào tạo hiệu quả. Chúng tôi mong muốn xây dựng một văn hóa học tập, nơi mọi thành viên đều có cơ hội phát triển. Vì vậy, INNO triển khai và duy trì các khóa đào tạo về <strong className="text-primary">kỹ năng chuyên môn, quản lý dự án, BIM và lãnh đạo</strong>, được thiết kế phù hợp với từng nhóm nhân viên, nhằm nâng cao năng lực và đồng hành cùng sự nghiệp của mỗi cá nhân.
+            </p>
           </div>
 
           {/* Training Programs Grid */}
