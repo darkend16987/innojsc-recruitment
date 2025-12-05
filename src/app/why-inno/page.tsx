@@ -181,7 +181,7 @@ export default function WhyInnoPage() {
         {/* CTA Section */}
         <section className="text-center bg-gradient-to-r from-primary to-red-700 text-white rounded-2xl p-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Sẵn sàng gia nhập đội ngũ INNO?
+            Bạn đã sẵn sàng gia nhập đội ngũ INNO?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Khám phá các vị trí tuyển dụng đang mở và bắt đầu hành trình phát triển sự nghiệp cùng chúng tôi

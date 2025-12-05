@@ -124,7 +124,7 @@ export default function FAQsPage() {
           {/* Still Have Questions */}
           <div className="mt-16 text-center bg-white rounded-lg shadow-md p-8 border border-gray-200">
             <h2 className="text-2xl font-bold text-gray-900 mb-4">
-              Vẫn còn thắc mắc?
+              Nếu bạn vẫn còn thắc mắc?
             </h2>
             <p className="text-gray-600 mb-6">
               Đừng ngại liên hệ với chúng tôi, chúng tôi luôn sẵn sàng hỗ trợ bạn
@@ -154,10 +154,10 @@ export default function FAQsPage() {
           {/* CTA to Jobs */}
           <div className="mt-12 text-center bg-gradient-to-r from-primary to-red-700 text-white rounded-2xl p-12">
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
-              Đã sẵn sàng ứng tuyển?
+              Bạn đã sẵn sàng ứng tuyển chưa?
             </h2>
             <p className="text-xl mb-8 max-w-2xl mx-auto">
-              Khám phá các vị trí tuyển dụng đang mở tại INNO
+              Hãy cùng khám phá các vị trí tuyển dụng đang mở tại INNO
             </p>
             <a
               href="/"

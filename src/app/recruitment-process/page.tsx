@@ -223,7 +223,7 @@ export default function RecruitmentProcessPage() {
         {/* CTA */}
         <section className="text-center bg-gradient-to-r from-primary to-red-700 text-white rounded-2xl p-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-6">
-            Sẵn sàng ứng tuyển?
+            Bạn đã sẵn sàng ứng tuyển?
           </h2>
           <p className="text-xl mb-8 max-w-2xl mx-auto">
             Khám phá các vị trí tuyển dụng đang mở và gửi hồ sơ của bạn ngay hôm nay
