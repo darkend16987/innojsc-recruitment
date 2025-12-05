@@ -4,7 +4,14 @@ import Image from 'next/image'; // Thêm dòng này để dùng Image
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { BookOpen, Users, Trophy } from 'lucide-react';
+import ImageSlider from '@/components/ImageSlider';
+import { BookOpen, Users, Trophy, TrendingUp, Award } from 'lucide-react';
+
+// Danh sách ảnh đào tạo
+const TRAINING_IMAGES = Array.from({ length: 8 }, (_, i) => `/images/recruitment/training/${i + 1}.webp`);
+
+// Danh sách ảnh cuộc sống tại INNO
+const LIFE_AT_INNO_IMAGES = Array.from({ length: 8 }, (_, i) => `/images/recruitment/life-at-inno/${i + 1}.webp`);
 
 export default function WhyInnoPage() {
   return (
@@ -55,45 +62,113 @@ export default function WhyInnoPage() {
             </div>
           </div>
 
-          {/* Training Images Slider Placeholder */}
-          <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-            <h3 className="text-xl font-semibold text-gray-900 mb-6 text-center">
-              Các chương trình đào tạo tại INNO
-            </h3>
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <BookOpen className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-400 text-lg">Image slider - Training & Development</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  (Upload ảnh vào: /public/images/recruitment/training/)
-                </p>
+          {/* Training Programs Grid */}
+          <div className="grid md:grid-cols-2 gap-8 mb-12">
+            {/* Program 1 */}
+            <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-primary">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Users className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Đào tạo hòa nhập & gắn kết
+                  </h3>
+                </div>
               </div>
+              <p className="text-gray-700 leading-relaxed">
+                Khi bước chân vào INNO, mỗi nhân viên mới sẽ luôn được chào đón nồng nhiệt và hướng dẫn từng bước để làm quen với văn hóa công ty, các phòng ban và quy trình dự án. Chương trình hội nhập giúp bạn tích hợp nhanh, kết nối đồng nghiệp và phát huy năng lực tối đa ngay từ những ngày đầu tiên.
+              </p>
+            </div>
+
+            {/* Program 2 */}
+            <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-primary">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <BookOpen className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Đào tạo học tập & phát triển
+                  </h3>
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                INNO tổ chức các chương trình đào tạo về chuyên môn, kỹ năng mềm, quản lý dự án và BIM, được thiết kế riêng cho từng nhóm nhân viên. Mục tiêu là giúp bạn nâng cao năng lực, tự tin xử lý dự án thực tế và mở rộng cơ hội phát triển nghề nghiệp.
+              </p>
+            </div>
+
+            {/* Program 3 */}
+            <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-primary">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <TrendingUp className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Đào tạo và phát triển đội ngũ
+                  </h3>
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                Chúng tôi tin vào việc phát triển nhân sự tiềm năng, chuẩn bị đội ngũ kế thừa cho các vị trí chủ chốt. Nhân viên sẽ được hướng dẫn, mentoring và thử thách để có thể đảm nhận vai trò lãnh đạo trong tương lai và gắn bó lâu dài với công ty.
+              </p>
+            </div>
+
+            {/* Program 4 */}
+            <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-primary">
+              <div className="flex items-start gap-4 mb-4">
+                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <Award className="w-6 h-6 text-primary" />
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold text-gray-900 mb-2">
+                    Ươm mầm nhân tài
+                  </h3>
+                </div>
+              </div>
+              <p className="text-gray-700 leading-relaxed">
+                Với mục tiêu nuôi dưỡng và phát triển nhân tài, INNO mang đến những chương trình thực tập và trải nghiệm dành cho sinh viên, thực tập sinh. Tại INNO, bạn sẽ có cơ hội tham gia trực tiếp vào các dự án thực tế, quy mô lớn, từ đó khám phá sở thích nghề nghiệp, trau dồi kỹ năng chuyên môn và tích lũy kinh nghiệm thực tiễn trong ngành xây dựng – thiết kế.
+              </p>
             </div>
           </div>
         </section>
 
+        {/* FULL WIDTH SLIDER SECTION - Hoạt động đào tạo */}
+        <section className="mb-20 -mx-4 sm:-mx-6 lg:-mx-8">
+          <div className="text-center mb-8 container mx-auto px-4">
+            <h3 className="text-xl font-semibold text-gray-900">
+              Hoạt động đào tạo và văn hóa học tập
+            </h3>
+          </div>
+
+          <div className="w-full">
+            <ImageSlider
+              images={TRAINING_IMAGES}
+              alt="Hoạt động đào tạo tại INNO"
+              height={600}
+            />
+          </div>
+        </section>
+
         {/* Life at INNO Section */}
-        <section className="mb-20">
-          <div className="flex items-center justify-center mb-8">
+        <section className="mb-20 -mx-4 sm:-mx-6 lg:-mx-8">
+          <div className="flex items-center justify-center mb-8 container mx-auto px-4">
             <Users className="w-12 h-12 text-primary mr-4" />
             <h2 className="text-3xl font-bold text-gray-900">Cuộc sống tại INNO</h2>
           </div>
 
-          <p className="text-center text-gray-600 text-lg mb-12 max-w-3xl mx-auto">
+          <p className="text-center text-gray-600 text-lg mb-12 max-w-3xl mx-auto container px-4">
             Life at INNO - Nơi làm việc chuyên nghiệp, môi trường thân thiện
           </p>
 
-          {/* Life at INNO Images Slider Placeholder */}
-          <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <div className="text-center">
-                <Users className="w-16 h-16 text-gray-300 mx-auto mb-4" />
-                <p className="text-gray-400 text-lg">Image slider - Life at INNO</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  (Upload ảnh vào: /public/images/recruitment/life-at-inno/)
-                </p>
-              </div>
-            </div>
+          {/* Life at INNO Images Slider */}
+          <div className="w-full">
+            <ImageSlider
+              images={LIFE_AT_INNO_IMAGES}
+              alt="Cuộc sống tại INNO"
+              height={600}
+            />
           </div>
         </section>
 

@@ -4,7 +4,14 @@ import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
+import ImageSlider from '@/components/ImageSlider';
 import { MapPin, Award, ChevronUp, ChevronDown, Building2, Users, Trophy, Briefcase, Calendar } from 'lucide-react';
+
+// Danh sách ảnh văn phòng Hà Nội
+const HANOI_OFFICE_IMAGES = Array.from({ length: 8 }, (_, i) => `/images/recruitment/office/hanoi/${i + 1}.webp`);
+
+// Danh sách ảnh văn phòng TP.HCM
+const HCM_OFFICE_IMAGES = Array.from({ length: 8 }, (_, i) => `/images/recruitment/office/hochiminh/${i + 1}.webp`);
 
 const AWARDS_DATA = {
   2016: [
@@ -414,27 +421,24 @@ export default function AboutPage() {
           </div>
 
           {/* Office Content */}
-          <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-            <div className="text-center mb-6">
-              <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-                {selectedOffice === 'hanoi' ? 'Văn phòng Hà Nội' : 'Văn phòng TP.Hồ Chí Minh'}
-              </h3>
-              <p className="text-gray-600">
-                {selectedOffice === 'hanoi'
-                  ? '39 Thượng Thụy, Phú Thượng'
-                  : 'A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền'}
-              </p>
-            </div>
-
-            {/* Image Slider Placeholder */}
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-              <p className="text-gray-400 text-lg">
-                Image slider for {selectedOffice === 'hanoi' ? 'Hanoi' : 'HCM'} office (will use Swiper.js)
-              </p>
-            </div>
-            <p className="text-center text-sm text-gray-500 mt-4">
-              📷 Upload ảnh văn phòng vào: /public/images/recruitment/office/{selectedOffice === 'hanoi' ? 'hanoi' : 'hochiminh'}/
+          <div className="text-center mb-6">
+            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
+              {selectedOffice === 'hanoi' ? 'Văn phòng Hà Nội' : 'Văn phòng TP.Hồ Chí Minh'}
+            </h3>
+            <p className="text-gray-600">
+              {selectedOffice === 'hanoi'
+                ? '39 Thượng Thụy, Phú Thượng'
+                : 'A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền'}
             </p>
+          </div>
+
+          {/* Image Slider */}
+          <div className="w-full">
+            <ImageSlider
+              images={selectedOffice === 'hanoi' ? HANOI_OFFICE_IMAGES : HCM_OFFICE_IMAGES}
+              alt={selectedOffice === 'hanoi' ? 'Văn phòng Hà Nội' : 'Văn phòng TP.Hồ Chí Minh'}
+              height={600}
+            />
           </div>
         </section>
 
