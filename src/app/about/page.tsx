@@ -176,7 +176,7 @@ export default function AboutPage() {
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
-            src="/images/recruitment/hero/about-hero.webp"
+            src="/images/recruitment/hero/about-hero1.webp"
             alt="Về INNO"
             fill
             className="object-cover"
