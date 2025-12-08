@@ -127,20 +127,90 @@ const FLOOR_DATA = [
 ];
 
 /**
- * TỌA ĐỘ CHÍNH XÁC từ file SVG AutoCAD
- * ViewBox: 0 0 1573.65 1251.75
- * Dựa trên vị trí Y của text labels trong file SVG
+ * TỌA ĐỘ ĐÃ ĐIỀU CHỈNH - Dựa trên phản hồi từ screenshot
+ * 
+ * Vấn đề trước: Vùng hover bị dịch lên phía trên so với cốt trần thực tế ~35-40%
+ * Giải pháp: Dịch tất cả các tầng xuống dưới để khớp với ranh giới kiến trúc
+ * 
+ * Công thức điều chỉnh:
+ * - Text position là tâm của tầng
+ * - Cần offset thêm để khớp với sàn/trần thực tế
+ * - Mỗi tầng cao ~120-130px
  */
+
 const FLOOR_COORDINATES = [
-  { id: 'f7', x: 180, y: 30, width: 1220, height: 150 },
-  { id: 'f6', x: 180, y: 180, width: 1220, height: 133 },
-  { id: 'f5', x: 180, y: 313, width: 1220, height: 133 },
-  { id: 'f4', x: 180, y: 446, width: 1220, height: 130 },
-  { id: 'f3', x: 180, y: 576, width: 1220, height: 133 },
-  { id: 'f2', x: 180, y: 709, width: 1220, height: 120 },
-  { id: 'f_mezz', x: 180, y: 829, width: 1220, height: 123 },
-  { id: 'f1', x: 180, y: 952, width: 1220, height: 120 },
-  { id: 'f_base', x: 180, y: 1072, width: 1220, height: 130 }
+  {
+    id: 'f7',
+    // Tầng 7 - từ mái xuống sàn tầng 6
+    x: 180,
+    y: 110,      // Điều chỉnh: từ 30 → 110 (+80)
+    width: 1220,
+    height: 125
+  },
+  {
+    id: 'f6',
+    // Tầng 6
+    x: 180,
+    y: 235,      // Điều chỉnh: từ 180 → 235 (+55)
+    width: 1220,
+    height: 128
+  },
+  {
+    id: 'f5',
+    // Tầng 5
+    x: 180,
+    y: 363,      // Điều chỉnh: từ 313 → 363 (+50)
+    width: 1220,
+    height: 130
+  },
+  {
+    id: 'f4',
+    // Tầng 4
+    x: 180,
+    y: 493,      // Điều chỉnh: từ 446 → 493 (+47)
+    width: 1220,
+    height: 127
+  },
+  {
+    id: 'f3',
+    // Tầng 3
+    x: 180,
+    y: 620,      // Điều chỉnh: từ 576 → 620 (+44)
+    width: 1220,
+    height: 132
+  },
+  {
+    id: 'f2',
+    // Tầng 2
+    x: 180,
+    y: 752,      // Điều chỉnh: từ 709 → 752 (+43)
+    width: 1220,
+    height: 127
+  },
+  {
+    id: 'f_mezz',
+    // Tầng Lửng
+    x: 180,
+    y: 879,      // Điều chỉnh: từ 829 → 879 (+50)
+    width: 1220,
+    height: 125
+  },
+  {
+    id: 'f1',
+    // Tầng 1
+    x: 180,
+    y: 1004,     // Điều chỉnh: từ 952 → 1004 (+52)
+    width: 1220,
+    height: 122
+  },
+  {
+    id: 'f_base',
+    // Tầng Hầm
+    x: 180,
+    y: 1126,     // Điều chỉnh: từ 1072 → 1126 (+54)
+    width: 1220,
+    height: 110
+  }
 ];
 
 // --- UTILS ---
@@ -207,14 +277,14 @@ const InteractiveBuilding = () => {
 
           {/* Background Image */}
           <Image
-            src="/images/about/tru-so-inno-mat-cat2.svg"
+            src="/images/about/tru-so-inno-mat-cat.svg"
             alt="Sơ đồ mặt cắt trụ sở INNO"
             fill
             className="object-contain object-center z-0"
             priority
           />
 
-          {/* SVG Overlay với tọa độ chính xác */}
+          {/* SVG Overlay với tọa độ đã điều chỉnh */}
           <svg
             className="absolute inset-0 w-full h-full z-10"
             viewBox="0 0 1573.65 1251.75"
