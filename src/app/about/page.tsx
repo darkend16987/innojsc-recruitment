@@ -194,9 +194,9 @@ export default function AboutPage() {
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 text-center text-white px-4">
-          <h1 className="text-5xl md:text-6xl font-bold mb-4">WELCOME TO INNO</h1>
-          <p className="text-xl md:text-2xl max-w-4xl mx-auto leading-relaxed">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">WELCOME TO INNO</h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
             Chào mừng bạn đến với INNO – nơi những Kiến trúc sư, Kỹ sư và Chuyên gia trẻ có thể không chỉ làm việc, mà còn phát triển và tỏa sáng.
           </p>
         </div>
