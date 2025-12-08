@@ -240,9 +240,9 @@ const InteractiveBuilding = () => {
                     y={floor.y}
                     width={floor.width}
                     height={floor.height}
-                    className="fill-transparent hover:fill-blue-600/30 transition-all duration-300 cursor-pointer"
+                    className="fill-transparent hover:fill-red-600/30 transition-all duration-300 cursor-pointer"
                     style={{
-                      stroke: hoveredFloor === floor.id ? '#2563eb' : 'transparent',
+                      stroke: hoveredFloor === floor.id ? '#dc2626' : 'transparent', // red-600
                       strokeWidth: hoveredFloor === floor.id ? 4 : 0
                     }}
                     onMouseEnter={() => setHoveredFloor(floor.id)}
@@ -255,7 +255,7 @@ const InteractiveBuilding = () => {
                       y={floor.y + floor.height / 2}
                       textAnchor="middle"
                       dominantBaseline="middle"
-                      className="fill-blue-700 font-bold pointer-events-none"
+                      className="fill-red-700 font-bold pointer-events-none"
                       style={{ fontSize: '32px', fontFamily: 'var(--font-montserrat)' }}
                     >
                       {floorData.label}
@@ -280,7 +280,7 @@ const InteractiveBuilding = () => {
 
           {activeFloorData ? (
             <div className={`h-full p-8 rounded-2xl border shadow-xl ${activeFloorData.color} transition-all duration-300 animate-in fade-in slide-in-from-right-4`}>
-              <div className="inline-block px-3 py-1 bg-blue-700 text-white text-sm font-bold rounded mb-4 shadow-sm">
+              <div className="inline-block px-3 py-1 bg-red-700 text-white text-sm font-bold rounded mb-4 shadow-sm">
                 {activeFloorData.label}
               </div>
               <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
@@ -293,7 +293,7 @@ const InteractiveBuilding = () => {
                   <ul className="space-y-3">
                     {activeFloorData.departments.map((dept, idx) => (
                       <li key={idx} className="flex items-start gap-3">
-                        <ArrowRight className="w-5 h-5 text-blue-700 flex-shrink-0 mt-0.5" />
+                        <ArrowRight className="w-5 h-5 text-red-700 flex-shrink-0 mt-0.5" />
                         <span className="text-lg text-gray-800 font-medium">{dept}</span>
                       </li>
                     ))}
@@ -310,7 +310,7 @@ const InteractiveBuilding = () => {
           ) : (
             <div className="h-full flex flex-col items-center justify-center p-8 text-center bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
               <div className="w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-6">
-                <Info className="w-10 h-10 text-blue-700" />
+                <Info className="w-10 h-10 text-red-700" />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>Khám phá Trụ sở INNO</h3>
               <p className="text-gray-500 max-w-md mx-auto">
@@ -368,7 +368,7 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <div className="relative pt-32 pb-24 sm:pt-40 sm:pb-32 flex items-center justify-center min-h-[500px]">
+      <div className="relative py-24 sm:py-32 flex items-center justify-center min-h-[400px]">
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/recruitment/hero/about-hero1.webp"
@@ -377,11 +377,12 @@ export default function AboutPage() {
             className="object-cover"
             priority
           />
-          <div className="absolute inset-0 bg-slate-900/70 mix-blend-multiply"></div>
+          {/* Style overlay bg-black/60 */}
+          <div className="absolute inset-0 bg-black/60"></div>
         </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white animate-in fade-in slide-in-from-bottom-8 duration-700">
-          <h1 className="text-4xl md:text-6xl font-black mb-6 tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>WELCOME TO INNO</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed font-light text-slate-200">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6">WELCOME TO INNO</h1>
+          <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
             Nơi những Kiến trúc sư, Kỹ sư và Chuyên gia trẻ không chỉ làm việc, mà còn phát triển và tỏa sáng.
           </p>
         </div>
@@ -392,15 +393,15 @@ export default function AboutPage() {
         <section className="max-w-4xl mx-auto mb-20">
           <div className="prose prose-lg prose-slate max-w-none leading-relaxed space-y-6 text-justify">
             <p>
-              Tại <span className="font-bold text-blue-700">INNO</span>, chúng tôi tin rằng mỗi công trình không chỉ là bản vẽ – đó là dấu ấn của trí tuệ, sự sáng tạo và tinh thần kiến tạo tương lai.
+              Tại <span className="font-bold text-red-700">INNO</span>, chúng tôi tin rằng mỗi công trình không chỉ là bản vẽ – đó là dấu ấn của trí tuệ, sự sáng tạo và tinh thần kiến tạo tương lai.
             </p>
             <p>
-              Từ năm 2008, INNO đã phát triển thành một trong những công ty tư vấn thiết kế uy tín nhất Việt Nam, quy tụ mạng lưới chuyên gia hàng đầu trong các lĩnh vực: <strong className="text-blue-700">Kiến trúc, Quy hoạch, Kết cấu, MEP, PCCC, Nội thất, Cảnh quan, Hạ tầng và Kinh tế xây dựng</strong>.
+              Từ năm 2008, INNO đã phát triển thành một trong những công ty tư vấn thiết kế uy tín nhất Việt Nam, quy tụ mạng lưới chuyên gia hàng đầu trong các lĩnh vực: <strong className="text-red-700">Kiến trúc, Quy hoạch, Kết cấu, MEP, PCCC, Nội thất, Cảnh quan, Hạ tầng và Kinh tế xây dựng</strong>.
             </p>
             <p>
               Hơn 17 năm qua, con người INNO tự hào luôn đồng hành, tham gia vào những dự án mang tính biểu tượng quốc gia như <strong>Bitexco Financial Tower, Landmark 81, JW Marriott Hà Nội, Landmark 55</strong>, và nhiều dự án quy mô lớn của Vingroup, Sungroup, MIK, T&T, BRG, Novaland…
             </p>
-            <p className="text-xl font-bold text-blue-700 text-center mt-12 italic border-t border-b border-blue-100 py-6" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            <p className="text-xl font-bold text-red-700 text-center mt-12 italic border-t border-b border-red-100 py-6" style={{ fontFamily: 'var(--font-montserrat)' }}>
               "Gia nhập INNO — Cùng chúng tôi kiến tạo tương lai."
             </p>
           </div>
@@ -443,22 +444,22 @@ export default function AboutPage() {
         {/* Impressive Numbers Section - Styled like Original */}
         <section className="mb-32">
           <div className="text-center mb-16">
-            <h2 className="text-4xl font-black text-slate-900 mb-4 tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>DẤU ẤN INNO</h2>
-            <div className="w-24 h-1.5 bg-blue-700 mx-auto rounded-full"></div>
+            <h2 className="text-4xl font-black text-red-700 mb-4 tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>DẤU ẤN INNO</h2>
+            <div className="w-24 h-1.5 bg-red-700 mx-auto rounded-full"></div>
             <p className="text-slate-500 mt-4 text-lg">Những con số biết nói khẳng định vị thế và uy tín</p>
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
-            {/* Main Stat */}
-            <div className="lg:col-span-12 xl:col-span-4 relative group overflow-hidden bg-gradient-to-br from-blue-800 to-blue-900 rounded-3xl p-10 text-white shadow-2xl flex flex-col justify-center items-center text-center transform hover:scale-[1.02] transition-transform duration-500">
+            {/* Main Stat - Cập nhật Gradient Đỏ */}
+            <div className="lg:col-span-12 xl:col-span-4 relative group overflow-hidden bg-gradient-to-br from-red-700 to-red-900 rounded-3xl p-10 text-white shadow-2xl flex flex-col justify-center items-center text-center transform hover:scale-[1.02] transition-transform duration-500">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2 group-hover:bg-white/20 transition-all duration-500"></div>
 
               <div className="relative z-10 flex flex-col justify-center h-full">
                 <div className="text-8xl lg:text-9xl font-black mb-2 tracking-tighter text-white" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   <CountUpNumber end={500} suffix="+" />
                 </div>
-                <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-wider mb-2 text-blue-100">Dự án</h3>
-                <p className="text-blue-200 font-medium text-lg">Đã tham gia thực hiện</p>
+                <h3 className="text-2xl md:text-3xl font-bold uppercase tracking-wider mb-2 text-red-100">Dự án</h3>
+                <p className="text-red-200 font-medium text-lg">Đã tham gia thực hiện</p>
               </div>
             </div>
 
@@ -473,7 +474,7 @@ export default function AboutPage() {
                 { end: 10, label: "Công ty thành viên & liên kết" },
               ].map((stat, idx) => (
                 <div key={idx} className="bg-white p-8 rounded-3xl shadow-lg border border-gray-100 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300 flex flex-col items-center text-center group justify-center min-h-[220px]">
-                  <div className="text-5xl font-bold text-blue-700 mb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  <div className="text-5xl font-bold text-red-700 mb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
                     <CountUpNumber end={stat.end} suffix="+" />
                   </div>
                   <p className="text-slate-600 font-medium text-lg leading-tight px-2">{stat.label}</p>
@@ -483,12 +484,12 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Vision, Mission, Core Values - Styled Text Only */}
+        {/* Vision, Mission, Core Values - Styled Text Only with RED Titles */}
         <section className="mb-20">
           <div className="grid md:grid-cols-3 gap-8 mx-auto">
             {/* Tầm nhìn */}
-            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-blue-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-              <h3 className="text-2xl font-black text-slate-900 mb-6 uppercase tracking-wider border-b-2 border-blue-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+              <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 TẦM NHÌN
               </h3>
               <p className="text-slate-600 text-lg leading-relaxed flex-grow">
@@ -497,8 +498,8 @@ export default function AboutPage() {
             </div>
 
             {/* Sứ mệnh */}
-            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-blue-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-              <h3 className="text-2xl font-black text-slate-900 mb-6 uppercase tracking-wider border-b-2 border-blue-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+              <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 SỨ MỆNH
               </h3>
               <p className="text-slate-600 text-lg leading-relaxed flex-grow">
@@ -507,8 +508,8 @@ export default function AboutPage() {
             </div>
 
             {/* Giá trị cốt lõi */}
-            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-blue-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-              <h3 className="text-2xl font-black text-slate-900 mb-6 uppercase tracking-wider border-b-2 border-blue-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+              <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 GIÁ TRỊ CỐT LÕI
               </h3>
               <p className="text-slate-600 text-lg leading-relaxed flex-grow">
@@ -536,7 +537,7 @@ export default function AboutPage() {
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>KHÔNG GIAN LÀM VIỆC</h2>
             <p className="text-slate-500 text-lg flex items-center justify-center gap-2">
-              <MapPin className="w-5 h-5 text-blue-700" />
+              <MapPin className="w-5 h-5 text-red-700" />
               Trụ sở chính: 39 Thượng Thụy, Phú Thượng, Hà Nội
             </p>
           </div>
@@ -555,17 +556,17 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row gap-12">
               <div className="md:w-1/4 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-100 pb-8 md:pb-0 md:pr-8">
                 <div className="flex flex-col items-center gap-6">
-                  <button onClick={() => handleYearChange('up')} disabled={selectedYear === YEARS[YEARS.length - 1]} className="p-3 rounded-full hover:bg-blue-50 text-blue-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"><ChevronUp className="w-10 h-10" /></button>
-                  <div className="text-7xl font-black text-blue-700 tracking-tighter" style={{ fontFamily: 'var(--font-montserrat)' }}>{selectedYear}</div>
-                  <button onClick={() => handleYearChange('down')} disabled={selectedYear === YEARS[0]} className="p-3 rounded-full hover:bg-blue-50 text-blue-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"><ChevronDown className="w-10 h-10" /></button>
+                  <button onClick={() => handleYearChange('up')} disabled={selectedYear === YEARS[YEARS.length - 1]} className="p-3 rounded-full hover:bg-red-50 text-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"><ChevronUp className="w-10 h-10" /></button>
+                  <div className="text-7xl font-black text-red-700 tracking-tighter" style={{ fontFamily: 'var(--font-montserrat)' }}>{selectedYear}</div>
+                  <button onClick={() => handleYearChange('down')} disabled={selectedYear === YEARS[0]} className="p-3 rounded-full hover:bg-red-50 text-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"><ChevronDown className="w-10 h-10" /></button>
                 </div>
               </div>
               <div className="md:w-3/4">
                 <div className="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
                   {AWARDS_DATA[selectedYear as keyof typeof AWARDS_DATA]?.map((item, index) => (
-                    <div key={index} className="group p-6 rounded-xl hover:bg-blue-50 transition-all duration-300 border-l-4 border-transparent hover:border-blue-700 bg-gray-50/50 hover:bg-blue-50/80">
+                    <div key={index} className="group p-6 rounded-xl hover:bg-red-50 transition-all duration-300 border-l-4 border-transparent hover:border-red-700 bg-gray-50/50 hover:bg-red-50/80">
                       <h4 className="font-bold text-xl text-slate-900 mb-2 flex items-start gap-3">
-                        <span className="w-2 h-2 rounded-full bg-blue-700 mt-2.5 flex-shrink-0"></span>
+                        <span className="w-2 h-2 rounded-full bg-red-700 mt-2.5 flex-shrink-0"></span>
                         {item.project}
                       </h4>
                       <p className="text-slate-600 leading-relaxed pl-5">{item.award}</p>
