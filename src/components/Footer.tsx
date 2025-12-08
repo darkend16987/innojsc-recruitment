@@ -9,7 +9,7 @@ const CONTACT_INFO = {
   addresses: [
     {
       name: 'Hà Nội',
-      detail: '39 Thượng Thụy, Phú Thượng, Tây Hồ',
+      detail: '39 Thượng Thụy, Phú Thượng, Hà Nội',
     },
     {
       name: 'TP.HCM',
