@@ -485,29 +485,34 @@ export default function AboutPage() {
         </section>
 
         {/* Vision, Mission, Core Values */}
-        <section className="mb-32">
+        <section className="mb-20">
+          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Tầm nhìn - Sứ mệnh - Giá trị cốt lõi</h2>
+
           <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 text-center hover:border-blue-200 transition-colors">
-              <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Award className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Tầm nhìn</h3>
-              <p className="text-slate-600">Trở thành công ty tư vấn thiết kế dẫn đầu về chất lượng và dịch vụ tại Việt Nam.</p>
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 uppercase tracking-wide">TẦM NHÌN</h3>
+              <p className="text-gray-700 leading-relaxed">Trở thành công ty tư vấn thiết kế dẫn đầu về chất lượng và dịch vụ tại Việt Nam.</p>
             </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 text-center hover:border-blue-200 transition-colors">
-              <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                <MapPin className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Sứ mệnh</h3>
-              <p className="text-slate-600">Đưa năng lực tư vấn thiết kế ngang tầm khu vực và tiệm cận thế giới.</p>
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 uppercase tracking-wide">SỨ MỆNH</h3>
+              <p className="text-gray-700 leading-relaxed">Đưa năng lực tư vấn thiết kế ngang tầm khu vực và tiệm cận thế giới.</p>
             </div>
-            <div className="bg-white p-8 rounded-2xl shadow-lg border border-slate-100 text-center hover:border-blue-200 transition-colors">
-              <div className="w-16 h-16 bg-blue-50 rounded-full flex items-center justify-center mx-auto mb-6">
-                <Award className="w-8 h-8 text-blue-600" />
-              </div>
-              <h3 className="text-xl font-bold text-slate-900 mb-3">Giá trị cốt lõi</h3>
-              <p className="text-slate-600">Chất lượng - Sáng tạo - Chuyên nghiệp - Tận tâm - Bền vững.</p>
+            <div className="bg-white p-8 rounded-2xl shadow-lg border border-gray-100 text-center hover:shadow-xl transition-shadow">
+              <h3 className="text-xl font-bold text-gray-900 mb-4 uppercase tracking-wide">GIÁ TRỊ CỐT LÕI</h3>
+              <p className="text-gray-700 leading-relaxed">8 giá trị văn hóa cốt lõi đặc sắc định hình bản sắc - con người INNO.</p>
             </div>
+          </div>
+        </section>
+
+        {/* Full Width Image Section */}
+        <section className="mb-32 -mx-4 sm:-mx-6 lg:-mx-8">
+          <div className="w-full relative aspect-[21/9] md:aspect-[24/9]">
+            <Image
+              src="/images/recruitment/about/company-culture.webp"
+              alt="Văn hóa công ty INNO"
+              fill
+              className="object-cover"
+            />
           </div>
         </section>
 
@@ -517,7 +522,7 @@ export default function AboutPage() {
             <h2 className="text-3xl font-bold text-slate-900 mb-4">KHÔNG GIAN LÀM VIỆC</h2>
             <p className="text-slate-500 text-lg flex items-center justify-center gap-2">
               <MapPin className="w-5 h-5 text-blue-600" />
-              Trụ sở chính: 39 Thượng Thụy, Phú Thượng, Tây Hồ, Hà Nội
+              Trụ sở chính: 39 Thượng Thụy, Phú Thượng, Hà Nội
             </p>
           </div>
 
