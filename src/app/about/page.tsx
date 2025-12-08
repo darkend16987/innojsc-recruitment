@@ -126,6 +126,23 @@ const FLOOR_DATA = [
   }
 ];
 
+/**
+ * TỌA ĐỘ CHÍNH XÁC từ file SVG AutoCAD
+ * ViewBox: 0 0 1573.65 1251.75
+ * Dựa trên vị trí Y của text labels trong file SVG
+ */
+const FLOOR_COORDINATES = [
+  { id: 'f7', x: 180, y: 30, width: 1220, height: 150 },
+  { id: 'f6', x: 180, y: 180, width: 1220, height: 133 },
+  { id: 'f5', x: 180, y: 313, width: 1220, height: 133 },
+  { id: 'f4', x: 180, y: 446, width: 1220, height: 130 },
+  { id: 'f3', x: 180, y: 576, width: 1220, height: 133 },
+  { id: 'f2', x: 180, y: 709, width: 1220, height: 120 },
+  { id: 'f_mezz', x: 180, y: 829, width: 1220, height: 123 },
+  { id: 'f1', x: 180, y: 952, width: 1220, height: 120 },
+  { id: 'f_base', x: 180, y: 1072, width: 1220, height: 130 }
+];
+
 // --- UTILS ---
 
 const CountUpNumber = ({ end, suffix = '', duration = 2000, className = '' }: { end: number, suffix?: string, duration?: number, className?: string }) => {
@@ -179,8 +196,7 @@ const CountUpNumber = ({ end, suffix = '', duration = 2000, className = '' }: { 
 const InteractiveBuilding = () => {
   const [hoveredFloor, setHoveredFloor] = useState<string | null>(null);
 
-  const activeFloorId = hoveredFloor;
-  const activeFloorData = FLOOR_DATA.find(f => f.id === activeFloorId);
+  const activeFloorData = FLOOR_DATA.find(f => f.id === hoveredFloor);
 
   return (
     <div className="flex flex-col lg:flex-row gap-8 items-stretch min-h-[600px] max-w-7xl mx-auto px-4">
@@ -189,88 +205,53 @@ const InteractiveBuilding = () => {
 
         <div className="relative w-full h-full min-h-[500px] lg:min-h-[700px] bg-white">
 
-          {/* Sử dụng Next/Image chuẩn */}
+          {/* Background Image */}
           <Image
-            // Đảm bảo bạn đã đặt file ảnh vào folder: public/images/about/tru-so-inno-mat-cat.svg
-            src="/images/about/tru-so-inno-mat-cat.svg"
+            src="/images/about/tru-so-inno-mat-cat2.svg"
             alt="Sơ đồ mặt cắt trụ sở INNO"
             fill
             className="object-contain object-center z-0"
-            priority // Load ngay lập tức vì là ảnh quan trọng
+            priority
           />
 
-          {/* SVG Overlay */}
+          {/* SVG Overlay với tọa độ chính xác */}
           <svg
-            className="absolute inset-0 w-full h-full cursor-pointer z-10"
-            viewBox="0 0 500 1000"
-            preserveAspectRatio="none"
+            className="absolute inset-0 w-full h-full z-10"
+            viewBox="0 0 1573.65 1251.75"
+            preserveAspectRatio="xMidYMid meet"
+            onMouseLeave={() => setHoveredFloor(null)}
           >
-            {/* Tầng 7 */}
-            <rect
-              x="50" y="30" width="400" height="80"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f7')}
-            />
-            {/* Tầng 6 */}
-            <rect
-              x="50" y="120" width="400" height="90"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f6')}
-            />
-            {/* Tầng 5 */}
-            <rect
-              x="50" y="220" width="400" height="90"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f5')}
-            />
-            {/* Tầng 4 */}
-            <rect
-              x="50" y="320" width="400" height="90"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f4')}
-            />
-            {/* Tầng 3 */}
-            <rect
-              x="50" y="420" width="400" height="90"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f3')}
-            />
-            {/* Tầng 2 */}
-            <rect
-              x="50" y="520" width="400" height="90"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f2')}
-            />
-            {/* Tầng Lửng */}
-            <rect
-              x="50" y="620" width="400" height="90"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f_mezz')}
-            />
-            {/* Tầng 1 */}
-            <rect
-              x="50" y="720" width="400" height="110"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f1')}
-            />
-            {/* Tầng Hầm */}
-            <rect
-              x="50" y="840" width="400" height="80"
-              className="fill-transparent hover:fill-blue-600/20 transition-colors duration-300"
-              onMouseEnter={() => setHoveredFloor('f_base')}
-            />
+            {/* Render các tầng */}
+            {FLOOR_COORDINATES.map((floor) => (
+              <g key={floor.id}>
+                <rect
+                  x={floor.x}
+                  y={floor.y}
+                  width={floor.width}
+                  height={floor.height}
+                  className="fill-transparent hover:fill-blue-600/30 transition-all duration-300 cursor-pointer"
+                  style={{
+                    stroke: hoveredFloor === floor.id ? '#2563eb' : 'transparent',
+                    strokeWidth: hoveredFloor === floor.id ? 4 : 0
+                  }}
+                  onMouseEnter={() => setHoveredFloor(floor.id)}
+                />
 
-            {/* Reset zones */}
-            <rect
-              x="0" y="0" width="50" height="1000"
-              className="fill-transparent"
-              onMouseEnter={() => setHoveredFloor(null)}
-            />
-            <rect
-              x="450" y="0" width="50" height="1000"
-              className="fill-transparent"
-              onMouseEnter={() => setHoveredFloor(null)}
-            />
+                {/* Label hiển thị khi hover */}
+                {hoveredFloor === floor.id && (
+                  <text
+                    x={floor.x + floor.width / 2}
+                    y={floor.y + floor.height / 2}
+                    textAnchor="middle"
+                    dominantBaseline="middle"
+                    className="fill-blue-600 font-bold pointer-events-none"
+                    style={{ fontSize: '32px' }}
+                  >
+                    {FLOOR_DATA.find(f => f.id === floor.id)?.label}
+                  </text>
+                )}
+              </g>
+            ))}
           </svg>
 
           <div className="absolute bottom-4 left-0 right-0 text-center pointer-events-none z-20">
