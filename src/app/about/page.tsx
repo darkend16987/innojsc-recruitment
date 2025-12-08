@@ -349,42 +349,73 @@ export default function AboutPage() {
         <section className="mb-20">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Tầm nhìn - Sứ mệnh - Giá trị cốt lõi</h2>
 
-          <div className="max-w-4xl mx-auto space-y-8">
+          <div className="max-w-5xl mx-auto space-y-8">
             {/* Vision */}
-            <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
+            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100 hover:shadow-xl transition-shadow">
               <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-primary mb-4">Tầm nhìn</h3>
+                <div className="flex-1 order-2 md:order-1">
+                  <h3 className="text-3xl font-bold text-primary mb-4 flex items-center gap-3">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                    Tầm nhìn
+                  </h3>
                   <p className="text-gray-700 leading-relaxed text-lg">
                     Trở thành công ty tư vấn thiết kế dẫn đầu về chất lượng và dịch vụ tại Việt Nam
                   </p>
                 </div>
-                <div className="w-full md:w-64 aspect-square bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <p className="text-gray-400 text-sm">Ảnh Vision</p>
+                <div className="w-full md:w-80 aspect-square relative rounded-xl overflow-hidden flex-shrink-0 order-1 md:order-2">
+                  <Image
+                    src="/images/recruitment/about/vision.webp"
+                    alt="Tầm nhìn INNO"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
               </div>
             </div>
 
             {/* Mission */}
-            <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
+            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100 hover:shadow-xl transition-shadow">
               <div className="flex flex-col md:flex-row gap-8 items-center">
-                <div className="flex-1">
-                  <h3 className="text-2xl font-bold text-primary mb-4">Sứ mệnh</h3>
+                <div className="w-full md:w-80 aspect-square relative rounded-xl overflow-hidden flex-shrink-0 order-1">
+                  <Image
+                    src="/images/recruitment/about/mission.webp"
+                    alt="Sứ mệnh INNO"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+                <div className="flex-1 order-2">
+                  <h3 className="text-3xl font-bold text-primary mb-4 flex items-center gap-3">
+                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                    Sứ mệnh
+                  </h3>
                   <p className="text-gray-700 leading-relaxed text-lg">
                     Đưa năng lực tư vấn thiết kế của công ty ngang tầm khu vực và tiệm cận các nước tiên tiến trên thế giới
                   </p>
-                </div>
-                <div className="w-full md:w-64 aspect-square bg-gray-100 rounded-lg flex items-center justify-center flex-shrink-0">
-                  <p className="text-gray-400 text-sm">Ảnh Mission</p>
                 </div>
               </div>
             </div>
 
             {/* Core Values */}
-            <div className="bg-white rounded-lg shadow-md p-8 border border-gray-200">
-              <h3 className="text-2xl font-bold text-primary mb-6 text-center">Giá trị cốt lõi</h3>
-              <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center">
-                <p className="text-gray-400 text-sm">Ảnh Core Values (ảnh ngang toàn bộ)</p>
+            <div className="bg-white rounded-2xl shadow-lg p-8 md:p-10 border border-gray-100 hover:shadow-xl transition-shadow">
+              <h3 className="text-3xl font-bold text-primary mb-8 text-center flex items-center justify-center gap-3">
+                <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+                </svg>
+                Giá trị cốt lõi
+              </h3>
+              <div className="relative aspect-video rounded-xl overflow-hidden">
+                <Image
+                  src="/images/recruitment/about/core-values.webp"
+                  alt="Giá trị cốt lõi INNO"
+                  fill
+                  className="object-contain"
+                />
               </div>
             </div>
           </div>
@@ -392,53 +423,68 @@ export default function AboutPage() {
 
         {/* Office Locations with Tabs */}
         <section className="mb-20">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">Văn phòng của INNO</h2>
-
-          {/* Office Tabs */}
-          <div className="flex justify-center gap-4 mb-8">
-            <button
-              onClick={() => setSelectedOffice('hanoi')}
-              className={`px-8 py-3 rounded-lg font-medium transition-all ${
-                selectedOffice === 'hanoi'
-                  ? 'bg-primary text-white shadow-lg'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:border-primary'
-              }`}
-            >
-              <MapPin className="inline-block w-5 h-5 mr-2" />
-              Hà Nội
-            </button>
-            <button
-              onClick={() => setSelectedOffice('hcm')}
-              className={`px-8 py-3 rounded-lg font-medium transition-all ${
-                selectedOffice === 'hcm'
-                  ? 'bg-primary text-white shadow-lg'
-                  : 'bg-white text-gray-700 border border-gray-300 hover:border-primary'
-              }`}
-            >
-              <MapPin className="inline-block w-5 h-5 mr-2" />
-              TP.Hồ Chí Minh
-            </button>
-          </div>
-
-          {/* Office Content */}
-          <div className="text-center mb-6">
-            <h3 className="text-2xl font-semibold text-gray-900 mb-2">
-              {selectedOffice === 'hanoi' ? 'Văn phòng Hà Nội' : 'Văn phòng TP.Hồ Chí Minh'}
-            </h3>
-            <p className="text-gray-600">
-              {selectedOffice === 'hanoi'
-                ? '39 Thượng Thụy, Phú Thượng'
-                : 'A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền'}
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-gray-900 mb-4">Văn phòng của INNO</h2>
+            <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+              Không gian làm việc hiện đại, chuyên nghiệp tại hai thành phố lớn
             </p>
           </div>
 
-          {/* Image Slider */}
-          <div className="w-full">
-            <ImageSlider
-              images={selectedOffice === 'hanoi' ? HANOI_OFFICE_IMAGES : HCM_OFFICE_IMAGES}
-              alt={selectedOffice === 'hanoi' ? 'Văn phòng Hà Nội' : 'Văn phòng TP.Hồ Chí Minh'}
-              height={600}
-            />
+          {/* Office Tabs - Improved Design */}
+          <div className="flex justify-center gap-3 mb-12">
+            <button
+              onClick={() => setSelectedOffice('hanoi')}
+              className={`group relative px-10 py-4 rounded-xl font-semibold transition-all duration-300 ${
+                selectedOffice === 'hanoi'
+                  ? 'bg-gradient-to-r from-primary to-red-700 text-white shadow-xl scale-105'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:shadow-lg'
+              }`}
+            >
+              <MapPin className="inline-block w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
+              Hà Nội
+              {selectedOffice === 'hanoi' && (
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-red-700"></div>
+              )}
+            </button>
+            <button
+              onClick={() => setSelectedOffice('hcm')}
+              className={`group relative px-10 py-4 rounded-xl font-semibold transition-all duration-300 ${
+                selectedOffice === 'hcm'
+                  ? 'bg-gradient-to-r from-primary to-red-700 text-white shadow-xl scale-105'
+                  : 'bg-white text-gray-700 border-2 border-gray-200 hover:border-primary hover:shadow-lg'
+              }`}
+            >
+              <MapPin className="inline-block w-5 h-5 mr-2 transition-transform group-hover:scale-110" />
+              TP.Hồ Chí Minh
+              {selectedOffice === 'hcm' && (
+                <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-0 h-0 border-l-8 border-r-8 border-t-8 border-transparent border-t-red-700"></div>
+              )}
+            </button>
+          </div>
+
+          {/* Office Content - Improved Card */}
+          <div className="bg-white rounded-2xl shadow-xl overflow-hidden">
+            <div className="bg-gradient-to-r from-primary/10 to-red-700/10 p-6 text-center border-b border-gray-200">
+              <h3 className="text-2xl font-bold text-gray-900 mb-2 flex items-center justify-center gap-2">
+                <Building2 className="w-6 h-6 text-primary" />
+                {selectedOffice === 'hanoi' ? 'Văn phòng Hà Nội' : 'Văn phòng TP.Hồ Chí Minh'}
+              </h3>
+              <p className="text-gray-700 flex items-center justify-center gap-2">
+                <MapPin className="w-4 h-4 text-primary" />
+                {selectedOffice === 'hanoi'
+                  ? '39 Thượng Thụy, Phú Thượng, Hà Nội'
+                  : 'A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền, TP.HCM'}
+              </p>
+            </div>
+
+            {/* Image Slider */}
+            <div className="w-full">
+              <ImageSlider
+                images={selectedOffice === 'hanoi' ? HANOI_OFFICE_IMAGES : HCM_OFFICE_IMAGES}
+                alt={selectedOffice === 'hanoi' ? 'Văn phòng Hà Nội' : 'Văn phòng TP.Hồ Chí Minh'}
+                height={600}
+              />
+            </div>
           </div>
         </section>
 
