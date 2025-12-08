@@ -12,6 +12,7 @@ export default function Header() {
     { href: '/about', label: 'Về INNO' },
     { href: '/why-inno', label: 'Vì sao chọn INNO' },
     { href: '/', label: 'Cơ hội nghề nghiệp' },
+    { href: '/internship-opportunity', label: 'Cơ hội cho thực tập sinh' },
     // { href: '/career-path', label: 'Lộ trình phát triển' }, // Tạm ẩn
     { href: '/recruitment-process', label: 'Quy trình tuyển dụng' },
     { href: '/faqs', label: 'FAQs' },
