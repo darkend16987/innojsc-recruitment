@@ -1,58 +1,12 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { Award, ChevronUp, ChevronDown, MapPin, Info, ArrowRight, Menu } from 'lucide-react';
+'use client';
 
-// --- MOCK COMPONENTS (Thay thế cho import từ Next.js) ---
+import { useState, useEffect, useRef } from 'react';
+import Image from 'next/image';
+import Header from '@/components/Header';
+import Footer from '@/components/Footer';
+import { Award, ChevronUp, ChevronDown, MapPin, Info, ArrowRight } from 'lucide-react';
 
-const Header = () => (
-  <header className="fixed top-0 left-0 right-0 z-50 bg-white/95 backdrop-blur-md shadow-sm border-b border-gray-100 h-20 flex items-center justify-between px-4 lg:px-8 transition-all duration-300">
-    <div className="flex items-center gap-2">
-      {/* Logo giả lập */}
-      <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center text-white font-black text-xl">I</div>
-      <span className="text-2xl font-bold text-blue-900 tracking-tight">INNO</span>
-    </div>
-    <nav className="hidden lg:flex items-center gap-8 text-sm font-semibold text-gray-600 uppercase tracking-wide">
-      <span className="text-blue-600 cursor-pointer">Về chúng tôi</span>
-      <span className="hover:text-blue-600 cursor-pointer transition-colors">Lĩnh vực hoạt động</span>
-      <span className="hover:text-blue-600 cursor-pointer transition-colors">Dự án</span>
-      <span className="hover:text-blue-600 cursor-pointer transition-colors">Tin tức</span>
-      <span className="hover:text-blue-600 cursor-pointer transition-colors">Tuyển dụng</span>
-    </nav>
-    <button className="lg:hidden p-2 text-gray-600">
-      <Menu className="w-6 h-6" />
-    </button>
-  </header>
-);
-
-const Footer = () => (
-  <footer className="bg-slate-900 text-white py-16 mt-auto">
-    <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-4 gap-8">
-      <div className="col-span-1 md:col-span-2">
-        <div className="text-2xl font-bold mb-4">INNO JSC</div>
-        <p className="text-slate-400 max-w-sm leading-relaxed">
-          Công ty Cổ phần INNO - Nhà tư vấn thiết kế chuyên nghiệp hàng đầu Việt Nam.
-        </p>
-      </div>
-      <div>
-        <h4 className="font-bold mb-4 text-slate-200">Liên hệ</h4>
-        <p className="text-slate-400 text-sm mb-2">Hà Nội: 39 Thượng Thụy, Phú Thượng, Tây Hồ</p>
-        <p className="text-slate-400 text-sm">TP.HCM: 37 Nguyễn Văn Hưởng, Thảo Điền</p>
-      </div>
-      <div>
-        <h4 className="font-bold mb-4 text-slate-200">Kết nối</h4>
-        <div className="flex gap-4">
-          <div className="w-8 h-8 bg-slate-700 rounded-full hover:bg-blue-600 transition-colors cursor-pointer"></div>
-          <div className="w-8 h-8 bg-slate-700 rounded-full hover:bg-blue-600 transition-colors cursor-pointer"></div>
-          <div className="w-8 h-8 bg-slate-700 rounded-full hover:bg-blue-600 transition-colors cursor-pointer"></div>
-        </div>
-      </div>
-    </div>
-    <div className="border-t border-slate-800 mt-12 pt-8 text-center text-slate-500 text-sm">
-      © 2024 INNO JSC. All rights reserved.
-    </div>
-  </footer>
-);
-
-// --- DATA ---
+// --- DATA: DANH SÁCH GIẢI THƯỞNG ---
 const AWARDS_DATA = {
   2016: [
     { project: 'LANDMARK 81', award: 'Giải thưởng Asia Pacific Property Awards: Đạt giải "Tòa nhà cao tầng tốt nhất Việt Nam"' },
@@ -70,6 +24,7 @@ const AWARDS_DATA = {
     { project: 'VINHOMES OCEAN PARK', award: 'Giải thưởng Smart City Awards: Đạt giải "Thành Phố Thông Minh 2020"' },
     { project: 'QHCT 1:500 KĐT DU LỊCH - DỊCH VỤ XUÂN YÊN', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Đồng' },
     { project: 'QHCT 1:500 KĐT DỊCH VỤ DU LỊCH XUÂN ĐAN - XUÂN PHỔ', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Đồng' },
+    { project: 'QHPK 1:2000 KĐT SINH THÁI, DU LỊCH, NGHỈ DƯỠNG & SÂN GOLF TAM NÔNG', award: 'Giải thưởng Quy hoạch Quốc Gia, hạng Đồng' },
   ],
   2021: [
     { project: 'DIAMOND CROWN HẢI PHÒNG', award: 'Giải thưởng Dot Property Vietnam Awards: Đạt giải "Dự án căn hộ và khách sạn cao cấp có thiết kế mang tính biểu tượng đẹp nhất Việt Nam 2021"' },
@@ -173,9 +128,9 @@ const FLOOR_DATA = [
 
 // --- UTILS ---
 
-const CountUpNumber = ({ end, suffix = '', duration = 2000, className = '' }) => {
+const CountUpNumber = ({ end, suffix = '', duration = 2000, className = '' }: { end: number, suffix?: string, duration?: number, className?: string }) => {
   const [count, setCount] = useState(0);
-  const countRef = useRef(null);
+  const countRef = useRef<HTMLSpanElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -195,14 +150,14 @@ const CountUpNumber = ({ end, suffix = '', duration = 2000, className = '' }) =>
 
   useEffect(() => {
     if (!isVisible) return;
-    let startTime;
-    let animationFrame;
+    let startTime: number;
+    let animationFrame: number;
 
-    const animate = (timestamp) => {
+    const animate = (timestamp: number) => {
       if (!startTime) startTime = timestamp;
       const progress = timestamp - startTime;
       const percentage = Math.min(progress / duration, 1);
-      const easeOut = (x) => (x === 1 ? 1 : 1 - Math.pow(2, -10 * x));
+      const easeOut = (x: number): number => (x === 1 ? 1 : 1 - Math.pow(2, -10 * x));
 
       setCount(Math.floor(easeOut(percentage) * end));
 
@@ -222,7 +177,7 @@ const CountUpNumber = ({ end, suffix = '', duration = 2000, className = '' }) =>
 // --- INTERACTIVE COMPONENT ---
 
 const InteractiveBuilding = () => {
-  const [hoveredFloor, setHoveredFloor] = useState(null);
+  const [hoveredFloor, setHoveredFloor] = useState<string | null>(null);
 
   const activeFloorId = hoveredFloor;
   const activeFloorData = FLOOR_DATA.find(f => f.id === activeFloorId);
@@ -234,17 +189,14 @@ const InteractiveBuilding = () => {
 
         <div className="relative w-full h-full min-h-[500px] lg:min-h-[700px] bg-white">
 
-          {/* Thay thế Image Next.js bằng thẻ img thường để tương thích preview */}
-          <img
-            // ĐƯỜNG DẪN ẢNH: Bạn hãy tạo folder public/images/about/ trong dự án Next.js
-            // và lưu file SVG của bạn vào đó với tên: tru-so-inno-mat-cat.svg
+          {/* Sử dụng Next/Image chuẩn */}
+          <Image
+            // Đảm bảo bạn đã đặt file ảnh vào folder: public/images/about/tru-so-inno-mat-cat.svg
             src="/images/about/tru-so-inno-mat-cat.svg"
             alt="Sơ đồ mặt cắt trụ sở INNO"
-            className="absolute inset-0 w-full h-full object-contain object-center z-0"
-            // Fallback: Nếu không tìm thấy file local (trong môi trường preview này), dùng ảnh demo online
-            onError={(e) => {
-              e.currentTarget.src = "https://i.imgur.com/k2E7z6v.jpeg";
-            }}
+            fill
+            className="object-contain object-center z-0"
+            priority // Load ngay lập tức vì là ảnh quan trọng
           />
 
           {/* SVG Overlay */}
@@ -386,12 +338,12 @@ export default function AboutPage() {
   const [selectedYear, setSelectedYear] = useState(2024);
 
   // Timeline drag state
-  const timelineRef = useRef(null);
+  const timelineRef = useRef<HTMLDivElement>(null);
   const [isDown, setIsDown] = useState(false);
   const [startX, setStartX] = useState(0);
   const [scrollLeft, setScrollLeft] = useState(0);
 
-  const handleYearChange = (direction) => {
+  const handleYearChange = (direction: 'up' | 'down') => {
     const currentIndex = YEARS.indexOf(selectedYear);
     if (direction === 'up' && currentIndex < YEARS.length - 1) {
       setSelectedYear(YEARS[currentIndex + 1]);
@@ -400,7 +352,7 @@ export default function AboutPage() {
     }
   };
 
-  const handleMouseDown = (e) => {
+  const handleMouseDown = (e: React.MouseEvent) => {
     if (!timelineRef.current) return;
     setIsDown(true);
     setStartX(e.pageX - timelineRef.current.offsetLeft);
@@ -410,7 +362,7 @@ export default function AboutPage() {
   const handleMouseLeave = () => { setIsDown(false); };
   const handleMouseUp = () => { setIsDown(false); };
 
-  const handleMouseMove = (e) => {
+  const handleMouseMove = (e: React.MouseEvent) => {
     if (!isDown || !timelineRef.current) return;
     e.preventDefault();
     const x = e.pageX - timelineRef.current.offsetLeft;
@@ -425,11 +377,12 @@ export default function AboutPage() {
       {/* Hero Section */}
       <div className="relative pt-32 pb-24 sm:pt-40 sm:pb-32 flex items-center justify-center min-h-[500px]">
         <div className="absolute inset-0 z-0">
-          {/* Ảnh thay thế */}
-          <img
-            src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?q=80&w=2070&auto=format&fit=crop"
+          <Image
+            src="/images/recruitment/hero/about-hero1.webp"
             alt="Về INNO"
-            className="w-full h-full object-cover"
+            fill
+            className="object-cover"
+            priority
           />
           <div className="absolute inset-0 bg-slate-900/70 mix-blend-multiply"></div>
         </div>
@@ -477,11 +430,15 @@ export default function AboutPage() {
             onMouseMove={handleMouseMove}
             style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
           >
-            <div className="min-w-[1000px] flex justify-center px-4">
-              {/* Placeholder Timeline Image since original was local */}
-              <div className="h-[400px] w-full bg-slate-100 rounded-xl flex items-center justify-center border border-dashed border-slate-300">
-                <span className="text-slate-400 font-medium">Khu vực hiển thị Timeline (Ảnh quá khổ)</span>
-              </div>
+            <div className="min-w-[1500px] md:min-w-[2000px] lg:min-w-[2500px]">
+              <Image
+                src="/images/recruitment/timeline/timeline.webp"
+                alt="Lịch sử hình thành và phát triển INNO"
+                width={6296}
+                height={1974}
+                className="w-full h-auto object-contain pointer-events-none"
+                priority
+              />
             </div>
           </div>
         </div>
@@ -591,7 +548,7 @@ export default function AboutPage() {
               </div>
               <div className="md:w-3/4">
                 <div className="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
-                  {AWARDS_DATA[selectedYear]?.map((item, index) => (
+                  {AWARDS_DATA[selectedYear as keyof typeof AWARDS_DATA]?.map((item, index) => (
                     <div key={index} className="group p-6 rounded-xl hover:bg-blue-50 transition-all duration-300 border border-transparent hover:border-blue-100">
                       <h4 className="font-bold text-xl text-slate-900 mb-2 flex items-start gap-3">
                         <Award className="w-6 h-6 text-blue-600 mt-1 flex-shrink-0" />
