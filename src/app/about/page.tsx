@@ -53,7 +53,8 @@ const YEARS = [2016, 2017, 2019, 2020, 2021, 2022, 2023, 2024];
 
 const FLOOR_DATA = [
   {
-    id: 'f7',
+    id: 'floor7',
+    svgId: 'floor7',
     label: 'Tầng 7',
     name: 'Ban Lãnh Đạo & Điều Hành',
     departments: ['Ban lãnh đạo', 'Phòng IBIM', 'Marketing', 'IT', 'Đào tạo'],
@@ -61,7 +62,8 @@ const FLOOR_DATA = [
     color: 'bg-red-50'
   },
   {
-    id: 'f6',
+    id: 'floor6',
+    svgId: 'floor6',
     label: 'Tầng 6',
     name: 'Khối Kiến Trúc & Nội Thất',
     departments: ['Phòng Kiến trúc (AS) 1', 'Phòng Kiến trúc (AS) 8', 'Phòng Nội thất INNO'],
@@ -69,7 +71,8 @@ const FLOOR_DATA = [
     color: 'bg-orange-50'
   },
   {
-    id: 'f5',
+    id: 'floor5',
+    svgId: 'floor5',
     label: 'Tầng 5',
     name: 'Khối Kiến Trúc & Cảnh Quan',
     departments: ['Phòng Kiến trúc (AS) 3, 4, 10', 'Phòng Cảnh quan (LS) 1', 'Phòng BIM 1'],
@@ -77,7 +80,8 @@ const FLOOR_DATA = [
     color: 'bg-yellow-50'
   },
   {
-    id: 'f4',
+    id: 'floor4',
+    svgId: 'floor4',
     label: 'Tầng 4',
     name: 'Khối Kết Cấu & Kiến Trúc',
     departments: ['Phòng Kết cấu (SS) 1, 2, 3', 'Phòng Kiến trúc (AS) 11'],
@@ -85,7 +89,8 @@ const FLOOR_DATA = [
     color: 'bg-green-50'
   },
   {
-    id: 'f3',
+    id: 'floor3',
+    svgId: 'floor3',
     label: 'Tầng 3',
     name: 'Tiện Ích & Sinh Hoạt Chung',
     departments: ['INNO Club', 'Không gian sinh hoạt chung', 'Căng tin'],
@@ -93,7 +98,8 @@ const FLOOR_DATA = [
     color: 'bg-teal-50'
   },
   {
-    id: 'f2',
+    id: 'floor2',
+    svgId: 'floor2',
     label: 'Tầng 2',
     name: 'Khối Kỹ Thuật MEP & Dự Toán',
     departments: ['Phòng MEP (Cơ điện, Nước, HVAC)', 'PCCC', 'Phòng Dự toán'],
@@ -101,7 +107,8 @@ const FLOOR_DATA = [
     color: 'bg-blue-50'
   },
   {
-    id: 'f_mezz',
+    id: 'extra-floor',
+    svgId: 'extra-floor',
     label: 'Tầng Lửng',
     name: 'Hội Nghị & Sự Kiện',
     departments: ['Meeting Hall', 'Phòng hội thảo'],
@@ -109,7 +116,8 @@ const FLOOR_DATA = [
     color: 'bg-indigo-50'
   },
   {
-    id: 'f1',
+    id: 'floor1',
+    svgId: 'floor1',
     label: 'Tầng 1',
     name: 'Khối Văn Phòng Hỗ Trợ',
     departments: ['Hành chính - Nhân sự', 'Kế toán - Tài chính', 'Đấu thầu - Hợp đồng'],
@@ -117,7 +125,8 @@ const FLOOR_DATA = [
     color: 'bg-purple-50'
   },
   {
-    id: 'f_base',
+    id: 'base',
+    svgId: 'base',
     label: 'Tầng Hầm',
     name: 'Khu Vực Hậu Cần',
     departments: ['Khu vực để xe máy', 'Kỹ thuật tòa nhà'],
@@ -127,90 +136,19 @@ const FLOOR_DATA = [
 ];
 
 /**
- * TỌA ĐỘ ĐÃ ĐIỀU CHỈNH - Dựa trên phản hồi từ screenshot
- * 
- * Vấn đề trước: Vùng hover bị dịch lên phía trên so với cốt trần thực tế ~35-40%
- * Giải pháp: Dịch tất cả các tầng xuống dưới để khớp với ranh giới kiến trúc
- * 
- * Công thức điều chỉnh:
- * - Text position là tâm của tầng
- * - Cần offset thêm để khớp với sàn/trần thực tế
- * - Mỗi tầng cao ~120-130px
+ * TỌA ĐỘ CHÍNH XÁC 100% từ file SVG
+ * Extracted từ các rect ID: base, floor1, extra-floor, floor2...floor7
  */
-
 const FLOOR_COORDINATES = [
-  {
-    id: 'f7',
-    // Tầng 7 - từ mái xuống sàn tầng 6
-    x: 180,
-    y: 110,      // Điều chỉnh: từ 30 → 110 (+80)
-    width: 1220,
-    height: 125
-  },
-  {
-    id: 'f6',
-    // Tầng 6
-    x: 180,
-    y: 235,      // Điều chỉnh: từ 180 → 235 (+55)
-    width: 1220,
-    height: 128
-  },
-  {
-    id: 'f5',
-    // Tầng 5
-    x: 180,
-    y: 363,      // Điều chỉnh: từ 313 → 363 (+50)
-    width: 1220,
-    height: 130
-  },
-  {
-    id: 'f4',
-    // Tầng 4
-    x: 180,
-    y: 493,      // Điều chỉnh: từ 446 → 493 (+47)
-    width: 1220,
-    height: 127
-  },
-  {
-    id: 'f3',
-    // Tầng 3
-    x: 180,
-    y: 620,      // Điều chỉnh: từ 576 → 620 (+44)
-    width: 1220,
-    height: 132
-  },
-  {
-    id: 'f2',
-    // Tầng 2
-    x: 180,
-    y: 752,      // Điều chỉnh: từ 709 → 752 (+43)
-    width: 1220,
-    height: 127
-  },
-  {
-    id: 'f_mezz',
-    // Tầng Lửng
-    x: 180,
-    y: 879,      // Điều chỉnh: từ 829 → 879 (+50)
-    width: 1220,
-    height: 125
-  },
-  {
-    id: 'f1',
-    // Tầng 1
-    x: 180,
-    y: 1004,     // Điều chỉnh: từ 952 → 1004 (+52)
-    width: 1220,
-    height: 122
-  },
-  {
-    id: 'f_base',
-    // Tầng Hầm
-    x: 180,
-    y: 1126,     // Điều chỉnh: từ 1072 → 1126 (+54)
-    width: 1220,
-    height: 110
-  }
+  { id: 'floor7', x: 147.35, y: 111.03, width: 1208.47, height: 153.36 },
+  { id: 'floor6', x: 147.35, y: 273.05, width: 1208.47, height: 109.49 },
+  { id: 'floor5', x: 147.35, y: 398.44, width: 1208.47, height: 115.12 },
+  { id: 'floor4', x: 147.35, y: 528.45, width: 1208.47, height: 114.92 },
+  { id: 'floor3', x: 147.35, y: 658.24, width: 1208.47, height: 114.15 },
+  { id: 'floor2', x: 147.35, y: 788.04, width: 1208.47, height: 114.36 },
+  { id: 'extra-floor', x: 147.35, y: 917.34, width: 1208.47, height: 103.8 },
+  { id: 'floor1', x: 147.35, y: 1035.84, width: 1208.47, height: 107.8 },
+  { id: 'base', x: 147.35, y: 1161.03, width: 1208.47, height: 97.33 }
 ];
 
 // --- UTILS ---
@@ -277,51 +215,56 @@ const InteractiveBuilding = () => {
 
           {/* Background Image */}
           <Image
-            src="/images/about/tru-so-inno-mat-cat.svg"
+            src="/images/about/tru-so-inno-mat-cat2.svg"
             alt="Sơ đồ mặt cắt trụ sở INNO"
             fill
             className="object-contain object-center z-0"
             priority
           />
 
-          {/* SVG Overlay với tọa độ đã điều chỉnh */}
+          {/* SVG Overlay - CHÍNH XÁC 100% với tọa độ từ file SVG */}
           <svg
             className="absolute inset-0 w-full h-full z-10"
             viewBox="0 0 1573.65 1251.75"
             preserveAspectRatio="xMidYMid meet"
             onMouseLeave={() => setHoveredFloor(null)}
           >
-            {/* Render các tầng */}
-            {FLOOR_COORDINATES.map((floor) => (
-              <g key={floor.id}>
-                <rect
-                  x={floor.x}
-                  y={floor.y}
-                  width={floor.width}
-                  height={floor.height}
-                  className="fill-transparent hover:fill-blue-600/30 transition-all duration-300 cursor-pointer"
-                  style={{
-                    stroke: hoveredFloor === floor.id ? '#2563eb' : 'transparent',
-                    strokeWidth: hoveredFloor === floor.id ? 4 : 0
-                  }}
-                  onMouseEnter={() => setHoveredFloor(floor.id)}
-                />
+            {/* Render các tầng với tọa độ chính xác từ SVG */}
+            {FLOOR_COORDINATES.map((floor) => {
+              const floorData = FLOOR_DATA.find(f => f.id === floor.id);
+              if (!floorData) return null;
 
-                {/* Label hiển thị khi hover */}
-                {hoveredFloor === floor.id && (
-                  <text
-                    x={floor.x + floor.width / 2}
-                    y={floor.y + floor.height / 2}
-                    textAnchor="middle"
-                    dominantBaseline="middle"
-                    className="fill-blue-600 font-bold pointer-events-none"
-                    style={{ fontSize: '32px' }}
-                  >
-                    {FLOOR_DATA.find(f => f.id === floor.id)?.label}
-                  </text>
-                )}
-              </g>
-            ))}
+              return (
+                <g key={floor.id}>
+                  <rect
+                    x={floor.x}
+                    y={floor.y}
+                    width={floor.width}
+                    height={floor.height}
+                    className="fill-transparent hover:fill-blue-600/30 transition-all duration-300 cursor-pointer"
+                    style={{
+                      stroke: hoveredFloor === floor.id ? '#2563eb' : 'transparent',
+                      strokeWidth: hoveredFloor === floor.id ? 4 : 0
+                    }}
+                    onMouseEnter={() => setHoveredFloor(floor.id)}
+                  />
+
+                  {/* Label hiển thị khi hover */}
+                  {hoveredFloor === floor.id && (
+                    <text
+                      x={floor.x + floor.width / 2}
+                      y={floor.y + floor.height / 2}
+                      textAnchor="middle"
+                      dominantBaseline="middle"
+                      className="fill-blue-600 font-bold pointer-events-none"
+                      style={{ fontSize: '32px' }}
+                    >
+                      {floorData.label}
+                    </text>
+                  )}
+                </g>
+              );
+            })}
           </svg>
 
           <div className="absolute bottom-4 left-0 right-0 text-center pointer-events-none z-20">
