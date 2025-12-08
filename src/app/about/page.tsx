@@ -215,7 +215,7 @@ const InteractiveBuilding = () => {
 
           {/* Background Image */}
           <Image
-            src="/images/about/tru-so-inno-mat-cat3.svg"
+            src="/images/about/tru-so-inno-mat-cat2.svg"
             alt="Sơ đồ mặt cắt trụ sở INNO"
             fill
             className="object-contain object-center z-0"
