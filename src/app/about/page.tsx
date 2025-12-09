@@ -386,7 +386,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">WELCOME TO INNO</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
-            Nơi những Kiến trúc sư, Kỹ sư và Chuyên gia trẻ không chỉ làm việc, trải nghiệm văn hóa, mà còn phát triển và xây dựng ước mơ của chính mình.
+            Nơi những Kiến trúc sư, Kỹ sư và Chuyên gia trẻ không chỉ làm việc, trải nghiệm văn hóa, mà còn phát triển và xây dựng ước mơ của chính mình.<p>JOIN US AND BUILD YOUR DREAM</p>
           </p>
         </div>
       </div>
