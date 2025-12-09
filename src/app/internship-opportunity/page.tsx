@@ -26,11 +26,11 @@ export default function InternshipOpportunityPage() {
             className="object-cover"
             priority
           />
-          {/* Overlay màu đen mờ giúp text trắng dễ đọc hơn */}
+          {/* Overlay màu đen mờ */}
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
 
-        {/* Nội dung text đặt lên trên (z-10) */}
+        {/* Nội dung text */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Cơ hội thực tập tại INNO
