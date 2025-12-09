@@ -492,32 +492,38 @@ export default function AboutPage() {
           <div className="grid md:grid-cols-3 gap-8 mx-auto">
             {/* Tầm nhìn */}
             <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-              <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <h3 className="text-2xl font-black text-red-700 mb-8 uppercase tracking-wider text-center" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 TẦM NHÌN
               </h3>
-              <p className="text-slate-600 text-lg leading-relaxed flex-grow">
-                Trở thành công ty tư vấn thiết kế dẫn đầu về chất lượng và dịch vụ tại Việt Nam.
-              </p>
+              <div className="flex-grow flex items-center justify-center">
+                <p className="text-slate-700 text-lg leading-loose text-center">
+                  Trở thành công ty tư vấn thiết kế dẫn đầu về chất lượng và dịch vụ tại Việt Nam.
+                </p>
+              </div>
             </div>
 
             {/* Sứ mệnh */}
             <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-              <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <h3 className="text-2xl font-black text-red-700 mb-8 uppercase tracking-wider text-center" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 SỨ MỆNH
               </h3>
-              <p className="text-slate-600 text-lg leading-relaxed flex-grow">
-                Đưa năng lực tư vấn thiết kế ngang tầm khu vực và tiệm cận thế giới.
-              </p>
+              <div className="flex-grow flex items-center justify-center">
+                <p className="text-slate-700 text-lg leading-loose text-center">
+                  Đưa năng lực tư vấn thiết kế ngang tầm khu vực và tiệm cận thế giới.
+                </p>
+              </div>
             </div>
 
             {/* Giá trị cốt lõi */}
             <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-              <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <h3 className="text-2xl font-black text-red-700 mb-8 uppercase tracking-wider text-center" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 GIÁ TRỊ CỐT LÕI
               </h3>
-              <p className="text-slate-600 text-lg leading-relaxed flex-grow">
-                8 giá trị văn hóa cốt lõi đặc sắc định hình bản sắc - con người INNO.
-              </p>
+              <div className="flex-grow flex items-center justify-center">
+                <p className="text-slate-700 text-lg leading-loose text-center">
+                  8 giá trị văn hóa cốt lõi đặc sắc định hình bản sắc - con người INNO.
+                </p>
+              </div>
             </div>
           </div>
         </section>
