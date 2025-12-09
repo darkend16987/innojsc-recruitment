@@ -95,12 +95,12 @@ export default function InternshipOpportunityPage() {
       </div>
 
       {/* FULL WIDTH SLIDER SECTION - Lộ trình đào tạo */}
-      <section className="mb-20">
-        <div className="text-center mb-8 container mx-auto px-4">
+      <section className="bg-white pb-20">
+        <div className="text-center mb-8 py-8">
           <h2 className="text-3xl font-bold text-gray-900 mb-4">
             Lộ trình đào tạo dành cho sinh viên
           </h2>
-          <p className="text-gray-600 text-lg max-w-3xl mx-auto">
+          <p className="text-gray-600 text-lg max-w-3xl mx-auto px-4">
             Chương trình được thiết kế bài bản, giúp sinh viên phát triển toàn diện từ kiến thức chuyên môn đến kỹ năng làm việc
           </p>
         </div>
@@ -109,7 +109,8 @@ export default function InternshipOpportunityPage() {
           <ImageSlider
             images={STUDENT_TRAINING_IMAGES}
             alt="Lộ trình đào tạo dành cho sinh viên tại INNO"
-            height={600}
+            height={700}
+            objectFit="contain"
           />
         </div>
       </section>
