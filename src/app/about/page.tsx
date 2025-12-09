@@ -364,11 +364,12 @@ export default function AboutPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 font-sans text-slate-800">
+    <div className="min-h-screen bg-gray-50">
       <Header />
 
       {/* Hero Section */}
       <div className="relative py-24 sm:py-32 flex items-center justify-center min-h-[400px]">
+        {/* Background Image */}
         <div className="absolute inset-0 z-0">
           <Image
             src="/images/recruitment/hero/about-hero1.webp"
@@ -377,9 +378,11 @@ export default function AboutPage() {
             className="object-cover"
             priority
           />
-          {/* Style overlay bg-black/60 */}
+          {/* Overlay màu đen mờ */}
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
+
+        {/* Nội dung text */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">WELCOME TO INNO</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
