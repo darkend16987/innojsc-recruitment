@@ -13,9 +13,10 @@ interface ImageSliderProps {
   images: string[];
   alt: string;
   height?: number;
+  objectFit?: 'cover' | 'contain';
 }
 
-export default function ImageSlider({ images, alt, height = 400 }: ImageSliderProps) {
+export default function ImageSlider({ images, alt, height = 400, objectFit = 'cover' }: ImageSliderProps) {
   // If no images provided, show placeholder
   if (!images || images.length === 0) {
     return (
@@ -54,12 +55,12 @@ export default function ImageSlider({ images, alt, height = 400 }: ImageSliderPr
       >
         {images.map((image, index) => (
           <SwiperSlide key={index}>
-            <div className="relative w-full h-full bg-gray-100">
+            <div className="relative w-full h-full bg-white">
               <Image
                 src={image}
                 alt={`${alt} ${index + 1}`}
                 fill
-                className="object-cover"
+                className={objectFit === 'contain' ? 'object-contain' : 'object-cover'}
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 100vw, 1920px"
                 priority={index === 0}
               />
