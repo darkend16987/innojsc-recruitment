@@ -8,7 +8,7 @@ import ImageSlider from '@/components/ImageSlider';
 import { GraduationCap, Users, Award } from 'lucide-react';
 
 // Danh sách ảnh lộ trình đào tạo sinh viên
-const STUDENT_TRAINING_IMAGES = Array.from({ length: 2 }, (_, i) => `/images/recruitment/student-training/${i + 1}.webp`);
+const STUDENT_TRAINING_IMAGES = Array.from({ length: 3 }, (_, i) => `/images/recruitment/student-training/${i + 1}.webp`);
 
 export default function InternshipOpportunityPage() {
   return (
