@@ -135,7 +135,7 @@ export default function WhyInnoPage() {
       </section>
 
       {/* FULL WIDTH SLIDER SECTION - Hoạt động đào tạo */}
-      <section className="mb-20 bg-white">
+      <section className="bg-white pb-20">
         <div className="text-center mb-8 py-8">
           <h3 className="text-xl font-semibold text-gray-900">
             Hoạt động đào tạo và văn hóa học tập
@@ -152,7 +152,7 @@ export default function WhyInnoPage() {
       </section>
 
       {/* Life at INNO Section */}
-      <section className="mb-20 bg-white">
+      <section className="bg-white pb-20">
         <div className="flex items-center justify-center mb-8 py-8">
           <Users className="w-12 h-12 text-primary mr-4" />
           <h2 className="text-3xl font-bold text-gray-900">Cuộc sống tại INNO</h2>
