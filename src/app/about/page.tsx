@@ -523,15 +523,15 @@ export default function AboutPage() {
         </section>
 
         {/* Full Width Extra Image Section */}
-        <section className="mb-32 rounded-3xl overflow-hidden shadow-2xl relative">
-          <div className="relative w-full aspect-[21/9] md:aspect-[24/9]">
+        <section className="mb-32 rounded-3xl overflow-hidden shadow-2xl">
+          <div className="relative w-full">
             <Image
-              src="/images/recruitment/about/company-culture.webp" // Sử dụng ảnh đã có trong thư viện hoặc thay thế bằng ảnh ngang mong muốn
-              alt="Văn hóa INNO"
-              fill
-              className="object-cover"
+              src="/images/recruitment/about/company-culture.webp"
+              alt="Văn hóa INNO - 8 Giá trị cốt lõi"
+              width={2123}
+              height={1194}
+              className="w-full h-auto"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
           </div>
         </section>
 
