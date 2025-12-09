@@ -491,7 +491,7 @@ export default function AboutPage() {
         <section className="mb-20">
           <div className="grid md:grid-cols-3 gap-8 mx-auto">
             {/* Tầm nhìn */}
-            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-100 group">
               <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 TẦM NHÌN
               </h3>
