@@ -39,7 +39,7 @@ export default function WhyInnoPage() {
             Vì sao nên chọn INNO?
           </h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
-            INNO là nơi bạn vừa được thử thách với những dự án quy mô lớn, vừa được hỗ trợ, đào tạo và phát triển bản thân trong một tập thể thân thiện, nhiệt huyết.
+            INNO là nơi bạn vừa được thử thách với những dự án quy mô lớn, vừa được hỗ trợ, đào tạo thực chiến và phát triển bản thân trong một tập thể thân thiện, nhiệt huyết.
           </p>
         </div>
       </div>

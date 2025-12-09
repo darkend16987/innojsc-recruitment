@@ -67,7 +67,7 @@ const FLOOR_DATA = [
     label: 'Tầng 6',
     name: 'Khối Kiến Trúc & Nội Thất',
     departments: ['Phòng Kiến trúc (AS) 1', 'Phòng Kiến trúc (AS) 8', 'Phòng Nội thất INNO'],
-    description: 'Không gian sáng tạo dành cho các nhóm thiết kế chuyên sâu.',
+    description: 'Zone 6, căn cứ của các KTS vẽ giỏi, quậy giỏi, quẩy càng ác',
     color: 'bg-orange-50 border-orange-100'
   },
   {
@@ -76,7 +76,7 @@ const FLOOR_DATA = [
     label: 'Tầng 5',
     name: 'Khối Kiến Trúc & Cảnh Quan',
     departments: ['Phòng Kiến trúc (AS) 3, 4, 10', 'Phòng Cảnh quan (LS) 1', 'Phòng BIM 1'],
-    description: 'Tổ hợp thiết kế kiến trúc đa năng và quy hoạch cảnh quan.',
+    description: 'Liên minh KTS INNO.',
     color: 'bg-yellow-50 border-yellow-100'
   },
   {
@@ -85,7 +85,7 @@ const FLOOR_DATA = [
     label: 'Tầng 4',
     name: 'Khối Kết Cấu & Kiến Trúc',
     departments: ['Phòng Kết cấu (SS) 1, 2, 3', 'Phòng Kiến trúc (AS) 11'],
-    description: 'Khu vực kỹ thuật chuyên sâu về kết cấu công trình.',
+    description: 'Đại bản doanh Kết cấu INNO.',
     color: 'bg-green-50 border-green-100'
   },
   {
@@ -103,7 +103,7 @@ const FLOOR_DATA = [
     label: 'Tầng 2',
     name: 'Khối Kỹ Thuật MEP & Dự Toán',
     departments: ['Phòng MEP (Cơ điện, Nước, HVAC)', 'PCCC', 'Phòng Dự toán'],
-    description: 'Trung tâm kỹ thuật cơ điện và kiểm soát chi phí.',
+    description: 'Trung tâm MEP và Phòng dự toán xây dựng.',
     color: 'bg-blue-50 border-blue-100'
   },
   {
@@ -121,7 +121,7 @@ const FLOOR_DATA = [
     label: 'Tầng 1',
     name: 'Khối Văn Phòng Hỗ Trợ',
     departments: ['Hành chính - Nhân sự', 'Kế toán - Tài chính', 'Đấu thầu - Hợp đồng'],
-    description: 'Bộ mặt đón tiếp và vận hành các thủ tục hành chính.',
+    description: 'Bộ mặt đón tiếp và vận hành các thủ tục.',
     color: 'bg-purple-50 border-purple-100'
   },
   {
@@ -130,7 +130,7 @@ const FLOOR_DATA = [
     label: 'Tầng Hầm',
     name: 'Khu Vực Hậu Cần',
     departments: ['Khu vực để xe máy', 'Kỹ thuật tòa nhà'],
-    description: 'Không gian tiện ích dành cho phương tiện đi lại.',
+    description: 'Khu vực kỹ thuật và hầm để xe máy cán bộ nhân viên INNO.',
     color: 'bg-gray-50 border-gray-200'
   }
 ];
@@ -386,7 +386,7 @@ export default function AboutPage() {
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">WELCOME TO INNO</h1>
           <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
-            Nơi những Kiến trúc sư, Kỹ sư và Chuyên gia trẻ không chỉ làm việc, mà còn phát triển và tỏa sáng.
+            Nơi những Kiến trúc sư, Kỹ sư và Chuyên gia trẻ không chỉ làm việc, trải nghiệm văn hóa,mà còn phát triển và xây dựng ước mơ của mình.
           </p>
         </div>
       </div>
