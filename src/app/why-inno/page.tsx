@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image'; // Thêm dòng này để dùng Image
+import Image from 'next/image';
 import Link from 'next/link';
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
@@ -18,7 +18,7 @@ export default function WhyInnoPage() {
     <div className="min-h-screen bg-gray-50">
       <Header />
 
-      {/* Hero Section */}
+      {/* Hero Section - Full Width */}
       <div className="relative py-24 sm:py-32 flex items-center justify-center min-h-[400px]">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
@@ -29,11 +29,11 @@ export default function WhyInnoPage() {
             className="object-cover"
             priority
           />
-          {/* Overlay màu đen mờ giúp text trắng dễ đọc hơn */}
+          {/* Overlay màu đen mờ */}
           <div className="absolute inset-0 bg-black/60"></div>
         </div>
 
-        {/* Nội dung text đặt lên trên (z-10) */}
+        {/* Nội dung text */}
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
           <h1 className="text-4xl md:text-5xl font-bold mb-6">
             Vì sao nên chọn INNO?
@@ -44,28 +44,29 @@ export default function WhyInnoPage() {
         </div>
       </div>
 
-      {/* Main Content */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
-
-        {/* Training & Development Section */}
-        <section className="mb-20">
-          <div className="flex items-center justify-center mb-8">
-            <BookOpen className="w-12 h-12 text-primary mr-4" />
+      {/* SECTION 1: Giới thiệu Đào tạo & Phát triển (Trong Container) */}
+      <section className="py-16 bg-white">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex flex-col items-center justify-center mb-10 text-center">
+            <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+              <BookOpen className="w-8 h-8 text-primary" />
+            </div>
             <h2 className="text-3xl font-bold text-gray-900">Đào tạo và phát triển</h2>
+            <div className="w-20 h-1 bg-primary rounded-full mt-4"></div>
           </div>
 
-          <div className="max-w-4xl mx-auto mb-12">
+          <div className="max-w-4xl mx-auto mb-16">
             <p className="text-gray-700 leading-relaxed text-lg text-center">
               INNO Academy phối hợp chặt chẽ với Ban lãnh đạo, các phòng ban và đội ngũ nhân sự để thiết kế những chương trình đào tạo hiệu quả. Chúng tôi mong muốn xây dựng một văn hóa học tập, nơi mọi thành viên đều có cơ hội phát triển. Vì vậy, INNO triển khai và duy trì các khóa đào tạo về <strong className="text-primary">kỹ năng chuyên môn, quản lý dự án, BIM và lãnh đạo</strong>, được thiết kế phù hợp với từng nhóm nhân viên, nhằm nâng cao năng lực và đồng hành cùng sự nghiệp của mỗi cá nhân.
             </p>
           </div>
 
           {/* Training Programs Grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
+          <div className="grid md:grid-cols-2 gap-8">
             {/* Program 1 */}
-            <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-primary">
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-100 group">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                   <Users className="w-6 h-6 text-primary" />
                 </div>
                 <div>
@@ -74,15 +75,15 @@ export default function WhyInnoPage() {
                   </h3>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">
-                Khi bước chân vào INNO, mỗi nhân viên mới sẽ luôn được chào đón nồng nhiệt và hướng dẫn từng bước để làm quen với văn hóa công ty, các phòng ban và quy trình dự án. Chương trình hội nhập giúp bạn tích hợp nhanh, kết nối đồng nghiệp và phát huy năng lực tối đa ngay từ những ngày đầu tiên.
+              <p className="text-gray-600 leading-relaxed">
+                Chương trình hội nhập giúp bạn tích hợp nhanh, kết nối đồng nghiệp và phát huy năng lực tối đa ngay từ những ngày đầu tiên.
               </p>
             </div>
 
             {/* Program 2 */}
-            <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-primary">
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-100 group">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                   <BookOpen className="w-6 h-6 text-primary" />
                 </div>
                 <div>
@@ -91,15 +92,15 @@ export default function WhyInnoPage() {
                   </h3>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">
-                INNO tổ chức các chương trình đào tạo về chuyên môn, kỹ năng mềm, quản lý dự án và BIM, được thiết kế riêng cho từng nhóm nhân viên. Mục tiêu là giúp bạn nâng cao năng lực, tự tin xử lý dự án thực tế và mở rộng cơ hội phát triển nghề nghiệp.
+              <p className="text-gray-600 leading-relaxed">
+                Các chương trình đào tạo về chuyên môn, kỹ năng mềm, quản lý dự án và BIM giúp bạn nâng cao năng lực và tự tin xử lý dự án thực tế.
               </p>
             </div>
 
             {/* Program 3 */}
-            <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-primary">
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-100 group">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                   <TrendingUp className="w-6 h-6 text-primary" />
                 </div>
                 <div>
@@ -108,15 +109,15 @@ export default function WhyInnoPage() {
                   </h3>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">
-                Chúng tôi tin vào việc phát triển nhân sự tiềm năng, chuẩn bị đội ngũ kế thừa cho các vị trí chủ chốt. Nhân viên sẽ được hướng dẫn, mentoring và thử thách để có thể đảm nhận vai trò lãnh đạo trong tương lai và gắn bó lâu dài với công ty.
+              <p className="text-gray-600 leading-relaxed">
+                Hướng dẫn, mentoring và thử thách để nhân viên tiềm năng có thể đảm nhận vai trò lãnh đạo trong tương lai.
               </p>
             </div>
 
             {/* Program 4 */}
-            <div className="bg-white rounded-lg shadow-md p-8 border-l-4 border-primary">
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-100 group">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-primary/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform">
                   <Award className="w-6 h-6 text-primary" />
                 </div>
                 <div>
@@ -125,14 +126,13 @@ export default function WhyInnoPage() {
                   </h3>
                 </div>
               </div>
-              <p className="text-gray-700 leading-relaxed">
-                Với mục tiêu nuôi dưỡng và phát triển nhân tài, INNO mang đến những chương trình thực tập và trải nghiệm dành cho sinh viên, thực tập sinh. Tại INNO, bạn sẽ có cơ hội tham gia trực tiếp vào các dự án thực tế, quy mô lớn, từ đó khám phá sở thích nghề nghiệp, trau dồi kỹ năng chuyên môn và tích lũy kinh nghiệm thực tiễn trong ngành xây dựng – thiết kế.
+              <p className="text-gray-600 leading-relaxed">
+                Chương trình thực tập và trải nghiệm dành cho sinh viên, tạo cơ hội tham gia trực tiếp vào các dự án thực tế quy mô lớn.
               </p>
             </div>
           </div>
-        </section>
-
-      </div>
+        </div>
+      </section>
 
       {/* FULL WIDTH SLIDER SECTION - Hoạt động đào tạo */}
       <section className="mb-20">
