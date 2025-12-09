@@ -247,7 +247,7 @@ const InteractiveBuilding = () => {
                     }}
                     onMouseEnter={() => setHoveredFloor(floor.id)}
                   />
-                  
+
                   {/* Label hiển thị khi hover */}
                   {hoveredFloor === floor.id && (
                     <text
