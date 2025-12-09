@@ -503,23 +503,27 @@ export default function AboutPage() {
             </div>
 
             {/* Sứ mệnh */}
-            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-              <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                SỨ MỆNH
-              </h3>
-              <p className="text-slate-600 text-lg leading-relaxed flex-grow">
-                Đưa năng lực tư vấn thiết kế ngang tầm khu vực và tiệm cận thế giới.
-              </p>
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+              <div className="flex items-start gap-4 mb-4">
+                <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  SỨ MỆNH
+                </h3>
+                <p className="text-slate-600 text-lg leading-relaxed flex-grow">
+                  Đưa năng lực tư vấn thiết kế ngang tầm khu vực và tiệm cận thế giới.
+                </p>
+              </div>
             </div>
 
             {/* Giá trị cốt lõi */}
-            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
-              <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                GIÁ TRỊ CỐT LÕI
-              </h3>
-              <p className="text-slate-600 text-lg leading-relaxed flex-grow">
-                8 giá trị văn hóa cốt lõi đặc sắc định hình bản sắc - con người INNO.
-              </p>
+            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-100 group">
+              <div className="flex items-start gap-4 mb-4">
+                <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                  GIÁ TRỊ CỐT LÕI
+                </h3>
+                <p className="text-slate-600 text-lg leading-relaxed flex-grow">
+                  8 giá trị văn hóa cốt lõi đặc sắc định hình bản sắc - con người INNO.
+                </p>
+              </div>
             </div>
           </div>
         </section>
