@@ -11,7 +11,7 @@ import { BookOpen, Users, Trophy, TrendingUp, Award } from 'lucide-react';
 const TRAINING_IMAGES = Array.from({ length: 8 }, (_, i) => `/images/recruitment/training/${i + 1}.webp`);
 
 // Danh sách ảnh cuộc sống tại INNO
-const LIFE_AT_INNO_IMAGES = Array.from({ length: 8 }, (_, i) => `/images/recruitment/life-at-inno/${i + 1}.webp`);
+const LIFE_AT_INNO_IMAGES = Array.from({ length: 7 }, (_, i) => `/images/recruitment/life-at-inno/${i + 1}.webp`);
 
 export default function WhyInnoPage() {
   return (
