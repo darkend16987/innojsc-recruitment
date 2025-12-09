@@ -491,106 +491,105 @@ export default function AboutPage() {
         <section className="mb-20">
           <div className="grid md:grid-cols-3 gap-8 mx-auto">
             {/* Tầm nhìn */}
-            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-200 group">
-              <div className="flex items-start gap-4 mb-4">
-                <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                  TẦM NHÌN
-                </h3>
-                <p className="text-slate-600 text-lg leading-relaxed flex-grow">
+            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+              <h3 className="text-2xl font-black text-red-700 mb-8 uppercase tracking-wider text-center" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                TẦM NHÌN
+              </h3>
+              <div className="flex-grow flex items-center justify-center">
+                <p className="text-slate-700 text-lg leading-loose text-center">
                   Trở thành công ty tư vấn thiết kế dẫn đầu về chất lượng và dịch vụ tại Việt Nam.
                 </p>
               </div>
             </div>
 
             {/* Sứ mệnh */}
-            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-200 group">
-              <div className="flex items-start gap-4 mb-4">
-                <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                  SỨ MỆNH
-                </h3>
-                <p className="text-slate-600 text-lg leading-relaxed flex-grow">
+            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+              <h3 className="text-2xl font-black text-red-700 mb-8 uppercase tracking-wider text-center" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                SỨ MỆNH
+              </h3>
+              <div className="flex-grow flex items-center justify-center">
+                <p className="text-slate-700 text-lg leading-loose text-center">
                   Đưa năng lực tư vấn thiết kế ngang tầm khu vực và tiệm cận thế giới.
                 </p>
               </div>
             </div>
 
             {/* Giá trị cốt lõi */}
-            <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-200 group">
-              <div className="flex items-start gap-4 mb-4">
-                <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
-                  GIÁ TRỊ CỐT LÕI
-                </h3>
-                <p className="text-slate-600 text-lg leading-relaxed flex-grow">
+            <div className="bg-white p-10 rounded-2xl shadow-lg border border-slate-100 hover:border-red-200 transition-all duration-300 flex flex-col h-full hover:-translate-y-1">
+              <h3 className="text-2xl font-black text-red-700 mb-8 uppercase tracking-wider text-center" style={{ fontFamily: 'var(--font-montserrat)' }}>
+                GIÁ TRỊ CỐT LÕI
+              </h3>
+              <div className="flex-grow flex items-center justify-center">
+                <p className="text-slate-700 text-lg leading-loose text-center">
                   8 giá trị văn hóa cốt lõi đặc sắc định hình bản sắc - con người INNO.
                 </p>
               </div>
             </div>
           </div>
         </section>
-      </div>
 
-      {/* Full Width Extra Image Section */}
-      <section className="mb-32">
-        <div className="w-full">
-          <Image
-            src="/images/recruitment/about/company-culture.webp"
-            alt="Văn hóa INNO - 8 Giá trị cốt lõi"
-            width={2403}
-            height={1352}
-            className="w-full h-auto"
-          />
-        </div>
-      </section>
-
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* --- TRỤ SỞ INNO INTERACTIVE --- */}
-        <section className="mb-32 scroll-mt-24" id="office-location">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>KHÔNG GIAN LÀM VIỆC</h2>
-            <p className="text-slate-500 text-lg flex items-center justify-center gap-2">
-              <MapPin className="w-5 h-5 text-red-700" />
-              Trụ sở chính: 39 Thượng Thụy, Phú Thượng, Hà Nội
-            </p>
+        {/* Full Width Extra Image Section */}
+        <section className="mb-32">
+          <div className="w-full">
+            <Image
+              src="/images/recruitment/about/company-culture.webp"
+              alt="Văn hóa INNO - 8 Giá trị cốt lõi"
+              width={2403}
+              height={1352}
+              className="w-full h-auto"
+            />
           </div>
-
-          <InteractiveBuilding />
-
         </section>
 
-        {/* Awards Section */}
-        <section className="mb-20">
-          <h2 className="text-3xl font-bold text-center text-slate-900 mb-12" style={{ fontFamily: 'var(--font-montserrat)' }}>
-            Giải thưởng & Thành tựu
-          </h2>
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+          {/* --- TRỤ SỞ INNO INTERACTIVE --- */}
+          <section className="mb-32 scroll-mt-24" id="office-location">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl font-bold text-slate-900 mb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>KHÔNG GIAN LÀM VIỆC</h2>
+              <p className="text-slate-500 text-lg flex items-center justify-center gap-2">
+                <MapPin className="w-5 h-5 text-red-700" />
+                Trụ sở chính: 39 Thượng Thụy, Phú Thượng, Hà Nội
+              </p>
+            </div>
 
-          <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 border border-slate-100">
-            <div className="flex flex-col md:flex-row gap-12">
-              <div className="md:w-1/4 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-100 pb-8 md:pb-0 md:pr-8">
-                <div className="flex flex-col items-center gap-6">
-                  <button onClick={() => handleYearChange('up')} disabled={selectedYear === YEARS[YEARS.length - 1]} className="p-3 rounded-full hover:bg-red-50 text-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"><ChevronUp className="w-10 h-10" /></button>
-                  <div className="text-7xl font-black text-red-700 tracking-tighter" style={{ fontFamily: 'var(--font-montserrat)' }}>{selectedYear}</div>
-                  <button onClick={() => handleYearChange('down')} disabled={selectedYear === YEARS[0]} className="p-3 rounded-full hover:bg-red-50 text-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"><ChevronDown className="w-10 h-10" /></button>
+            <InteractiveBuilding />
+
+          </section>
+
+          {/* Awards Section */}
+          <section className="mb-20">
+            <h2 className="text-3xl font-bold text-center text-slate-900 mb-12" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              Giải thưởng & Thành tựu
+            </h2>
+
+            <div className="bg-white rounded-3xl shadow-xl p-8 lg:p-12 border border-slate-100">
+              <div className="flex flex-col md:flex-row gap-12">
+                <div className="md:w-1/4 flex flex-col items-center justify-center border-b md:border-b-0 md:border-r border-slate-100 pb-8 md:pb-0 md:pr-8">
+                  <div className="flex flex-col items-center gap-6">
+                    <button onClick={() => handleYearChange('up')} disabled={selectedYear === YEARS[YEARS.length - 1]} className="p-3 rounded-full hover:bg-red-50 text-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"><ChevronUp className="w-10 h-10" /></button>
+                    <div className="text-7xl font-black text-red-700 tracking-tighter" style={{ fontFamily: 'var(--font-montserrat)' }}>{selectedYear}</div>
+                    <button onClick={() => handleYearChange('down')} disabled={selectedYear === YEARS[0]} className="p-3 rounded-full hover:bg-red-50 text-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"><ChevronDown className="w-10 h-10" /></button>
+                  </div>
                 </div>
-              </div>
-              <div className="md:w-3/4">
-                <div className="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
-                  {AWARDS_DATA[selectedYear as keyof typeof AWARDS_DATA]?.map((item, index) => (
-                    <div key={index} className="group p-6 rounded-xl hover:bg-red-50 transition-all duration-300 border-l-4 border-transparent hover:border-red-700 bg-gray-50/50 hover:bg-red-50/80">
-                      <h4 className="font-bold text-xl text-slate-900 mb-2 flex items-start gap-3">
-                        <span className="w-2 h-2 rounded-full bg-red-700 mt-2.5 flex-shrink-0"></span>
-                        {item.project}
-                      </h4>
-                      <p className="text-slate-600 leading-relaxed pl-5">{item.award}</p>
-                    </div>
-                  ))}
+                <div className="md:w-3/4">
+                  <div className="space-y-4 max-h-[500px] overflow-y-auto pr-4 custom-scrollbar">
+                    {AWARDS_DATA[selectedYear as keyof typeof AWARDS_DATA]?.map((item, index) => (
+                      <div key={index} className="group p-6 rounded-xl hover:bg-red-50 transition-all duration-300 border-l-4 border-transparent hover:border-red-700 bg-gray-50/50 hover:bg-red-50/80">
+                        <h4 className="font-bold text-xl text-slate-900 mb-2 flex items-start gap-3">
+                          <span className="w-2 h-2 rounded-full bg-red-700 mt-2.5 flex-shrink-0"></span>
+                          {item.project}
+                        </h4>
+                        <p className="text-slate-600 leading-relaxed pl-5">{item.award}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-        </section>
-      </div>
+          </section>
+        </div>
 
-      <Footer />
-    </div>
-  );
-}
+        <Footer />
+      </div>
+      );  
+}   
