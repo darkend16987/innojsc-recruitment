@@ -527,20 +527,22 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
+      </div>
 
-        {/* Full Width Extra Image Section */}
-        <section className="mb-32 rounded-3xl overflow-hidden shadow-2xl">
-          <div className="relative w-full">
-            <Image
-              src="/images/recruitment/about/company-culture.webp"
-              alt="Văn hóa INNO - 8 Giá trị cốt lõi"
-              width={2123}
-              height={1194}
-              className="w-full h-auto"
-            />
-          </div>
-        </section>
+      {/* Full Width Extra Image Section */}
+      <section className="mb-32">
+        <div className="w-full">
+          <Image
+            src="/images/recruitment/about/company-culture.webp"
+            alt="Văn hóa INNO - 8 Giá trị cốt lõi"
+            width={2403}
+            height={1352}
+            className="w-full h-auto"
+          />
+        </div>
+      </section>
 
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* --- TRỤ SỞ INNO INTERACTIVE --- */}
         <section className="mb-32 scroll-mt-24" id="office-location">
           <div className="text-center mb-16">
