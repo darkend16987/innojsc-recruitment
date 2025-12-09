@@ -493,7 +493,6 @@ export default function AboutPage() {
             {/* Tầm nhìn */}
             <div className="bg-gray-50 rounded-xl p-8 hover:shadow-lg transition-all duration-300 border border-gray-100 group">
               <div className="flex items-start gap-4 mb-4">
-                <div className="w-12 h-12 bg-white rounded-lg shadow-sm flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform"></div>
                 <h3 className="text-2xl font-black text-red-700 mb-6 uppercase tracking-wider border-b-2 border-red-100 pb-4" style={{ fontFamily: 'var(--font-montserrat)' }}>
                   TẦM NHÌN
                 </h3>
