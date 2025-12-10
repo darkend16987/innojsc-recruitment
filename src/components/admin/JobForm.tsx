@@ -8,6 +8,7 @@ import { getSettings, SystemSettings } from '@/lib/settings';
 import { useToast } from '@/components/Toast';
 import { Save, X, AlertCircle, Tag } from 'lucide-react';
 import { generateUniqueSlug } from '@/lib/slug';
+import { markdownToHtml, htmlToMarkdown } from '@/lib/markdown';
 
 interface JobFormProps {
   job?: Job;
@@ -30,7 +31,7 @@ export default function JobForm({ job, mode }: JobFormProps) {
     jobType: job?.jobType || '',
     expertise: job?.expertise || '',
     experience: job?.experience || 0,
-    description: job?.description || '',
+    description: job?.description ? htmlToMarkdown(job.description) : '',
     requirements: job?.requirements || [],
     benefits: job?.benefits || [],
     tags: job?.tags || [],
@@ -156,8 +157,10 @@ export default function JobForm({ job, mode }: JobFormProps) {
     setLoading(true);
 
     try {
+      // Convert markdown description to HTML before saving
       const jobData = {
         ...formData,
+        description: markdownToHtml(formData.description),
         publishedAt: job?.publishedAt || new Date().toISOString(),
       };
 
