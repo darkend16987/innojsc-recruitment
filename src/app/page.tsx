@@ -26,7 +26,30 @@ export default function HomePage() {
   // Location filter (only location now)
   const [selectedLocation, setSelectedLocation] = useState<string>('');
 
-  const locations = ['Hà Nội', 'TP.Hồ Chí Minh'];
+  const locations = ['Hà Nội', 'TP. Hồ Chí Minh'];
+
+  // Helper function to check if job location matches selected filter
+  const isLocationMatch = (jobLocation: string, filterLocation: string): boolean => {
+    if (!filterLocation) return true;
+
+    const jobLoc = jobLocation.toLowerCase();
+
+    // Map filter locations to actual addresses
+    if (filterLocation === 'Hà Nội') {
+      return jobLoc.includes('hà nội') ||
+             jobLoc.includes('39 thượng thụy') ||
+             jobLoc.includes('phú thượng');
+    }
+
+    if (filterLocation === 'TP. Hồ Chí Minh' || filterLocation === 'TP.Hồ Chí Minh') {
+      return jobLoc.includes('hồ chí minh') ||
+             jobLoc.includes('hoàng anh river view') ||
+             jobLoc.includes('37 nguyễn văn hưởng') ||
+             jobLoc.includes('an khánh');
+    }
+
+    return jobLocation === filterLocation;
+  };
 
   useEffect(() => {
     fetchJobs();
@@ -75,8 +98,8 @@ export default function HomePage() {
       if (!matchesSearch) return false;
     }
 
-    // Location filter
-    if (selectedLocation && job.location !== selectedLocation) return false;
+    // Location filter - use helper function for matching
+    if (!isLocationMatch(job.location, selectedLocation)) return false;
 
     return true;
   });

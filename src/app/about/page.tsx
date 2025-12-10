@@ -103,7 +103,7 @@ const FLOOR_DATA = [
     label: 'Tầng 2',
     name: 'Khối Kỹ Thuật MEP & Dự Toán',
     departments: ['Phòng MEP (Cơ điện, Nước, HVAC)', 'PCCC', 'Phòng Dự toán'],
-    description: 'Trung tâm MEP và Phòng dự toán xây dựng.',
+    description: 'Không gian làm việc của đội ngũ kỹ thuật MEP và Dự toán.',
     color: 'bg-blue-50 border-blue-100'
   },
   {
@@ -121,7 +121,7 @@ const FLOOR_DATA = [
     label: 'Tầng 1',
     name: 'Khối Văn Phòng Hỗ Trợ',
     departments: ['Hành chính - Nhân sự', 'Kế toán - Tài chính', 'Đấu thầu - Hợp đồng'],
-    description: 'Bộ mặt đón tiếp và vận hành các thủ tục.',
+    description: 'Không gian làm việc của các bộ phận hỗ trợ và vận hành.',
     color: 'bg-purple-50 border-purple-100'
   },
   {
@@ -208,7 +208,7 @@ const InteractiveBuilding = () => {
   return (
     <div className="flex flex-col lg:flex-row gap-8 items-stretch min-h-[600px] max-w-7xl mx-auto px-4">
       {/* Cột trái: Hình ảnh tương tác */}
-      <div className="lg:w-1/2 relative group rounded-2xl overflow-hidden shadow-2xl bg-white border border-gray-100">
+      <div className="lg:w-1/2 relative group rounded-3xl overflow-hidden shadow-2xl bg-white border border-gray-200 hover:shadow-3xl transition-shadow duration-500">
 
         <div className="relative w-full h-full min-h-[500px] lg:min-h-[700px] bg-white">
 
@@ -279,41 +279,45 @@ const InteractiveBuilding = () => {
         <div className={`transition-all duration-300 ease-in-out`}>
 
           {activeFloorData ? (
-            <div className={`h-full p-8 rounded-2xl border shadow-xl ${activeFloorData.color} transition-all duration-300 animate-in fade-in slide-in-from-right-4`}>
-              <div className="inline-block px-3 py-1 bg-red-700 text-white text-sm font-bold rounded mb-4 shadow-sm">
+            <div className={`h-full p-8 md:p-10 rounded-3xl border-2 shadow-2xl ${activeFloorData.color} transition-all duration-500 animate-in fade-in slide-in-from-right-4`}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-700 to-red-600 text-white text-sm font-bold rounded-full mb-5 shadow-lg">
+                <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
                 {activeFloorData.label}
               </div>
-              <h3 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6 leading-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-8 leading-tight tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 {activeFloorData.name}
               </h3>
 
-              <div className="space-y-6">
+              <div className="space-y-8">
                 <div>
-                  <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-3">Chức năng & Phòng ban</h4>
+                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <span className="w-8 h-0.5 bg-red-600"></span>
+                    Chức năng & Phòng ban
+                  </h4>
                   <ul className="space-y-3">
                     {activeFloorData.departments.map((dept, idx) => (
-                      <li key={idx} className="flex items-start gap-3">
-                        <ArrowRight className="w-5 h-5 text-red-700 flex-shrink-0 mt-0.5" />
-                        <span className="text-lg text-gray-800 font-medium">{dept}</span>
+                      <li key={idx} className="flex items-start gap-3 group/item">
+                        <ArrowRight className="w-5 h-5 text-red-700 flex-shrink-0 mt-1 group-hover/item:translate-x-1 transition-transform" />
+                        <span className="text-lg text-gray-800 font-semibold leading-relaxed">{dept}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
 
-                <div className="pt-6 border-t border-gray-200/50">
-                  <p className="text-gray-600 italic text-lg leading-relaxed">
+                <div className="pt-6 border-t-2 border-gray-300/30">
+                  <p className="text-gray-700 italic text-lg leading-relaxed font-medium">
                     "{activeFloorData.description}"
                   </p>
                 </div>
               </div>
             </div>
           ) : (
-            <div className="h-full flex flex-col items-center justify-center p-8 text-center bg-gray-50 rounded-2xl border-2 border-dashed border-gray-200">
-              <div className="w-20 h-20 bg-white rounded-full shadow-md flex items-center justify-center mb-6">
-                <Info className="w-10 h-10 text-red-700" />
+            <div className="h-full flex flex-col items-center justify-center p-8 md:p-10 text-center bg-gradient-to-br from-gray-50 to-white rounded-3xl border-2 border-dashed border-gray-300">
+              <div className="w-24 h-24 bg-gradient-to-br from-red-600 to-red-700 rounded-full shadow-xl flex items-center justify-center mb-6 animate-pulse">
+                <Info className="w-12 h-12 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-2" style={{ fontFamily: 'var(--font-montserrat)' }}>Khám phá Trụ sở INNO</h3>
-              <p className="text-gray-500 max-w-md mx-auto">
+              <h3 className="text-2xl md:text-3xl font-black text-gray-900 mb-3" style={{ fontFamily: 'var(--font-montserrat)' }}>Khám phá Trụ sở INNO</h3>
+              <p className="text-gray-600 max-w-md mx-auto text-lg leading-relaxed">
                 Di chuyển chuột vào sơ đồ mặt cắt bên trái để xem bố trí các phòng ban chức năng tại trụ sở mới của chúng tôi.
               </p>
             </div>

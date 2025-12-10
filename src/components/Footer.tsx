@@ -12,8 +12,8 @@ const CONTACT_INFO = {
       detail: '39 Thượng Thụy, Phú Thượng, Hà Nội',
     },
     {
-      name: 'TP.HCM',
-      detail: 'A01.03, Hoàng Anh River View, 37 Nguyễn Văn Hưởng, Thảo Điền',
+      name: 'TP. Hồ Chí Minh',
+      detail: 'Căn hộ C01.05, Chung cư Hoàng Anh River View, 37 Nguyễn Văn Hưởng, Phường An Khánh, TP Hồ Chí Minh',
     },
   ],
   socials: {
