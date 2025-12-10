@@ -22,7 +22,7 @@ export function markdownToHtml(markdown: string): string {
     // Check if line is a bullet point
     if (line.startsWith('- ')) {
       if (!inList) {
-        processedLines.push('<ul class="list-disc list-inside space-y-2 ml-4">');
+        processedLines.push('<ul class="list-disc list-inside space-y-2 text-gray-700 leading-relaxed">');
         inList = true;
       }
       // Remove the '- ' and wrap in <li>
