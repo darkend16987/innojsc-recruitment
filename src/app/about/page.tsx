@@ -58,7 +58,6 @@ const FLOOR_DATA = [
     label: 'Tầng 7',
     name: 'Ban Lãnh Đạo & Điều Hành',
     departments: ['Ban lãnh đạo', 'Phòng IBIM', 'Marketing', 'IT', 'Đào tạo'],
-    description: 'Trung tâm điều hành chiến lược và các phòng ban hỗ trợ then chốt.',
     color: 'bg-red-50 border-red-100'
   },
   {
@@ -67,7 +66,6 @@ const FLOOR_DATA = [
     label: 'Tầng 6',
     name: 'Khối Kiến Trúc & Nội Thất',
     departments: ['Phòng Kiến trúc (AS) 1', 'Phòng Kiến trúc (AS) 8', 'Phòng Nội thất INNO'],
-    description: 'Zone 6, căn cứ của các KTS vẽ giỏi, quậy giỏi, quẩy càng ác',
     color: 'bg-orange-50 border-orange-100'
   },
   {
@@ -76,7 +74,6 @@ const FLOOR_DATA = [
     label: 'Tầng 5',
     name: 'Khối Kiến Trúc & Cảnh Quan',
     departments: ['Phòng Kiến trúc (AS) 3, 4, 10', 'Phòng Cảnh quan (LS) 1', 'Phòng BIM 1'],
-    description: 'Liên minh KTS INNO.',
     color: 'bg-yellow-50 border-yellow-100'
   },
   {
@@ -85,7 +82,6 @@ const FLOOR_DATA = [
     label: 'Tầng 4',
     name: 'Khối Kết Cấu & Kiến Trúc',
     departments: ['Phòng Kết cấu (SS) 1, 2, 3', 'Phòng Kiến trúc (AS) 11'],
-    description: 'Đại bản doanh Kết cấu INNO.',
     color: 'bg-green-50 border-green-100'
   },
   {
@@ -94,7 +90,6 @@ const FLOOR_DATA = [
     label: 'Tầng 3',
     name: 'Tiện Ích & Sinh Hoạt Chung',
     departments: ['INNO Club', 'Không gian sinh hoạt chung', 'Căng tin'],
-    description: 'Nơi kết nối, thư giãn và tái tạo năng lượng cho CBNV.',
     color: 'bg-teal-50 border-teal-100'
   },
   {
@@ -103,7 +98,6 @@ const FLOOR_DATA = [
     label: 'Tầng 2',
     name: 'Khối Kỹ Thuật MEP & Dự Toán',
     departments: ['Phòng MEP (Cơ điện, Nước, HVAC)', 'PCCC', 'Phòng Dự toán'],
-    description: 'Không gian làm việc của đội ngũ kỹ thuật MEP và Dự toán.',
     color: 'bg-blue-50 border-blue-100'
   },
   {
@@ -112,7 +106,6 @@ const FLOOR_DATA = [
     label: 'Tầng Lửng',
     name: 'Hội Nghị & Sự Kiện',
     departments: ['Meeting Hall', 'Phòng hội thảo'],
-    description: 'Không gian tổ chức các sự kiện lớn và đào tạo nội bộ.',
     color: 'bg-indigo-50 border-indigo-100'
   },
   {
@@ -121,7 +114,6 @@ const FLOOR_DATA = [
     label: 'Tầng 1',
     name: 'Khối Văn Phòng Hỗ Trợ',
     departments: ['Hành chính - Nhân sự', 'Kế toán - Tài chính', 'Đấu thầu - Hợp đồng'],
-    description: 'Không gian làm việc của các bộ phận hỗ trợ và vận hành.',
     color: 'bg-purple-50 border-purple-100'
   },
   {
@@ -130,7 +122,6 @@ const FLOOR_DATA = [
     label: 'Tầng Hầm',
     name: 'Khu Vực Hậu Cần',
     departments: ['Khu vực để xe máy', 'Kỹ thuật tòa nhà'],
-    description: 'Khu vực kỹ thuật và hầm để xe máy cán bộ nhân viên INNO.',
     color: 'bg-gray-50 border-gray-200'
   }
 ];
@@ -279,36 +270,28 @@ const InteractiveBuilding = () => {
         <div className={`transition-all duration-300 ease-in-out`}>
 
           {activeFloorData ? (
-            <div className={`h-full p-8 md:p-10 rounded-3xl border-2 shadow-2xl ${activeFloorData.color} transition-all duration-500 animate-in fade-in slide-in-from-right-4`}>
-              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-700 to-red-600 text-white text-sm font-bold rounded-full mb-5 shadow-lg">
+            <div className={`h-full p-8 md:p-10 rounded-3xl border-2 shadow-2xl ${activeFloorData.color} transition-all duration-500 animate-in fade-in slide-in-from-right-4 flex flex-col justify-center`}>
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-red-700 to-red-600 text-white text-sm font-bold rounded-full mb-6 shadow-lg w-fit">
                 <span className="w-2 h-2 bg-white rounded-full animate-pulse"></span>
                 {activeFloorData.label}
               </div>
-              <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-8 leading-tight tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
+              <h3 className="text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 mb-10 leading-tight tracking-tight" style={{ fontFamily: 'var(--font-montserrat)' }}>
                 {activeFloorData.name}
               </h3>
 
-              <div className="space-y-8">
-                <div>
-                  <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <span className="w-8 h-0.5 bg-red-600"></span>
-                    Chức năng & Phòng ban
-                  </h4>
-                  <ul className="space-y-3">
-                    {activeFloorData.departments.map((dept, idx) => (
-                      <li key={idx} className="flex items-start gap-3 group/item">
-                        <ArrowRight className="w-5 h-5 text-red-700 flex-shrink-0 mt-1 group-hover/item:translate-x-1 transition-transform" />
-                        <span className="text-lg text-gray-800 font-semibold leading-relaxed">{dept}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="pt-6 border-t-2 border-gray-300/30">
-                  <p className="text-gray-700 italic text-lg leading-relaxed font-medium">
-                    "{activeFloorData.description}"
-                  </p>
-                </div>
+              <div>
+                <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-5 flex items-center gap-2">
+                  <span className="w-10 h-0.5 bg-red-600"></span>
+                  Chức năng & Phòng ban
+                </h4>
+                <ul className="space-y-4">
+                  {activeFloorData.departments.map((dept, idx) => (
+                    <li key={idx} className="flex items-start gap-3 group/item">
+                      <ArrowRight className="w-6 h-6 text-red-700 flex-shrink-0 mt-0.5 group-hover/item:translate-x-1 transition-transform" />
+                      <span className="text-xl text-gray-800 font-semibold leading-relaxed">{dept}</span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             </div>
           ) : (
