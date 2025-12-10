@@ -176,7 +176,7 @@ export default function WhyInnoPage() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Why Join Section - Key Benefits */}
-        <section className="mb-20">
+        <section className="mb-20 pt-16">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Những lợi ích khi làm việc tại INNO
           </h2>
