@@ -16,30 +16,17 @@ export default function InternshipOpportunityPage() {
       <Header />
 
       {/* Hero Section */}
-      <div className="relative py-24 sm:py-32 flex items-center justify-center min-h-[400px]">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/recruitment/hero/internship-hero.webp"
-            alt="Cơ hội thực tập tại INNO"
-            fill
-            className="object-cover"
-            priority
-          />
-          {/* Overlay màu đen mờ */}
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
-
-        {/* Nội dung text */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">
-            Cơ hội thực tập tại INNO
-          </h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
-            Nơi sinh viên trở thành chuyên gia - Khởi đầu sự nghiệp vững chắc
-          </p>
-        </div>
-      </div>
+      <div className="relative w-full h-[400px]">
+              {/* Background Image - Chỉ hiển thị ảnh sạch */}
+              <Image
+                src="/images/recruitment/hero/internship-hero.webp"
+                alt="Cơ hội thực tập tại INNO"
+                fill
+                className="object-cover" // Giữ tỉ lệ ảnh đẹp, tự động cắt nếu màn hình không đúng tỉ lệ
+                priority
+                sizes="100vw"
+              />
+            </div>
 
       {/* Main Content */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-16">
