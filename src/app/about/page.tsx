@@ -357,7 +357,7 @@ export default function AboutPage() {
       {/* Hero Section */}
       <div className="relative min-h-[400px]">
         <Image
-          src="/images/recruitment/hero/about-hero1.webp"
+          src="/images/recruitment/hero/about-hero2.webp"
           alt="Về INNO"
           fill
           className="object-cover"
