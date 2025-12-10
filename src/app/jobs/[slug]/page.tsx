@@ -124,7 +124,12 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
         '@type': 'Place',
         address: {
           '@type': 'PostalAddress',
-          addressLocality: job.location === 'Hà Nội' ? 'Hanoi' : job.location === 'TP.HCM' ? 'Ho Chi Minh City' : 'Vietnam',
+          addressLocality:
+            job.location.toLowerCase().includes('hà nội') || job.location.toLowerCase().includes('39 thượng thụy')
+              ? 'Hanoi'
+              : job.location.toLowerCase().includes('hồ chí minh') || job.location.toLowerCase().includes('hoàng anh river view')
+              ? 'Ho Chi Minh City'
+              : 'Vietnam',
           addressCountry: 'VN',
         },
       },
@@ -370,14 +375,13 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                   <div>
                     <strong className="text-gray-700">Hà Nội:</strong>
                     <p className="text-gray-600 mt-1">
-                      39 Thượng Thụy, Phú Thượng, Tây Hồ, Hà Nội
+                      39 Thượng Thụy, Phú Thượng, Hà Nội
                     </p>
                   </div>
                   <div>
-                    <strong className="text-gray-700">TP.HCM:</strong>
+                    <strong className="text-gray-700">TP. Hồ Chí Minh:</strong>
                     <p className="text-gray-600 mt-1">
-                      A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng,
-                      phường Thảo Điền
+                      Căn hộ C01.05, Chung cư Hoàng Anh River View, 37 Nguyễn Văn Hưởng, Phường An Khánh, TP Hồ Chí Minh
                     </p>
                   </div>
                   <hr className="my-3" />

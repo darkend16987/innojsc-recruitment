@@ -16,13 +16,13 @@ const CONTACT_INFO = {
   addresses: [
     {
       name: 'Văn phòng Hà Nội',
-      detail: '39 Thượng Thụy, Phú Thượng',
+      detail: '39 Thượng Thụy, Phú Thượng, Hà Nội',
       mapUrl: 'https://maps.google.com/?q=39+Thượng+Thụy,+Phú+Thượng,+Hà+Nội',
     },
     {
-      name: 'Văn phòng TP.HCM',
-      detail: 'A01.03, Khu căn hộ Hoàng Anh River View, 37 Nguyễn Văn Hưởng, phường Thảo Điền',
-      mapUrl: 'https://maps.google.com/?q=37+Nguyễn+Văn+Hưởng,+Thảo+Điền,+Thủ+Đức',
+      name: 'Văn phòng TP. Hồ Chí Minh',
+      detail: 'Căn hộ C01.05, Chung cư Hoàng Anh River View, 37 Nguyễn Văn Hưởng, Phường An Khánh, TP Hồ Chí Minh',
+      mapUrl: 'https://maps.google.com/?q=Hoàng+Anh+River+View,+37+Nguyễn+Văn+Hưởng,+An+Khánh,+TP+Hồ+Chí+Minh',
     },
   ],
 };
