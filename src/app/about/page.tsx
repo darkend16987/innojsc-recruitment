@@ -355,27 +355,14 @@ export default function AboutPage() {
       <Header />
 
       {/* Hero Section */}
-      <div className="relative py-24 sm:py-32 flex items-center justify-center min-h-[400px]">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/recruitment/hero/about-hero2.webp"
-            alt="Về INNO"
-            fill
-            className="object-cover"
-            priority
-          />
-          {/* Overlay màu đen mờ */}
-          <div className="absolute inset-0 bg-black/60"></div>
-        </div>
-
-        {/* Nội dung text */}
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 text-white">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6">WELCOME TO INNO</h1>
-          <p className="text-xl md:text-2xl max-w-3xl mx-auto leading-relaxed">
-            Nơi những Kiến trúc sư, Kỹ sư và Chuyên gia trẻ không chỉ làm việc, trải nghiệm văn hóa, mà còn phát triển và xây dựng ước mơ của chính mình.
-          </p>
-        </div>
+      <div className="relative min-h-[400px]">
+        <Image
+          src="/images/recruitment/hero/about-hero1.webp"
+          alt="Về INNO"
+          fill
+          className="object-cover"
+          priority
+        />
       </div>
 
       {/* Intro Content */}
