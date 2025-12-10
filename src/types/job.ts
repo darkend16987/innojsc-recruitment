@@ -24,9 +24,10 @@ export interface Application {
   fullName: string;
   email: string;
   phone: string;
-  position?: string; // Vị trí mong muốn (optional)
-  expertise?: string; // Chuyên môn/Cấp bậc (optional)
+  birthYear?: string; // Năm sinh (optional)
+  rank?: string; // Cấp bậc: Junior, Senior, Lead... (optional)
   yearsOfExperience?: string; // Số năm kinh nghiệm (optional) - text range like "1-2 năm"
+  notes?: string; // Ghi chú thêm từ ứng viên (optional)
   coverLetter?: string; // Optional: thư xin việc/giới thiệu bản thân
   cvUrl: string;
   appliedAt: string;

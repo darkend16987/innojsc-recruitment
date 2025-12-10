@@ -90,17 +90,17 @@ export const onApplicationCreated = functions
               <span class="value">${application.phone}</span>
             </div>
 
-            ${application.position ? `
+            ${application.birthYear ? `
             <div class="info-row">
-              <span class="label">💼 Vị trí mong muốn:</span>
-              <span class="value">${application.position}</span>
+              <span class="label">🎂 Năm sinh:</span>
+              <span class="value">${application.birthYear}</span>
             </div>
             ` : ''}
 
-            ${application.expertise ? `
+            ${application.rank ? `
             <div class="info-row">
-              <span class="label">🎓 Chuyên môn:</span>
-              <span class="value">${application.expertise}</span>
+              <span class="label">🎓 Cấp bậc:</span>
+              <span class="value">${application.rank}</span>
             </div>
             ` : ''}
 
@@ -108,6 +108,13 @@ export const onApplicationCreated = functions
             <div class="info-row">
               <span class="label">⏱️ Kinh nghiệm:</span>
               <span class="value">${application.yearsOfExperience}</span>
+            </div>
+            ` : ''}
+
+            ${application.notes ? `
+            <div class="info-row">
+              <span class="label">📝 Ghi chú:</span>
+              <span class="value" style="white-space: pre-wrap;">${application.notes}</span>
             </div>
             ` : ''}
 
@@ -140,13 +147,14 @@ export const onApplicationCreated = functions
       </html>
     `;
 
-    // Build email subject with format: [Ứng tuyển] - name - job - location - chuyên ngành - số năm kinh nghiệm
+    // Build email subject with format: [Ứng tuyển] - name - job - location - cấp bậc - năm sinh - số năm KN
     const subjectParts = [
       '[Ứng tuyển]',
       application.fullName,
       jobData.title,
       jobData.location,
-      application.expertise || 'N/A',
+      application.rank || 'N/A',
+      application.birthYear ? `${application.birthYear}` : 'N/A',
       application.yearsOfExperience || 'N/A'
     ];
     const emailSubject = subjectParts.join(' - ');

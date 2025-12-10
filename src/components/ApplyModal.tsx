@@ -26,9 +26,10 @@ export default function ApplyModal({
     name: '',
     email: '',
     phone: '',
-    position: '',
-    expertise: '',
+    birthYear: '',
+    rank: '',
     yearsOfExperience: '',
+    notes: '',
   });
   const [cvFile, setCvFile] = useState<File | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -51,7 +52,7 @@ export default function ApplyModal({
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
@@ -129,9 +130,10 @@ export default function ApplyModal({
       name: '',
       email: '',
       phone: '',
-      position: '',
-      expertise: '',
-      yearsOfExperience: ''
+      birthYear: '',
+      rank: '',
+      yearsOfExperience: '',
+      notes: '',
     });
     setCvFile(null);
     setError('');
@@ -232,45 +234,42 @@ export default function ApplyModal({
               />
             </div>
 
-            {/* Position (Optional) */}
+            {/* Birth Year (Optional) */}
             <div>
-              <label htmlFor="position" className="block text-sm font-medium text-gray-700 mb-1">
-                Vị trí <span className="text-gray-400 text-xs">(Không bắt buộc)</span>
+              <label htmlFor="birthYear" className="block text-sm font-medium text-gray-700 mb-1">
+                Năm sinh <span className="text-gray-400 text-xs">(Không bắt buộc)</span>
               </label>
-              <select
-                id="position"
-                name="position"
-                value={formData.position}
+              <input
+                type="number"
+                id="birthYear"
+                name="birthYear"
+                value={formData.birthYear}
                 onChange={handleInputChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                disabled={isSubmitting || !settings}
-              >
-                <option value="">-- Chọn vị trí --</option>
-                {settings?.positions.map((pos) => (
-                  <option key={pos} value={pos}>
-                    {pos}
-                  </option>
-                ))}
-              </select>
+                placeholder="1995"
+                min="1950"
+                max={new Date().getFullYear()}
+                disabled={isSubmitting}
+              />
             </div>
 
-            {/* Expertise (Optional) */}
+            {/* Rank (Optional) */}
             <div>
-              <label htmlFor="expertise" className="block text-sm font-medium text-gray-700 mb-1">
-                Chuyên môn <span className="text-gray-400 text-xs">(Không bắt buộc)</span>
+              <label htmlFor="rank" className="block text-sm font-medium text-gray-700 mb-1">
+                Cấp bậc <span className="text-gray-400 text-xs">(Không bắt buộc)</span>
               </label>
               <select
-                id="expertise"
-                name="expertise"
-                value={formData.expertise}
+                id="rank"
+                name="rank"
+                value={formData.rank}
                 onChange={handleInputChange}
                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 disabled={isSubmitting || !settings}
               >
-                <option value="">-- Chọn chuyên môn --</option>
-                {settings?.expertiseLevels.map((exp) => (
-                  <option key={exp} value={exp}>
-                    {exp}
+                <option value="">-- Chọn cấp bậc --</option>
+                {settings?.expertiseLevels.map((level) => (
+                  <option key={level} value={level}>
+                    {level}
                   </option>
                 ))}
               </select>
@@ -296,6 +295,23 @@ export default function ApplyModal({
                 <option value="5-10 năm">5-10 năm</option>
                 <option value="Trên 10 năm">Trên 10 năm</option>
               </select>
+            </div>
+
+            {/* Notes (Optional) */}
+            <div>
+              <label htmlFor="notes" className="block text-sm font-medium text-gray-700 mb-1">
+                Ghi chú thêm <span className="text-gray-400 text-xs">(Không bắt buộc)</span>
+              </label>
+              <textarea
+                id="notes"
+                name="notes"
+                value={formData.notes}
+                onChange={handleInputChange}
+                rows={3}
+                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent resize-none"
+                placeholder="Thông tin bổ sung về bản thân, kinh nghiệm làm việc..."
+                disabled={isSubmitting}
+              />
             </div>
 
             {/* CV Upload */}

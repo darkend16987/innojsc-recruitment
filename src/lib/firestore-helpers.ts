@@ -167,9 +167,10 @@ export async function submitApplication(
     name: string;
     email: string;
     phone: string;
-    position?: string;
-    expertise?: string;
+    birthYear?: string;
+    rank?: string;
     yearsOfExperience?: string;
+    notes?: string;
   },
   cvFile: File
 ): Promise<string> {
@@ -184,9 +185,10 @@ export async function submitApplication(
       fullName: applicantData.name,
       email: applicantData.email,
       phone: applicantData.phone,
-      ...(applicantData.position && { position: applicantData.position }),
-      ...(applicantData.expertise && { expertise: applicantData.expertise }),
+      ...(applicantData.birthYear && { birthYear: applicantData.birthYear }),
+      ...(applicantData.rank && { rank: applicantData.rank }),
       ...(applicantData.yearsOfExperience && { yearsOfExperience: applicantData.yearsOfExperience }),
+      ...(applicantData.notes && { notes: applicantData.notes }),
       cvUrl,
       appliedAt: new Date().toISOString(),
       status: 'pending',
