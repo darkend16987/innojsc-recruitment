@@ -2,7 +2,7 @@
 'use client';
 
 import { Job } from '@/types/job';
-import { MapPin, Briefcase, Clock, DollarSign, Award } from 'lucide-react';
+import { MapPin, Briefcase, Clock, Wallet, Award } from 'lucide-react';
 import Link from 'next/link';
 
 interface JobCardProps {
@@ -102,7 +102,7 @@ export default function JobCard({ job, onApply, viewMode = 'list' }: JobCardProp
             {/* Salary */}
             {job.salary && (
               <div className="flex items-center gap-2 text-sm text-gray-600">
-                <DollarSign size={16} className="text-gray-400" />
+                <Wallet size={16} className="text-gray-400" />
                 <span className="font-medium text-primary">{job.salary}</span>
               </div>
             )}

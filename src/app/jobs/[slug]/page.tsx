@@ -4,7 +4,7 @@ import { useState, useEffect, use } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Script from 'next/script';
-import { ArrowLeft, MapPin, Briefcase, Clock, DollarSign, Building2, Share2 } from 'lucide-react';
+import { ArrowLeft, MapPin, Briefcase, Clock, Wallet, Building2, Share2 } from 'lucide-react';
 
 import { getJobById, getJobBySlug, getRelatedJobs } from '@/lib/firestore-helpers';
 import { Job } from '@/types/job';
@@ -258,7 +258,7 @@ export default function JobDetailPage({ params }: { params: Promise<{ slug: stri
                   </div>
                   {job.salary && (
                     <div className="flex items-center gap-2 text-sm">
-                      <DollarSign size={18} className="text-primary" />
+                      <Wallet size={18} className="text-primary" />
                       <span className="font-medium text-primary">{job.salary}</span>
                     </div>
                   )}
